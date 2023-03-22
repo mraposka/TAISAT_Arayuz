@@ -30,14 +30,14 @@ namespace TAISAT_Arayuz
             {
                 SchemeName = "localfolder",
                 SchemeHandlerFactory = new FolderSchemeHandlerFactory(
-                    rootFolder: @"C:\Users\Abdulkadir\Desktop",
+                    rootFolder: @"",
                     defaultPage: "index.html" // default
                 )
             });
 
             Cef.Initialize(settings);
 
-            string html = File.ReadAllText(@"C:\Users\Abdulkadir\Desktop\index.html"); 
+            string html = File.ReadAllText(@"index.html"); 
             chromiumWebBrowser1.LoadHtml(html);  
 
         }
@@ -91,8 +91,8 @@ namespace TAISAT_Arayuz
                     label_packageNo.Text = telemetryData[0];
                     label_uyduStatus.Text = telemetryData[1];
                     label_hataKod.Text = telemetryData[2];
-                    label_currentDate.Text = telemetryData[3];
-                    label_currentTime.Text = telemetryData[4];
+                    label_currentDate.Text = telemetryData[3].Replace("/", ".");
+                    label_currentTime.Text = telemetryData[4].Replace("/",":");
                     label_containerPressure.Text = telemetryData[6];
                     label_payloadPressure.Text = telemetryData[5];
                     label_containerAltitude.Text = telemetryData[8];
@@ -108,17 +108,18 @@ namespace TAISAT_Arayuz
                     label_payloadRoll.Text = telemetryData[17];
                     label_payloadYaw.Text = telemetryData[18];
                     label_teamID.Text = telemetryData[19];
+                   // MessageBox.Show("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + ")");
+                    chromiumWebBrowser1.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + ");"); 
                 } 
                 buffer = string.Empty;
             }
             
-        }
-
+        } 
         private void Form1_Load(object sender, EventArgs e)
         { 
             ListComPorts();
             comboBox_baudRateTelemetry.SelectedIndex=(comboBox_baudRateTelemetry.Items.Count - 1);
-            string html = File.ReadAllText(@"C:\Users\Abdulkadir\Desktop\index.html"); 
+            string html = File.ReadAllText(@"index.html"); 
             chromiumWebBrowser1.LoadHtml(html);
         }
 
