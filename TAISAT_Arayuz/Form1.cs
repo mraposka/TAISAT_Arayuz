@@ -339,8 +339,7 @@ namespace TAISAT_Arayuz
                 string[] str = videorecordpath.Split('\\');
                 textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
             }
-        }
-
+        } 
         private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
         {
             //TEST
