@@ -17,8 +17,9 @@ using CefSharp.SchemeHandler;
 using CefSharp.WinForms;
 using TAISAT_Arayuz.Properties;
 using AForge.Video;
-using AForge.Video.DirectShow; 
+using AForge.Video.DirectShow;
 using Accord.Video.FFMPEG;
+using System.Net.Sockets;
 
 namespace TAISAT_Arayuz
 {
@@ -33,18 +34,18 @@ namespace TAISAT_Arayuz
 
         //Video Kaydı Değişkenleri
         int width, height;
-        int resolution; 
+        int resolution;
         string videorecordpath = @"";
         FilterInfoCollection fCollection;
         VideoCaptureDevice cam;
         VideoFileWriter videoWriter = new VideoFileWriter();
-        Bitmap videoBitmap; 
+        Bitmap videoBitmap;
         TimeSpan currentTime;
         TimeSpan startTime;
         TimeSpan finishTime;
         TimeSpan elapsedTime;
         //Video Kaydı Değişkenleri
-         
+
         //Port Okuma Değişkenleri
         SerialPort port;
         string buffer = string.Empty;
@@ -52,9 +53,9 @@ namespace TAISAT_Arayuz
         public void InitBrowser()
         {
             var settings = new CefSettings();
-            settings.RegisterScheme(new CefCustomScheme {SchemeName = "localfolder",  SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html")}); 
-            Cef.Initialize(settings);  
-            chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html")); 
+            settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
+            Cef.Initialize(settings);
+            chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
         }
 
         public void SerialPortProgram()
@@ -62,7 +63,7 @@ namespace TAISAT_Arayuz
             port.DataReceived += Port_DataReceived;
             port.Open();
             Console.ReadLine();
-        } 
+        }
         public void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (!backgroundWorker1.IsBusy)
@@ -101,13 +102,13 @@ namespace TAISAT_Arayuz
                 {
                     //Telemetry To Labels
                     label_packageNo.Text = telemetryData[0];
-                    label_uyduStatus.Text = telemetryData[1]; 
+                    label_uyduStatus.Text = telemetryData[1];
                     label_hataKod.Text = telemetryData[2];
                     label_currentDate.Text = telemetryData[3].Replace("/", ".");
                     label_currentTime.Text = telemetryData[4].Replace("/", ":");
                     label_containerPressure.Text = telemetryData[6];
                     label_payloadPressure.Text = telemetryData[5];
-                    label_containerAltitude.Text = telemetryData[8]; 
+                    label_containerAltitude.Text = telemetryData[8];
                     label_payloadAltitude.Text = telemetryData[7];
                     label_AltitudeDiff.Text = telemetryData[9];
                     label_payloadVelocity.Text = telemetryData[10];
@@ -121,6 +122,13 @@ namespace TAISAT_Arayuz
                     label_payloadYaw.Text = telemetryData[18];
                     label_teamID.Text = telemetryData[19];
                     //Telemetry To Labels 
+
+                    //Sending Gyro To Model Simulation
+                    //Pitch:X Yaw:Y Roll:Z
+                    string gyroData= label_payloadPitch.Text +label_payloadYaw.Text+label_payloadRoll.Text;
+                    try { new UdpClient().Send(Encoding.ASCII.GetBytes(gyroData), Encoding.ASCII.GetBytes(gyroData).Length, "127.0.0.1", 11000); } catch { }
+                    //Sending Gyro To Model Simulation
+
                     //Uydu Status
                     switch (Int16.Parse(label_uyduStatus.Text))
                     {
@@ -174,13 +182,13 @@ namespace TAISAT_Arayuz
                     //GPS To Map
                 }
                 buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
-            } 
-        } 
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             if (resolution == 480) { width = 640; height = 480; }
             if (resolution == 720) { width = 1280; height = 720; }
-            if (resolution == 1080) { width = 1920; height = 1080; } 
+            if (resolution == 1080) { width = 1920; height = 1080; }
             statusLabels = new Label[8] { label_status00, label_status01, label_status02, label_status03, label_status04, label_status05, label_status06, label_status07 };
             fCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo item in fCollection)
@@ -189,9 +197,9 @@ namespace TAISAT_Arayuz
                 cam = new VideoCaptureDevice();
             }
             ListComPorts();
-            comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1); 
+            comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
             chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
-        } 
+        }
         private void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
             if (button_telemetryCOMPortOpenClose.BackColor != Color.Green)
@@ -208,31 +216,31 @@ namespace TAISAT_Arayuz
                 MessageBox.Show("Uçuş Tamamlandı!");
                 SaveFlight();
             }
-        } 
+        }
         private void SaveFlight()
         {
             //Save everything
-        } 
+        }
         private void button_refreshCOMPort_Click(object sender, EventArgs e)
         {
             ListComPorts();
         }
         void ListComPorts()
-        { 
+        {
             foreach (var port in SerialPort.GetPortNames())
-                comboBox_COMPortTelemetry.Items.Add(port); 
-        } 
+                comboBox_COMPortTelemetry.Items.Add(port);
+        }
         private void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
         {
             port = new SerialPort(comboBox_COMPortTelemetry.SelectedItem.ToString(), Int32.Parse(comboBox_baudRateTelemetry.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
-        } 
+        }
         private void button_cameraOpenClose_Click(object sender, EventArgs e)
         {
             if (button_cameraOpenClose.Text == "Open Camera")
-            { 
+            {
                 cam = new VideoCaptureDevice(fCollection[comboBox_chooseCamera.SelectedIndex].MonikerString);
                 cam.NewFrame += Cam_NewFrame;
-                cam.Start(); 
+                cam.Start();
                 button_cameraOpenClose.Text = "Close Camera";
                 button_cameraOpenClose.BackColor = Color.Red;
             }
@@ -247,7 +255,7 @@ namespace TAISAT_Arayuz
                     button_recordStartStop.Text = "Start Record";
                     recordInformationLed.BackColor = Color.Transparent;
                     pictureBox_camera.Image = null;
-                } 
+                }
                 label_videoRecordTime.Text = "00:00:00";
                 button_cameraOpenClose.Text = "Open Camera";
                 button_cameraOpenClose.BackColor = Color.Lime;
@@ -280,7 +288,7 @@ namespace TAISAT_Arayuz
             try
             {
                 if (button_recordStartStop.Text == "Start Record" && cam.IsRunning && videorecordpath != null)
-                {  
+                {
                     string filePath = "" + videorecordpath + "\\" + "videoTaisat_" + DateTime.Now.ToString().Replace(':', '.').Replace(' ', '_') + ".avi";
                     videoWriter.Open(filePath, width, height, 30, Accord.Video.FFMPEG.VideoCodec.MPEG4, 5000000);
                     startTime = DateTime.Now.TimeOfDay;
@@ -332,7 +340,7 @@ namespace TAISAT_Arayuz
         }
         private void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog browser = new FolderBrowserDialog(); 
+            FolderBrowserDialog browser = new FolderBrowserDialog();
             if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 videorecordpath = browser.SelectedPath;
