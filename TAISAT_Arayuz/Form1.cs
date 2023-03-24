@@ -34,9 +34,9 @@ namespace TAISAT_Arayuz
             InitializeComponent();
         }
         //3D Simulation Değişkenleri
-        [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent); 
-        [DllImport("user32.dll", SetLastError = true)] internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);  
-        string _3DSimExePath = @"C:/Users/Administrator/Desktop/3D Sim/New Unity Project.exe"; 
+        [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+        [DllImport("user32.dll", SetLastError = true)] internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+        string _3DSimExePath = @"C:/Users/Administrator/Desktop/3D Sim/New Unity Project.exe";
         Process simApplication;
         const int WS_BORDER = 8388608;
         const int WS_DLGFRAME = 4194304;
@@ -52,7 +52,8 @@ namespace TAISAT_Arayuz
         const int SWP_NOSIZE = 0x1;
         const int SWP_FRAMECHANGED = 0x20;
         const uint MF_BYPOSITION = 0x400;
-        const uint MF_REMOVE = 0x1000;
+        const uint MF_REMOVE = 0x1000; 
+        int count = 5;
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern int GetWindowLongA(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
@@ -72,13 +73,13 @@ namespace TAISAT_Arayuz
             Style = GetWindowLongA(MainWindowHandle, GWL_EXSTYLE);
             SetWindowLongA(MainWindowHandle, GWL_EXSTYLE, Style | WS_EX_DLGMODALFRAME);
             SetWindowPos(MainWindowHandle, new IntPtr(0), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
-        } 
+        }
         //3D Simulation Değişkenleri
         Label[] statusLabels;//0-7 Arası Uydu Statusu Belirten labellar 
 
         //Video Kaydı Değişkenleri
         int width, height;
-        int resolution;
+        int resolution=720;
         string videorecordpath = @"";
         FilterInfoCollection fCollection;
         VideoCaptureDevice cam;
@@ -100,8 +101,7 @@ namespace TAISAT_Arayuz
             settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
             Cef.Initialize(settings);
             chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
-        }
-
+        } 
         public void SerialPortProgram()
         {
             port.DataReceived += Port_DataReceived;
@@ -169,7 +169,7 @@ namespace TAISAT_Arayuz
 
                     //Sending Gyro To Model Simulation
                     //Pitch:X Yaw:Y Roll:Z
-                    string gyroData= label_payloadPitch.Text +label_payloadYaw.Text+label_payloadRoll.Text;
+                    string gyroData = label_payloadPitch.Text + "," + label_payloadYaw.Text + "," + label_payloadRoll.Text;
                     try { new UdpClient().Send(Encoding.ASCII.GetBytes(gyroData), Encoding.ASCII.GetBytes(gyroData).Length, "127.0.0.1", 11000); } catch { }
                     //Sending Gyro To Model Simulation
 
@@ -199,8 +199,7 @@ namespace TAISAT_Arayuz
                             break;
                         case 7:
                             statusLabels[7].BackColor = Color.Lime;
-                            break;
-
+                            break; 
                     }
                     //Uydu Status
                     //Charts
@@ -214,14 +213,15 @@ namespace TAISAT_Arayuz
                     payloadPressure_Chart.Series["P_Pressure"].Points.AddY(label_payloadPressure.Text);
                     carrierPressure_Chart.Series["C_Pressure"].Points.AddY(label_containerPressure.Text);
                     //Charts
-                    //Error Code
-                    errorBit1.BackColor = label_hataKod.Text[0] == 0 ? Color.Lime : Color.Red;
-                    errorBit2.BackColor = label_hataKod.Text[1] == 0 ? Color.Lime : Color.Red;
-                    errorBit3.BackColor = label_hataKod.Text[2] == 0 ? Color.Lime : Color.Red;
-                    errorBit4.BackColor = label_hataKod.Text[3] == 0 ? Color.Lime : Color.Red;
-                    errorBit5.BackColor = label_hataKod.Text[4] == 0 ? Color.Lime : Color.Red;
+                    //Error Code 
+                    errorBit1.BackColor = label_hataKod.Text[0] == '0' ? Color.Lime : Color.Red;
+                    errorBit2.BackColor = label_hataKod.Text[1] == '0' ? Color.Lime : Color.Red;
+                    errorBit3.BackColor = label_hataKod.Text[2] == '0' ? Color.Lime : Color.Red;
+                    errorBit4.BackColor = label_hataKod.Text[3] == '0' ? Color.Lime : Color.Red;
+                    errorBit5.BackColor = label_hataKod.Text[4] == '0' ? Color.Lime : Color.Red;
                     //Error Code
                     //GPS To Map 
+                    chromiumWebBrowser1.EvaluateScriptAsync("delLastMark();");
                     chromiumWebBrowser1.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + ");");
                     //GPS To Map
                 }
@@ -238,13 +238,13 @@ namespace TAISAT_Arayuz
         private void Form1_Load(object sender, EventArgs e)
         {
             KillSimulations();
-            ProcessStartInfo startInfo = new ProcessStartInfo();  
+            ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = _3DSimExePath;
             startInfo.WindowStyle = ProcessWindowStyle.Maximized;
             simApplication = Process.Start(startInfo);
             simApplication.WaitForInputIdle();
             MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
-            timer1.Start();
+            windowFixer.Start();
             if (resolution == 480) { width = 640; height = 480; }
             if (resolution == 720) { width = 1280; height = 720; }
             if (resolution == 1080) { width = 1920; height = 1080; }
@@ -286,6 +286,7 @@ namespace TAISAT_Arayuz
         }
         void ListComPorts()
         {
+            comboBox_COMPortTelemetry.Items.Clear();
             foreach (var port in SerialPort.GetPortNames())
                 comboBox_COMPortTelemetry.Items.Add(port);
         }
@@ -335,13 +336,8 @@ namespace TAISAT_Arayuz
                     videoBitmap = (Bitmap)eventArgs.Frame.Clone();
                     pictureBox_camera.Image = videoBitmap;
                 }
-            }
-            catch (Exception error)
-            {
-                textBox_logs.AppendText(error.Message + Environment.NewLine);
-            }
-        }
-
+            }  catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
+        } 
         private void button_recordStartStop_Click(object sender, EventArgs e)
         {
             try
@@ -349,7 +345,7 @@ namespace TAISAT_Arayuz
                 if (button_recordStartStop.Text == "Start Record" && cam.IsRunning && videorecordpath != null)
                 {
                     string filePath = "" + videorecordpath + "\\" + "videoTaisat_" + DateTime.Now.ToString().Replace(':', '.').Replace(' ', '_') + ".avi";
-                    videoWriter.Open(filePath, width, height, 30, Accord.Video.FFMPEG.VideoCodec.MPEG4, 5000000);
+                    videoWriter.Open(@filePath, width, height, 30, Accord.Video.FFMPEG.VideoCodec.MPEG4, 5000000);
                     startTime = DateTime.Now.TimeOfDay;
                     timer_videoRecordTime.Start();
                     button_recordStartStop.Text = "Stop Record";
@@ -365,15 +361,9 @@ namespace TAISAT_Arayuz
                 else
                 {
                     MessageBox.Show("You have to open the camera and select a folder to start record!");
-                }
-
-            }
-            catch (Exception error)
-            {
-                textBox_logs.AppendText(error.Message + Environment.NewLine);
-            }
-        }
-
+                } 
+            }  catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
+        } 
         private void timer_videoRecordTime_Tick(object sender, EventArgs e)
         {
             currentTime = DateTime.Now.TimeOfDay;
@@ -387,8 +377,7 @@ namespace TAISAT_Arayuz
             {
                 recordInformationLed.BackColor = Color.Transparent;
             }
-        }
-
+        } 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (cam.IsRunning == true)
@@ -408,55 +397,20 @@ namespace TAISAT_Arayuz
                 textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
             }
         }
-        int count = 5;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
+        private void windowFixer_TimerTick(object sender, EventArgs e)
+        { 
             MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
             SetParent(simApplication.MainWindowHandle, _3DSimPanel.Handle);
             MakeExternalWindowBorderless(simApplication.MainWindowHandle);
             count--;
-            if (count == 0) timer1.Stop();
-        }
-
+            if (count == 0) { windowFixer.Stop(); MessageBox.Show("Arayüz Kullanıma Hazır!"); }
+        } 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             KillSimulations();
-        }
-
+        } 
         private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
         { 
-            //TEST
-            if (label_uyduStatus.Text == "") { label_uyduStatus.Text = "0"; }
-            else { label_uyduStatus.Text = (Int16.Parse(label_uyduStatus.Text) + 1).ToString(); }
-            switch (Int16.Parse(label_uyduStatus.Text))
-            {
-                case 0:
-                    statusLabels[0].BackColor = Color.Lime;
-                    break;
-                case 1:
-                    statusLabels[1].BackColor = Color.Lime;
-                    break;
-                case 2:
-                    statusLabels[2].BackColor = Color.Lime;
-                    break;
-                case 3:
-                    statusLabels[3].BackColor = Color.Lime;
-                    break;
-                case 4:
-                    statusLabels[4].BackColor = Color.Lime;
-                    break;
-                case 5:
-                    statusLabels[5].BackColor = Color.Lime;
-                    break;
-                case 6:
-                    statusLabels[6].BackColor = Color.Lime;
-                    break;
-                case 7:
-                    statusLabels[7].BackColor = Color.Lime;
-                    break;
-
-            }
-            //TEST
             /*MANUAL DEPLOY KOMUTU
             int currentStatus = Int16.Parse(label_uyduStatus.Text);
             //MANUAL DEPLOY KOMUTU (CURRENT STATUSUN 1 SONRASINI AKTİFLEŞTİRCEK)

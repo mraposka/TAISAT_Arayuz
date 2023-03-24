@@ -31,33 +31,33 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TabPage tabPage_serialMonitor;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea21 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend21 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea22 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend22 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea23 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend23 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea24 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend24 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea25 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend25 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea26 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend26 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea27 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend27 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea28 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend28 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea29 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend29 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea30 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend30 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea31 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend31 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea32 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend32 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea33 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend33 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea34 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend34 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea35 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend35 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea36 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend36 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_logs = new System.Windows.Forms.TextBox();
@@ -122,7 +122,6 @@
             this.button_browseVideoFileToSend = new System.Windows.Forms.Button();
             this.textBox_videoPathToSend = new System.Windows.Forms.TextBox();
             this.button_sendVideo = new System.Windows.Forms.Button();
-            this.label34 = new System.Windows.Forms.Label();
             this.button_recordStartStop = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label33 = new System.Windows.Forms.Label();
@@ -192,7 +191,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_views = new System.Windows.Forms.TableLayoutPanel();
             this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.windowFixer = new System.Windows.Forms.Timer(this.components);
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -795,163 +794,163 @@
             // 
             // payloadGPSAltitude_Chart
             // 
-            chartArea19.Name = "ChartArea1";
-            this.payloadGPSAltitude_Chart.ChartAreas.Add(chartArea19);
+            chartArea28.Name = "ChartArea1";
+            this.payloadGPSAltitude_Chart.ChartAreas.Add(chartArea28);
             this.payloadGPSAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend19.Name = "Legend1";
-            this.payloadGPSAltitude_Chart.Legends.Add(legend19);
+            legend28.Name = "Legend1";
+            this.payloadGPSAltitude_Chart.Legends.Add(legend28);
             this.payloadGPSAltitude_Chart.Location = new System.Drawing.Point(3, 309);
             this.payloadGPSAltitude_Chart.Name = "payloadGPSAltitude_Chart";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series19.Legend = "Legend1";
-            series19.Name = "P_GPSAltitude";
-            series19.YValuesPerPoint = 4;
-            this.payloadGPSAltitude_Chart.Series.Add(series19);
+            series28.ChartArea = "ChartArea1";
+            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series28.Legend = "Legend1";
+            series28.Name = "P_GPSAltitude";
+            series28.YValuesPerPoint = 4;
+            this.payloadGPSAltitude_Chart.Series.Add(series28);
             this.payloadGPSAltitude_Chart.Size = new System.Drawing.Size(306, 176);
             this.payloadGPSAltitude_Chart.TabIndex = 9;
             this.payloadGPSAltitude_Chart.Text = "chart9";
             // 
             // differenceAltitude_Chart
             // 
-            chartArea20.Name = "ChartArea1";
-            this.differenceAltitude_Chart.ChartAreas.Add(chartArea20);
+            chartArea29.Name = "ChartArea1";
+            this.differenceAltitude_Chart.ChartAreas.Add(chartArea29);
             this.differenceAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend20.Name = "Legend1";
-            this.differenceAltitude_Chart.Legends.Add(legend20);
+            legend29.Name = "Legend1";
+            this.differenceAltitude_Chart.Legends.Add(legend29);
             this.differenceAltitude_Chart.Location = new System.Drawing.Point(315, 309);
             this.differenceAltitude_Chart.Name = "differenceAltitude_Chart";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series20.Legend = "Legend1";
-            series20.Name = "D_Altitude";
-            this.differenceAltitude_Chart.Series.Add(series20);
+            series29.ChartArea = "ChartArea1";
+            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series29.Legend = "Legend1";
+            series29.Name = "D_Altitude";
+            this.differenceAltitude_Chart.Series.Add(series29);
             this.differenceAltitude_Chart.Size = new System.Drawing.Size(306, 176);
             this.differenceAltitude_Chart.TabIndex = 8;
             this.differenceAltitude_Chart.Text = "chart8";
             // 
             // temperature_Chart
             // 
-            chartArea21.Name = "ChartArea1";
-            this.temperature_Chart.ChartAreas.Add(chartArea21);
+            chartArea30.Name = "ChartArea1";
+            this.temperature_Chart.ChartAreas.Add(chartArea30);
             this.temperature_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend21.Name = "Legend1";
-            this.temperature_Chart.Legends.Add(legend21);
+            legend30.Name = "Legend1";
+            this.temperature_Chart.Legends.Add(legend30);
             this.temperature_Chart.Location = new System.Drawing.Point(627, 309);
             this.temperature_Chart.Name = "temperature_Chart";
-            series21.ChartArea = "ChartArea1";
-            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series21.Legend = "Legend1";
-            series21.Name = "Temperature";
-            this.temperature_Chart.Series.Add(series21);
+            series30.ChartArea = "ChartArea1";
+            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series30.Legend = "Legend1";
+            series30.Name = "Temperature";
+            this.temperature_Chart.Series.Add(series30);
             this.temperature_Chart.Size = new System.Drawing.Size(308, 176);
             this.temperature_Chart.TabIndex = 7;
             this.temperature_Chart.Text = "chart7";
             // 
             // velocity_Chart
             // 
-            chartArea22.Name = "ChartArea1";
-            this.velocity_Chart.ChartAreas.Add(chartArea22);
+            chartArea31.Name = "ChartArea1";
+            this.velocity_Chart.ChartAreas.Add(chartArea31);
             this.velocity_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend22.Name = "Legend1";
-            this.velocity_Chart.Legends.Add(legend22);
+            legend31.Name = "Legend1";
+            this.velocity_Chart.Legends.Add(legend31);
             this.velocity_Chart.Location = new System.Drawing.Point(627, 156);
             this.velocity_Chart.Name = "velocity_Chart";
-            series22.ChartArea = "ChartArea1";
-            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series22.Legend = "Legend1";
-            series22.Name = "Velocity";
-            this.velocity_Chart.Series.Add(series22);
+            series31.ChartArea = "ChartArea1";
+            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series31.Legend = "Legend1";
+            series31.Name = "Velocity";
+            this.velocity_Chart.Series.Add(series31);
             this.velocity_Chart.Size = new System.Drawing.Size(308, 147);
             this.velocity_Chart.TabIndex = 6;
             this.velocity_Chart.Text = "chart6";
             // 
             // carrierAltitude_Chart
             // 
-            chartArea23.Name = "ChartArea1";
-            this.carrierAltitude_Chart.ChartAreas.Add(chartArea23);
+            chartArea32.Name = "ChartArea1";
+            this.carrierAltitude_Chart.ChartAreas.Add(chartArea32);
             this.carrierAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend23.Name = "Legend1";
-            this.carrierAltitude_Chart.Legends.Add(legend23);
+            legend32.Name = "Legend1";
+            this.carrierAltitude_Chart.Legends.Add(legend32);
             this.carrierAltitude_Chart.Location = new System.Drawing.Point(315, 156);
             this.carrierAltitude_Chart.Name = "carrierAltitude_Chart";
-            series23.ChartArea = "ChartArea1";
-            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series23.Legend = "Legend1";
-            series23.Name = "C_Altitıde";
-            this.carrierAltitude_Chart.Series.Add(series23);
+            series32.ChartArea = "ChartArea1";
+            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series32.Legend = "Legend1";
+            series32.Name = "C_Altitude";
+            this.carrierAltitude_Chart.Series.Add(series32);
             this.carrierAltitude_Chart.Size = new System.Drawing.Size(306, 147);
             this.carrierAltitude_Chart.TabIndex = 5;
             this.carrierAltitude_Chart.Text = "chart5";
             // 
             // payloadAltitude_Chart
             // 
-            chartArea24.Name = "ChartArea1";
-            this.payloadAltitude_Chart.ChartAreas.Add(chartArea24);
+            chartArea33.Name = "ChartArea1";
+            this.payloadAltitude_Chart.ChartAreas.Add(chartArea33);
             this.payloadAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend24.Name = "Legend1";
-            this.payloadAltitude_Chart.Legends.Add(legend24);
+            legend33.Name = "Legend1";
+            this.payloadAltitude_Chart.Legends.Add(legend33);
             this.payloadAltitude_Chart.Location = new System.Drawing.Point(3, 156);
             this.payloadAltitude_Chart.Name = "payloadAltitude_Chart";
-            series24.ChartArea = "ChartArea1";
-            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series24.Legend = "Legend1";
-            series24.Name = "P_Altitude";
-            this.payloadAltitude_Chart.Series.Add(series24);
+            series33.ChartArea = "ChartArea1";
+            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series33.Legend = "Legend1";
+            series33.Name = "P_Altitude";
+            this.payloadAltitude_Chart.Series.Add(series33);
             this.payloadAltitude_Chart.Size = new System.Drawing.Size(306, 147);
             this.payloadAltitude_Chart.TabIndex = 4;
             this.payloadAltitude_Chart.Text = "chart4";
             // 
             // batterVoltage_Chart
             // 
-            chartArea25.Name = "ChartArea1";
-            this.batterVoltage_Chart.ChartAreas.Add(chartArea25);
+            chartArea34.Name = "ChartArea1";
+            this.batterVoltage_Chart.ChartAreas.Add(chartArea34);
             this.batterVoltage_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend25.Name = "Legend1";
-            this.batterVoltage_Chart.Legends.Add(legend25);
+            legend34.Name = "Legend1";
+            this.batterVoltage_Chart.Legends.Add(legend34);
             this.batterVoltage_Chart.Location = new System.Drawing.Point(627, 3);
             this.batterVoltage_Chart.Name = "batterVoltage_Chart";
-            series25.ChartArea = "ChartArea1";
-            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series25.Legend = "Legend1";
-            series25.Name = "B_Voltage";
-            this.batterVoltage_Chart.Series.Add(series25);
+            series34.ChartArea = "ChartArea1";
+            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series34.Legend = "Legend1";
+            series34.Name = "B_Voltage";
+            this.batterVoltage_Chart.Series.Add(series34);
             this.batterVoltage_Chart.Size = new System.Drawing.Size(308, 147);
             this.batterVoltage_Chart.TabIndex = 3;
             this.batterVoltage_Chart.Text = "chart3";
             // 
             // carrierPressure_Chart
             // 
-            chartArea26.Name = "ChartArea1";
-            this.carrierPressure_Chart.ChartAreas.Add(chartArea26);
+            chartArea35.Name = "ChartArea1";
+            this.carrierPressure_Chart.ChartAreas.Add(chartArea35);
             this.carrierPressure_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend26.Name = "Legend1";
-            this.carrierPressure_Chart.Legends.Add(legend26);
+            legend35.Name = "Legend1";
+            this.carrierPressure_Chart.Legends.Add(legend35);
             this.carrierPressure_Chart.Location = new System.Drawing.Point(315, 3);
             this.carrierPressure_Chart.Name = "carrierPressure_Chart";
-            series26.ChartArea = "ChartArea1";
-            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series26.Legend = "Legend1";
-            series26.Name = "C_Pressure";
-            this.carrierPressure_Chart.Series.Add(series26);
+            series35.ChartArea = "ChartArea1";
+            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series35.Legend = "Legend1";
+            series35.Name = "C_Pressure";
+            this.carrierPressure_Chart.Series.Add(series35);
             this.carrierPressure_Chart.Size = new System.Drawing.Size(306, 147);
             this.carrierPressure_Chart.TabIndex = 2;
             this.carrierPressure_Chart.Text = "chart2";
             // 
             // payloadPressure_Chart
             // 
-            chartArea27.Name = "ChartArea1";
-            this.payloadPressure_Chart.ChartAreas.Add(chartArea27);
+            chartArea36.Name = "ChartArea1";
+            this.payloadPressure_Chart.ChartAreas.Add(chartArea36);
             this.payloadPressure_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend27.Name = "Legend1";
-            this.payloadPressure_Chart.Legends.Add(legend27);
+            legend36.Name = "Legend1";
+            this.payloadPressure_Chart.Legends.Add(legend36);
             this.payloadPressure_Chart.Location = new System.Drawing.Point(3, 3);
             this.payloadPressure_Chart.Name = "payloadPressure_Chart";
-            series27.ChartArea = "ChartArea1";
-            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series27.Legend = "Legend1";
-            series27.Name = "P_Pressure";
-            this.payloadPressure_Chart.Series.Add(series27);
+            series36.ChartArea = "ChartArea1";
+            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series36.Legend = "Legend1";
+            series36.Name = "P_Pressure";
+            this.payloadPressure_Chart.Series.Add(series36);
             this.payloadPressure_Chart.Size = new System.Drawing.Size(306, 147);
             this.payloadPressure_Chart.TabIndex = 1;
             this.payloadPressure_Chart.Text = "chart1";
@@ -973,7 +972,7 @@
             // 
             this.recordInformationLed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.recordInformationLed.BackColor = System.Drawing.Color.Transparent;
-            this.recordInformationLed.Location = new System.Drawing.Point(134, 143);
+            this.recordInformationLed.Location = new System.Drawing.Point(145, 143);
             this.recordInformationLed.Name = "recordInformationLed";
             this.recordInformationLed.Size = new System.Drawing.Size(13, 13);
             this.recordInformationLed.TabIndex = 15;
@@ -983,7 +982,7 @@
             this.label_videoRecordTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_videoRecordTime.AutoSize = true;
             this.label_videoRecordTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_videoRecordTime.Location = new System.Drawing.Point(149, 143);
+            this.label_videoRecordTime.Location = new System.Drawing.Point(160, 143);
             this.label_videoRecordTime.Name = "label_videoRecordTime";
             this.label_videoRecordTime.Size = new System.Drawing.Size(49, 13);
             this.label_videoRecordTime.TabIndex = 14;
@@ -993,7 +992,7 @@
             // button_browseVideoFolderToSave
             // 
             this.button_browseVideoFolderToSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_browseVideoFolderToSave.Location = new System.Drawing.Point(175, 79);
+            this.button_browseVideoFolderToSave.Location = new System.Drawing.Point(186, 79);
             this.button_browseVideoFolderToSave.Name = "button_browseVideoFolderToSave";
             this.button_browseVideoFolderToSave.Size = new System.Drawing.Size(23, 23);
             this.button_browseVideoFolderToSave.TabIndex = 13;
@@ -1006,10 +1005,10 @@
             this.textBox_videoFolderToSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_videoFolderToSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox_videoFolderToSave.Location = new System.Drawing.Point(-2, 81);
+            this.textBox_videoFolderToSave.Location = new System.Drawing.Point(7, 81);
             this.textBox_videoFolderToSave.Name = "textBox_videoFolderToSave";
             this.textBox_videoFolderToSave.ReadOnly = true;
-            this.textBox_videoFolderToSave.Size = new System.Drawing.Size(174, 20);
+            this.textBox_videoFolderToSave.Size = new System.Drawing.Size(176, 20);
             this.textBox_videoFolderToSave.TabIndex = 12;
             // 
             // comboBox_chooseCamera
@@ -1018,9 +1017,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_chooseCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_chooseCamera.FormattingEnabled = true;
-            this.comboBox_chooseCamera.Location = new System.Drawing.Point(-3, 15);
+            this.comboBox_chooseCamera.Location = new System.Drawing.Point(7, 15);
             this.comboBox_chooseCamera.Name = "comboBox_chooseCamera";
-            this.comboBox_chooseCamera.Size = new System.Drawing.Size(201, 21);
+            this.comboBox_chooseCamera.Size = new System.Drawing.Size(202, 21);
             this.comboBox_chooseCamera.TabIndex = 11;
             // 
             // progressBar_sendVideo
@@ -1029,7 +1028,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar_sendVideo.Location = new System.Drawing.Point(5, 186);
             this.progressBar_sendVideo.Name = "progressBar_sendVideo";
-            this.progressBar_sendVideo.Size = new System.Drawing.Size(200, 10);
+            this.progressBar_sendVideo.Size = new System.Drawing.Size(211, 10);
             this.progressBar_sendVideo.Step = 1;
             this.progressBar_sendVideo.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar_sendVideo.TabIndex = 0;
@@ -1038,7 +1037,7 @@
             // button_browseVideoFileToSend
             // 
             this.button_browseVideoFileToSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_browseVideoFileToSend.Location = new System.Drawing.Point(182, 160);
+            this.button_browseVideoFileToSend.Location = new System.Drawing.Point(193, 160);
             this.button_browseVideoFileToSend.Name = "button_browseVideoFileToSend";
             this.button_browseVideoFileToSend.Size = new System.Drawing.Size(23, 23);
             this.button_browseVideoFileToSend.TabIndex = 10;
@@ -1049,11 +1048,12 @@
             // 
             this.textBox_videoPathToSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_videoPathToSend.Location = new System.Drawing.Point(5, 162);
+            this.textBox_videoPathToSend.Location = new System.Drawing.Point(7, 162);
             this.textBox_videoPathToSend.Name = "textBox_videoPathToSend";
             this.textBox_videoPathToSend.ReadOnly = true;
-            this.textBox_videoPathToSend.Size = new System.Drawing.Size(174, 20);
+            this.textBox_videoPathToSend.Size = new System.Drawing.Size(183, 20);
             this.textBox_videoPathToSend.TabIndex = 9;
+            this.textBox_videoPathToSend.Text = "Select Video For Send";
             // 
             // button_sendVideo
             // 
@@ -1062,31 +1062,19 @@
             this.button_sendVideo.BackColor = System.Drawing.Color.Transparent;
             this.button_sendVideo.Location = new System.Drawing.Point(4, 198);
             this.button_sendVideo.Name = "button_sendVideo";
-            this.button_sendVideo.Size = new System.Drawing.Size(201, 34);
+            this.button_sendVideo.Size = new System.Drawing.Size(212, 34);
             this.button_sendVideo.TabIndex = 8;
             this.button_sendVideo.Text = "Send Video";
             this.button_sendVideo.UseVisualStyleBackColor = false;
-            // 
-            // label34
-            // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(4, 146);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(76, 13);
-            this.label34.TabIndex = 6;
-            this.label34.Text = "Video Transfer";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button_recordStartStop
             // 
             this.button_recordStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_recordStartStop.BackColor = System.Drawing.Color.Transparent;
-            this.button_recordStartStop.Location = new System.Drawing.Point(-2, 107);
+            this.button_recordStartStop.Location = new System.Drawing.Point(7, 107);
             this.button_recordStartStop.Name = "button_recordStartStop";
-            this.button_recordStartStop.Size = new System.Drawing.Size(201, 34);
+            this.button_recordStartStop.Size = new System.Drawing.Size(203, 34);
             this.button_recordStartStop.TabIndex = 2;
             this.button_recordStartStop.Text = "Start Record";
             this.button_recordStartStop.UseVisualStyleBackColor = false;
@@ -1222,9 +1210,9 @@
             this.button_cameraOpenClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_cameraOpenClose.BackColor = System.Drawing.Color.Lime;
-            this.button_cameraOpenClose.Location = new System.Drawing.Point(-3, 41);
+            this.button_cameraOpenClose.Location = new System.Drawing.Point(7, 41);
             this.button_cameraOpenClose.Name = "button_cameraOpenClose";
-            this.button_cameraOpenClose.Size = new System.Drawing.Size(201, 34);
+            this.button_cameraOpenClose.Size = new System.Drawing.Size(202, 34);
             this.button_cameraOpenClose.TabIndex = 0;
             this.button_cameraOpenClose.Text = "Open Camera";
             this.button_cameraOpenClose.UseVisualStyleBackColor = false;
@@ -1238,7 +1226,7 @@
             this.pictureBox_camera.BackColor = System.Drawing.Color.Black;
             this.pictureBox_camera.Location = new System.Drawing.Point(5, 3);
             this.pictureBox_camera.Name = "pictureBox_camera";
-            this.pictureBox_camera.Size = new System.Drawing.Size(390, 415);
+            this.pictureBox_camera.Size = new System.Drawing.Size(382, 415);
             this.pictureBox_camera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_camera.TabIndex = 17;
             this.pictureBox_camera.TabStop = false;
@@ -1257,14 +1245,13 @@
             this.panel5.Controls.Add(this.button_browseVideoFileToSend);
             this.panel5.Controls.Add(this.textBox_videoPathToSend);
             this.panel5.Controls.Add(this.button_sendVideo);
-            this.panel5.Controls.Add(this.label34);
             this.panel5.Controls.Add(this.button_recordStartStop);
             this.panel5.Controls.Add(this.label33);
             this.panel5.Controls.Add(this.button_cameraOpenClose);
-            this.panel5.Location = new System.Drawing.Point(396, 72);
+            this.panel5.Location = new System.Drawing.Point(385, 72);
             this.panel5.MinimumSize = new System.Drawing.Size(145, 250);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(208, 419);
+            this.panel5.Size = new System.Drawing.Size(219, 419);
             this.panel5.TabIndex = 16;
             // 
             // _3DSimPanel
@@ -1274,7 +1261,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this._3DSimPanel.Location = new System.Drawing.Point(3, 238);
             this._3DSimPanel.Name = "_3DSimPanel";
-            this._3DSimPanel.Size = new System.Drawing.Size(202, 176);
+            this._3DSimPanel.Size = new System.Drawing.Size(213, 176);
             this._3DSimPanel.TabIndex = 16;
             // 
             // panel_camera
@@ -2031,10 +2018,10 @@
             this.chromiumWebBrowser1.Size = new System.Drawing.Size(608, 313);
             this.chromiumWebBrowser1.TabIndex = 22;
             // 
-            // timer1
+            // windowFixer
             // 
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.windowFixer.Interval = 500;
+            this.windowFixer.Tick += new System.EventHandler(this.windowFixer_TimerTick);
             // 
             // Form1
             // 
@@ -2158,7 +2145,6 @@
         private System.Windows.Forms.Button button_browseVideoFileToSend;
         private System.Windows.Forms.TextBox textBox_videoPathToSend;
         private System.Windows.Forms.Button button_sendVideo;
-        private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Button button_recordStartStop;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label33;
@@ -2242,7 +2228,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart carrierPressure_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart payloadPressure_Chart;
         private System.Windows.Forms.Panel _3DSimPanel;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer windowFixer;
     }
 }
 
