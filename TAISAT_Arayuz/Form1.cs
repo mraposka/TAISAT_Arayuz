@@ -258,6 +258,21 @@ namespace TAISAT_Arayuz
             ListComPorts();
             comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
             chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
+        } 
+        private void ToggleUI(bool toggle)
+        {
+            Type[] types = { typeof(TextBox), typeof(Button), typeof(ComboBox) };
+            foreach (Type type in types) 
+                foreach (var item in GetAll(this, type)) 
+                    item.Enabled = toggle; 
+        }
+        public IEnumerable<Control> GetAll(Control control, Type type)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, type))
+                                      .Concat(controls)
+                                      .Where(c => c.GetType() == type);
         }
         private void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
@@ -403,12 +418,9 @@ namespace TAISAT_Arayuz
             SetParent(simApplication.MainWindowHandle, _3DSimPanel.Handle);
             MakeExternalWindowBorderless(simApplication.MainWindowHandle);
             count--;
-            if (count == 0) { windowFixer.Stop(); MessageBox.Show("Arayüz Kullanıma Hazır!"); }
-        } 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            KillSimulations();
-        } 
+            if (count == 0) { windowFixer.Stop(); ToggleUI(true); }
+            else  { ToggleUI(false); }
+        }  
         private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
         { 
             /*MANUAL DEPLOY KOMUTU

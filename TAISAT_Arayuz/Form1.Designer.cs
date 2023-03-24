@@ -2037,8 +2037,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TAISAT ARAYÜZ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing); 
             this.Load += new System.EventHandler(this.Form1_Load);
             tabPage_serialMonitor.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
