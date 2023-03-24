@@ -136,6 +136,7 @@
             this.button_cameraOpenClose = new System.Windows.Forms.Button();
             this.pictureBox_camera = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this._3DSimPanel = new System.Windows.Forms.Panel();
             this.panel_camera = new System.Windows.Forms.Panel();
             this.panel_views1 = new System.Windows.Forms.Panel();
             this.panel_views4 = new System.Windows.Forms.Panel();
@@ -191,6 +192,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_views = new System.Windows.Forms.TableLayoutPanel();
             this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -971,7 +973,7 @@
             // 
             this.recordInformationLed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.recordInformationLed.BackColor = System.Drawing.Color.Transparent;
-            this.recordInformationLed.Location = new System.Drawing.Point(71, 143);
+            this.recordInformationLed.Location = new System.Drawing.Point(134, 143);
             this.recordInformationLed.Name = "recordInformationLed";
             this.recordInformationLed.Size = new System.Drawing.Size(13, 13);
             this.recordInformationLed.TabIndex = 15;
@@ -981,7 +983,7 @@
             this.label_videoRecordTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_videoRecordTime.AutoSize = true;
             this.label_videoRecordTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_videoRecordTime.Location = new System.Drawing.Point(86, 143);
+            this.label_videoRecordTime.Location = new System.Drawing.Point(149, 143);
             this.label_videoRecordTime.Name = "label_videoRecordTime";
             this.label_videoRecordTime.Size = new System.Drawing.Size(49, 13);
             this.label_videoRecordTime.TabIndex = 14;
@@ -991,7 +993,7 @@
             // button_browseVideoFolderToSave
             // 
             this.button_browseVideoFolderToSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_browseVideoFolderToSave.Location = new System.Drawing.Point(112, 79);
+            this.button_browseVideoFolderToSave.Location = new System.Drawing.Point(175, 79);
             this.button_browseVideoFolderToSave.Name = "button_browseVideoFolderToSave";
             this.button_browseVideoFolderToSave.Size = new System.Drawing.Size(23, 23);
             this.button_browseVideoFolderToSave.TabIndex = 13;
@@ -1007,7 +1009,7 @@
             this.textBox_videoFolderToSave.Location = new System.Drawing.Point(-2, 81);
             this.textBox_videoFolderToSave.Name = "textBox_videoFolderToSave";
             this.textBox_videoFolderToSave.ReadOnly = true;
-            this.textBox_videoFolderToSave.Size = new System.Drawing.Size(111, 20);
+            this.textBox_videoFolderToSave.Size = new System.Drawing.Size(174, 20);
             this.textBox_videoFolderToSave.TabIndex = 12;
             // 
             // comboBox_chooseCamera
@@ -1018,7 +1020,7 @@
             this.comboBox_chooseCamera.FormattingEnabled = true;
             this.comboBox_chooseCamera.Location = new System.Drawing.Point(-3, 15);
             this.comboBox_chooseCamera.Name = "comboBox_chooseCamera";
-            this.comboBox_chooseCamera.Size = new System.Drawing.Size(138, 21);
+            this.comboBox_chooseCamera.Size = new System.Drawing.Size(201, 21);
             this.comboBox_chooseCamera.TabIndex = 11;
             // 
             // progressBar_sendVideo
@@ -1027,7 +1029,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar_sendVideo.Location = new System.Drawing.Point(5, 186);
             this.progressBar_sendVideo.Name = "progressBar_sendVideo";
-            this.progressBar_sendVideo.Size = new System.Drawing.Size(137, 10);
+            this.progressBar_sendVideo.Size = new System.Drawing.Size(200, 10);
             this.progressBar_sendVideo.Step = 1;
             this.progressBar_sendVideo.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar_sendVideo.TabIndex = 0;
@@ -1036,7 +1038,7 @@
             // button_browseVideoFileToSend
             // 
             this.button_browseVideoFileToSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_browseVideoFileToSend.Location = new System.Drawing.Point(119, 160);
+            this.button_browseVideoFileToSend.Location = new System.Drawing.Point(182, 160);
             this.button_browseVideoFileToSend.Name = "button_browseVideoFileToSend";
             this.button_browseVideoFileToSend.Size = new System.Drawing.Size(23, 23);
             this.button_browseVideoFileToSend.TabIndex = 10;
@@ -1050,7 +1052,7 @@
             this.textBox_videoPathToSend.Location = new System.Drawing.Point(5, 162);
             this.textBox_videoPathToSend.Name = "textBox_videoPathToSend";
             this.textBox_videoPathToSend.ReadOnly = true;
-            this.textBox_videoPathToSend.Size = new System.Drawing.Size(111, 20);
+            this.textBox_videoPathToSend.Size = new System.Drawing.Size(174, 20);
             this.textBox_videoPathToSend.TabIndex = 9;
             // 
             // button_sendVideo
@@ -1060,7 +1062,7 @@
             this.button_sendVideo.BackColor = System.Drawing.Color.Transparent;
             this.button_sendVideo.Location = new System.Drawing.Point(4, 198);
             this.button_sendVideo.Name = "button_sendVideo";
-            this.button_sendVideo.Size = new System.Drawing.Size(138, 34);
+            this.button_sendVideo.Size = new System.Drawing.Size(201, 34);
             this.button_sendVideo.TabIndex = 8;
             this.button_sendVideo.Text = "Send Video";
             this.button_sendVideo.UseVisualStyleBackColor = false;
@@ -1084,7 +1086,7 @@
             this.button_recordStartStop.BackColor = System.Drawing.Color.Transparent;
             this.button_recordStartStop.Location = new System.Drawing.Point(-2, 107);
             this.button_recordStartStop.Name = "button_recordStartStop";
-            this.button_recordStartStop.Size = new System.Drawing.Size(138, 34);
+            this.button_recordStartStop.Size = new System.Drawing.Size(201, 34);
             this.button_recordStartStop.TabIndex = 2;
             this.button_recordStartStop.Text = "Start Record";
             this.button_recordStartStop.UseVisualStyleBackColor = false;
@@ -1222,7 +1224,7 @@
             this.button_cameraOpenClose.BackColor = System.Drawing.Color.Lime;
             this.button_cameraOpenClose.Location = new System.Drawing.Point(-3, 41);
             this.button_cameraOpenClose.Name = "button_cameraOpenClose";
-            this.button_cameraOpenClose.Size = new System.Drawing.Size(138, 34);
+            this.button_cameraOpenClose.Size = new System.Drawing.Size(201, 34);
             this.button_cameraOpenClose.TabIndex = 0;
             this.button_cameraOpenClose.Text = "Open Camera";
             this.button_cameraOpenClose.UseVisualStyleBackColor = false;
@@ -1236,7 +1238,7 @@
             this.pictureBox_camera.BackColor = System.Drawing.Color.Black;
             this.pictureBox_camera.Location = new System.Drawing.Point(5, 3);
             this.pictureBox_camera.Name = "pictureBox_camera";
-            this.pictureBox_camera.Size = new System.Drawing.Size(456, 415);
+            this.pictureBox_camera.Size = new System.Drawing.Size(390, 415);
             this.pictureBox_camera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_camera.TabIndex = 17;
             this.pictureBox_camera.TabStop = false;
@@ -1245,6 +1247,7 @@
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this._3DSimPanel);
             this.panel5.Controls.Add(this.recordInformationLed);
             this.panel5.Controls.Add(this.label_videoRecordTime);
             this.panel5.Controls.Add(this.button_browseVideoFolderToSave);
@@ -1258,11 +1261,21 @@
             this.panel5.Controls.Add(this.button_recordStartStop);
             this.panel5.Controls.Add(this.label33);
             this.panel5.Controls.Add(this.button_cameraOpenClose);
-            this.panel5.Location = new System.Drawing.Point(459, 72);
+            this.panel5.Location = new System.Drawing.Point(396, 72);
             this.panel5.MinimumSize = new System.Drawing.Size(145, 250);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(145, 419);
+            this.panel5.Size = new System.Drawing.Size(208, 419);
             this.panel5.TabIndex = 16;
+            // 
+            // _3DSimPanel
+            // 
+            this._3DSimPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._3DSimPanel.Location = new System.Drawing.Point(3, 238);
+            this._3DSimPanel.Name = "_3DSimPanel";
+            this._3DSimPanel.Size = new System.Drawing.Size(202, 176);
+            this._3DSimPanel.TabIndex = 16;
             // 
             // panel_camera
             // 
@@ -2018,6 +2031,11 @@
             this.chromiumWebBrowser1.Size = new System.Drawing.Size(608, 313);
             this.chromiumWebBrowser1.TabIndex = 22;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2033,6 +2051,7 @@
             this.Text = "TAISAT ARAYÜZ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             tabPage_serialMonitor.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
@@ -2222,6 +2241,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart batterVoltage_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart carrierPressure_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart payloadPressure_Chart;
+        private System.Windows.Forms.Panel _3DSimPanel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

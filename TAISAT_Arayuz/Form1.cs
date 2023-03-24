@@ -20,6 +20,10 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Accord.Video.FFMPEG;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using static System.Windows.Forms.AxHost;
+using CefSharp.DevTools.Browser;
 
 namespace TAISAT_Arayuz
 {
@@ -29,7 +33,47 @@ namespace TAISAT_Arayuz
         {
             InitializeComponent();
         }
-
+        //3D Simulation Değişkenleri
+        [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent); 
+        [DllImport("user32.dll", SetLastError = true)] internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);  
+        string _3DSimExePath = @"C:/Users/Administrator/Desktop/3D Sim/New Unity Project.exe"; 
+        Process simApplication;
+        const int WS_BORDER = 8388608;
+        const int WS_DLGFRAME = 4194304;
+        const int WS_CAPTION = WS_BORDER | WS_DLGFRAME;
+        const int WS_SYSMENU = 524288;
+        const int WS_THICKFRAME = 262144;
+        const int WS_MINIMIZE = 536870912;
+        const int WS_MAXIMIZEBOX = 65536;
+        const int GWL_STYLE = (int)-16L;
+        const int GWL_EXSTYLE = (int)-20L;
+        const int WS_EX_DLGMODALFRAME = (int)0x1L;
+        const int SWP_NOMOVE = 0x2;
+        const int SWP_NOSIZE = 0x1;
+        const int SWP_FRAMECHANGED = 0x20;
+        const uint MF_BYPOSITION = 0x400;
+        const uint MF_REMOVE = 0x1000;
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern int GetWindowLongA(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern int SetWindowLongA(IntPtr hWnd, int nIndex, int dwNewLong);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+        public void MakeExternalWindowBorderless(IntPtr MainWindowHandle)
+        {
+            int Style = 0;
+            Style = GetWindowLongA(MainWindowHandle, GWL_STYLE);
+            Style = Style & ~WS_CAPTION;
+            Style = Style & ~WS_SYSMENU;
+            Style = Style & ~WS_THICKFRAME;
+            Style = Style & ~WS_MINIMIZE;
+            Style = Style & ~WS_MAXIMIZEBOX;
+            SetWindowLongA(MainWindowHandle, GWL_STYLE, Style);
+            Style = GetWindowLongA(MainWindowHandle, GWL_EXSTYLE);
+            SetWindowLongA(MainWindowHandle, GWL_EXSTYLE, Style | WS_EX_DLGMODALFRAME);
+            SetWindowPos(MainWindowHandle, new IntPtr(0), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
+        } 
+        //3D Simulation Değişkenleri
         Label[] statusLabels;//0-7 Arası Uydu Statusu Belirten labellar 
 
         //Video Kaydı Değişkenleri
@@ -184,8 +228,23 @@ namespace TAISAT_Arayuz
                 buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
             }
         }
+        void KillSimulations()
+        {
+            foreach (var process in Process.GetProcessesByName(_3DSimExePath.Split('/').Last().Split('.')[0]))
+            {
+                process.Kill();
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
+            KillSimulations();
+            ProcessStartInfo startInfo = new ProcessStartInfo();  
+            startInfo.FileName = _3DSimExePath;
+            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            simApplication = Process.Start(startInfo);
+            simApplication.WaitForInputIdle();
+            MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
+            timer1.Start();
             if (resolution == 480) { width = 640; height = 480; }
             if (resolution == 720) { width = 1280; height = 720; }
             if (resolution == 1080) { width = 1920; height = 1080; }
@@ -336,6 +395,7 @@ namespace TAISAT_Arayuz
             {
                 cam.Stop();
                 videoWriter.Close();
+                KillSimulations();
             }
         }
         private void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
@@ -347,9 +407,24 @@ namespace TAISAT_Arayuz
                 string[] str = videorecordpath.Split('\\');
                 textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
             }
-        } 
-        private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
+        }
+        int count = 5;
+        private void timer1_Tick(object sender, EventArgs e)
         {
+            MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
+            SetParent(simApplication.MainWindowHandle, _3DSimPanel.Handle);
+            MakeExternalWindowBorderless(simApplication.MainWindowHandle);
+            count--;
+            if (count == 0) timer1.Stop();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            KillSimulations();
+        }
+
+        private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
+        { 
             //TEST
             if (label_uyduStatus.Text == "") { label_uyduStatus.Text = "0"; }
             else { label_uyduStatus.Text = (Int16.Parse(label_uyduStatus.Text) + 1).ToString(); }
