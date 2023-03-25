@@ -24,11 +24,14 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using static System.Windows.Forms.AxHost;
 using CefSharp.DevTools.Browser;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace TAISAT_Arayuz
 {
     public partial class Form1 : Form
     {
+        //PACKAGE INCELENECEK SAAT 2 PARÇA GELİYOR?
+        //PACKAGE KURALI ??
         public Form1()
         {
             InitializeComponent();
@@ -52,7 +55,7 @@ namespace TAISAT_Arayuz
         const int SWP_NOSIZE = 0x1;
         const int SWP_FRAMECHANGED = 0x20;
         const uint MF_BYPOSITION = 0x400;
-        const uint MF_REMOVE = 0x1000; 
+        const uint MF_REMOVE = 0x1000;
         int count = 5;
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern int GetWindowLongA(IntPtr hWnd, int nIndex);
@@ -79,7 +82,7 @@ namespace TAISAT_Arayuz
 
         //Video Kaydı Değişkenleri
         int width, height;
-        int resolution=720;
+        int resolution = 720;
         string videorecordpath = @"";
         FilterInfoCollection fCollection;
         VideoCaptureDevice cam;
@@ -101,7 +104,7 @@ namespace TAISAT_Arayuz
             settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
             Cef.Initialize(settings);
             chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
-        } 
+        }
         public void SerialPortProgram()
         {
             port.DataReceived += Port_DataReceived;
@@ -112,6 +115,217 @@ namespace TAISAT_Arayuz
         {
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
+        }
+        void KillSimulations()
+        {
+            foreach (var process in Process.GetProcessesByName(_3DSimExePath.Split('/').Last().Split('.')[0]))
+            {
+                process.Kill();
+            }
+        }
+        private void ToggleUI(bool toggle)
+        {
+            Type[] types = { typeof(TextBox), typeof(Button), typeof(ComboBox) };
+            foreach (Type type in types)
+                foreach (var item in GetAll(this, type))
+                    item.Enabled = toggle;
+        }
+        public IEnumerable<Control> GetAll(Control control, Type type)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, type))
+                                      .Concat(controls)
+                                      .Where(c => c.GetType() == type);
+        }
+        void takeScreenShotOfChart(Chart chart)
+        {
+            Size oldSize = chart.Size;
+            chart.Size = new Size(1920, 1080);
+            chart.SaveImage(chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
+            chart.Size = oldSize;
+        }
+        private void SaveFlight(string log)
+        {
+            //Save everything
+        }
+        void ListComPorts()
+        {
+            comboBox_COMPortTelemetry.Items.Clear();
+            foreach (var port in SerialPort.GetPortNames())
+                comboBox_COMPortTelemetry.Items.Add(port);
+        }
+        private void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            port = new SerialPort(comboBox_COMPortTelemetry.SelectedItem.ToString(), Int32.Parse(comboBox_baudRateTelemetry.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
+        }
+        private void button_refreshCOMPort_Click(object sender, EventArgs e)
+        {
+            ListComPorts();
+        }
+        private void button_cameraOpenClose_Click(object sender, EventArgs e)
+        {
+            if (button_cameraOpenClose.Text == "Open Camera")
+            {
+                cam = new VideoCaptureDevice(fCollection[comboBox_chooseCamera.SelectedIndex].MonikerString);
+                cam.NewFrame += Cam_NewFrame;
+                cam.Start();
+                button_cameraOpenClose.Text = "Close Camera";
+                button_cameraOpenClose.BackColor = Color.Red;
+            }
+            else if (button_cameraOpenClose.Text == "Close Camera")
+            {
+                if (cam.IsRunning == true)
+                {
+                    cam.Stop();
+                    videoWriter.Close();
+                    finishTime = DateTime.Now.TimeOfDay;
+                    timer_videoRecordTime.Stop();
+                    button_recordStartStop.Text = "Start Record";
+                    recordInformationLed.BackColor = Color.Transparent;
+                    pictureBox_camera.Image = null;
+                }
+                label_videoRecordTime.Text = "00:00:00";
+                button_cameraOpenClose.Text = "Open Camera";
+                button_cameraOpenClose.BackColor = Color.Lime;
+            }
+        }
+        private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                if (button_recordStartStop.Text == "Stop Record")
+                {
+                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
+                    videoWriter.WriteVideoFrame(videoBitmap);
+                    pictureBox_camera.Image = videoBitmap;
+                }
+                else
+                {
+                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
+                    pictureBox_camera.Image = videoBitmap;
+                }
+            }
+            catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
+        }
+        private void button_recordStartStop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (button_recordStartStop.Text == "Start Record" && cam.IsRunning && videorecordpath != null)
+                {
+                    string filePath = "" + videorecordpath + "\\" + "videoTaisat_" + DateTime.Now.ToString().Replace(':', '.').Replace(' ', '_') + ".avi";
+                    videoWriter.Open(@filePath, width, height, 30, Accord.Video.FFMPEG.VideoCodec.MPEG4, 5000000);
+                    startTime = DateTime.Now.TimeOfDay;
+                    timer_videoRecordTime.Start();
+                    button_recordStartStop.Text = "Stop Record";
+                }
+                else if (button_recordStartStop.Text == "Stop Record")
+                {
+                    videoWriter.Close();
+                    finishTime = DateTime.Now.TimeOfDay;
+                    timer_videoRecordTime.Stop();
+                    button_recordStartStop.Text = "Start Record";
+                    recordInformationLed.BackColor = Color.Transparent;
+                }
+                else
+                {
+                    MessageBox.Show("You have to open the camera and select a folder to start record!");
+                }
+            }
+            catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
+        }
+        private void timer_videoRecordTime_Tick(object sender, EventArgs e)
+        {
+            currentTime = DateTime.Now.TimeOfDay;
+            elapsedTime = currentTime.Subtract(startTime);
+            label_videoRecordTime.Text = elapsedTime.ToString(@"hh\:mm\:ss");
+            if (recordInformationLed.BackColor == Color.Transparent)
+            {
+                recordInformationLed.BackColor = Color.Red;
+            }
+            else if (recordInformationLed.BackColor == Color.Red)
+            {
+                recordInformationLed.BackColor = Color.Transparent;
+            }
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (cam.IsRunning == true)
+            {
+                cam.Stop();
+                videoWriter.Close();
+                KillSimulations();
+            }
+        }
+        private void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog browser = new FolderBrowserDialog();
+            if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                videorecordpath = browser.SelectedPath;
+                string[] str = videorecordpath.Split('\\');
+                textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
+            }
+        }
+        private void windowFixer_TimerTick(object sender, EventArgs e)
+        {
+            MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
+            SetParent(simApplication.MainWindowHandle, _3DSimPanel.Handle);
+            MakeExternalWindowBorderless(simApplication.MainWindowHandle);
+            count--;
+            if (count == 0)
+            { windowFixer.Stop(); ToggleUI(true); }
+            else
+                ToggleUI(false);
+        }
+        private void payloadPressure_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(payloadPressure_Chart);
+        }
+        private void carrierPressure_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(carrierPressure_Chart);
+        }
+
+        private void batterVoltage_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(batterVoltage_Chart);
+        }
+        private void payloadAltitude_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(payloadAltitude_Chart);
+        }
+        private void carrierAltitude_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(carrierAltitude_Chart);
+        }
+        private void velocity_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(velocity_Chart);
+        }
+        private void payloadGPSAltitude_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(payloadGPSAltitude_Chart);
+        }
+        private void differenceAltitude_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(differenceAltitude_Chart);
+        }
+        private void temperature_Chart_Click(object sender, EventArgs e)
+        {
+            takeScreenShotOfChart(temperature_Chart);
+        }
+        private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
+        {
+            payloadPressure_Chart.Size = new Size(1920, 1080);
+            MessageBox.Show(payloadPressure_Chart.Size.Width.ToString());
+            /*MANUAL DEPLOY KOMUTU
+            int currentStatus = Int16.Parse(label_uyduStatus.Text);
+            //MANUAL DEPLOY KOMUTU (CURRENT STATUSUN 1 SONRASINI AKTİFLEŞTİRCEK)
+            currentStatus++;
+            label_uyduStatus.Text=currentStatus.ToString();
+            //MANUAL DEPLOY KOMUTU */
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -166,7 +380,26 @@ namespace TAISAT_Arayuz
                     label_payloadYaw.Text = telemetryData[18];
                     label_teamID.Text = telemetryData[19];
                     //Telemetry To Labels 
-
+                    string log = label_packageNo.Text + " numaralı " + label_currentTime.Text + " saatinde gelen veriler" + Environment.NewLine +
+                        "Paket Numarasi:" + label_packageNo.Text + Environment.NewLine +
+                        "Uydu Statusu:" + label_uyduStatus.Text + Environment.NewLine +
+                        "Hata Kodu:" + label_hataKod.Text + Environment.NewLine +
+                        "Gonderme Saati:" + label_currentDate.Text + " - " + label_currentTime.Text + Environment.NewLine +
+                        "Basinc1:" + label_containerPressure.Text + Environment.NewLine +
+                        "Basinc2:" + label_payloadPressure.Text + Environment.NewLine +
+                        "Yukseklik1:" + label_containerAltitude.Text + Environment.NewLine +
+                        "Yukseklik2:" + label_payloadAltitude.Text + Environment.NewLine +
+                        "İrtifa Farki:" + label_AltitudeDiff.Text + Environment.NewLine +
+                        "İnis Hizi:" + label_payloadVelocity.Text + Environment.NewLine +
+                        "Sicaklik:" + label_payloadTemperature.Text + Environment.NewLine +
+                        "Pil Gerilimi:" + label_payloadBataryVoltage.Text + Environment.NewLine +
+                        "Gps Latitude:" + label_payloadGPSLatitude.Text + Environment.NewLine +
+                        "Gps Longitude:" + label_payloadGPSLongitude.Text + Environment.NewLine +
+                        "Gps Altitude:" + label_payloadGPSAltitude.Text + Environment.NewLine +
+                        "Pitch:" + label_payloadPitch.Text + Environment.NewLine +
+                        "Roll:" + label_payloadRoll.Text + Environment.NewLine +
+                        "Yaw:" + label_payloadYaw.Text + Environment.NewLine +
+                        "Takim No:" + label_teamID.Text + Environment.NewLine + "---------------------------------------------------" + Environment.NewLine;
                     //Sending Gyro To Model Simulation
                     //Pitch:X Yaw:Y Roll:Z
                     string gyroData = label_payloadPitch.Text + "," + label_payloadYaw.Text + "," + label_payloadRoll.Text;
@@ -199,19 +432,19 @@ namespace TAISAT_Arayuz
                             break;
                         case 7:
                             statusLabels[7].BackColor = Color.Lime;
-                            break; 
+                            break;
                     }
                     //Uydu Status
                     //Charts
-                    payloadGPSAltitude_Chart.Series["P_GPSAltitude"].Points.AddY(label_payloadGPSAltitude.Text);
-                    temperature_Chart.Series["Temperature"].Points.AddY(label_payloadTemperature.Text);
-                    batterVoltage_Chart.Series["B_Voltage"].Points.AddY(label_payloadBataryVoltage.Text);
-                    velocity_Chart.Series["Velocity"].Points.AddY(label_payloadVelocity.Text);
-                    differenceAltitude_Chart.Series["D_Altitude"].Points.AddY(label_AltitudeDiff.Text);
-                    payloadAltitude_Chart.Series["P_Altitude"].Points.AddY(label_payloadAltitude.Text);
-                    carrierAltitude_Chart.Series["C_Altitude"].Points.AddY(label_containerAltitude.Text);
-                    payloadPressure_Chart.Series["P_Pressure"].Points.AddY(label_payloadPressure.Text);
-                    carrierPressure_Chart.Series["C_Pressure"].Points.AddY(label_containerPressure.Text);
+                    payloadGPSAltitude_Chart.Series["P_GPSAltitude"].Points.AddXY(label_currentTime.Text, label_payloadGPSAltitude.Text);
+                    temperature_Chart.Series["Temperature"].Points.AddXY(label_currentTime.Text, label_payloadTemperature.Text);
+                    batterVoltage_Chart.Series["B_Voltage"].Points.AddXY(label_currentTime.Text, label_payloadBataryVoltage.Text);
+                    velocity_Chart.Series["Velocity"].Points.AddXY(label_currentTime.Text, label_payloadVelocity.Text);
+                    differenceAltitude_Chart.Series["D_Altitude"].Points.AddXY(label_currentTime.Text, label_AltitudeDiff.Text);
+                    payloadAltitude_Chart.Series["P_Altitude"].Points.AddXY(label_currentTime.Text, label_payloadAltitude.Text);
+                    carrierAltitude_Chart.Series["C_Altitude"].Points.AddXY(label_currentTime.Text, label_containerAltitude.Text);
+                    payloadPressure_Chart.Series["P_Pressure"].Points.AddXY(label_currentTime.Text, label_payloadPressure.Text);
+                    carrierPressure_Chart.Series["C_Pressure"].Points.AddXY(label_currentTime.Text, label_containerPressure.Text);
                     //Charts
                     //Error Code 
                     errorBit1.BackColor = label_hataKod.Text[0] == '0' ? Color.Lime : Color.Red;
@@ -226,13 +459,6 @@ namespace TAISAT_Arayuz
                     //GPS To Map
                 }
                 buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
-            }
-        }
-        void KillSimulations()
-        {
-            foreach (var process in Process.GetProcessesByName(_3DSimExePath.Split('/').Last().Split('.')[0]))
-            {
-                process.Kill();
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -258,21 +484,6 @@ namespace TAISAT_Arayuz
             ListComPorts();
             comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
             chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
-        } 
-        private void ToggleUI(bool toggle)
-        {
-            Type[] types = { typeof(TextBox), typeof(Button), typeof(ComboBox) };
-            foreach (Type type in types) 
-                foreach (var item in GetAll(this, type)) 
-                    item.Enabled = toggle; 
-        }
-        public IEnumerable<Control> GetAll(Control control, Type type)
-        {
-            var controls = control.Controls.Cast<Control>();
-
-            return controls.SelectMany(ctrl => GetAll(ctrl, type))
-                                      .Concat(controls)
-                                      .Where(c => c.GetType() == type);
         }
         private void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
@@ -288,147 +499,7 @@ namespace TAISAT_Arayuz
                 port.Dispose();
                 button_telemetryCOMPortOpenClose.BackColor = Color.Lime;
                 MessageBox.Show("Uçuş Tamamlandı!");
-                SaveFlight();
             }
-        }
-        private void SaveFlight()
-        {
-            //Save everything
-        }
-        private void button_refreshCOMPort_Click(object sender, EventArgs e)
-        {
-            ListComPorts();
-        }
-        void ListComPorts()
-        {
-            comboBox_COMPortTelemetry.Items.Clear();
-            foreach (var port in SerialPort.GetPortNames())
-                comboBox_COMPortTelemetry.Items.Add(port);
-        }
-        private void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            port = new SerialPort(comboBox_COMPortTelemetry.SelectedItem.ToString(), Int32.Parse(comboBox_baudRateTelemetry.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
-        }
-        private void button_cameraOpenClose_Click(object sender, EventArgs e)
-        {
-            if (button_cameraOpenClose.Text == "Open Camera")
-            {
-                cam = new VideoCaptureDevice(fCollection[comboBox_chooseCamera.SelectedIndex].MonikerString);
-                cam.NewFrame += Cam_NewFrame;
-                cam.Start();
-                button_cameraOpenClose.Text = "Close Camera";
-                button_cameraOpenClose.BackColor = Color.Red;
-            }
-            else if (button_cameraOpenClose.Text == "Close Camera")
-            {
-                if (cam.IsRunning == true)
-                {
-                    cam.Stop();
-                    videoWriter.Close();
-                    finishTime = DateTime.Now.TimeOfDay;
-                    timer_videoRecordTime.Stop();
-                    button_recordStartStop.Text = "Start Record";
-                    recordInformationLed.BackColor = Color.Transparent;
-                    pictureBox_camera.Image = null;
-                }
-                label_videoRecordTime.Text = "00:00:00";
-                button_cameraOpenClose.Text = "Open Camera";
-                button_cameraOpenClose.BackColor = Color.Lime;
-            }
-        }
-        private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            try
-            {
-                if (button_recordStartStop.Text == "Stop Record")
-                {
-                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
-                    videoWriter.WriteVideoFrame(videoBitmap);
-                    pictureBox_camera.Image = videoBitmap;
-                }
-                else
-                {
-                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
-                    pictureBox_camera.Image = videoBitmap;
-                }
-            }  catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
-        } 
-        private void button_recordStartStop_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (button_recordStartStop.Text == "Start Record" && cam.IsRunning && videorecordpath != null)
-                {
-                    string filePath = "" + videorecordpath + "\\" + "videoTaisat_" + DateTime.Now.ToString().Replace(':', '.').Replace(' ', '_') + ".avi";
-                    videoWriter.Open(@filePath, width, height, 30, Accord.Video.FFMPEG.VideoCodec.MPEG4, 5000000);
-                    startTime = DateTime.Now.TimeOfDay;
-                    timer_videoRecordTime.Start();
-                    button_recordStartStop.Text = "Stop Record";
-                }
-                else if (button_recordStartStop.Text == "Stop Record")
-                {
-                    videoWriter.Close();
-                    finishTime = DateTime.Now.TimeOfDay;
-                    timer_videoRecordTime.Stop();
-                    button_recordStartStop.Text = "Start Record";
-                    recordInformationLed.BackColor = Color.Transparent;
-                }
-                else
-                {
-                    MessageBox.Show("You have to open the camera and select a folder to start record!");
-                } 
-            }  catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
-        } 
-        private void timer_videoRecordTime_Tick(object sender, EventArgs e)
-        {
-            currentTime = DateTime.Now.TimeOfDay;
-            elapsedTime = currentTime.Subtract(startTime);
-            label_videoRecordTime.Text = elapsedTime.ToString(@"hh\:mm\:ss");
-            if (recordInformationLed.BackColor == Color.Transparent)
-            {
-                recordInformationLed.BackColor = Color.Red;
-            }
-            else if (recordInformationLed.BackColor == Color.Red)
-            {
-                recordInformationLed.BackColor = Color.Transparent;
-            }
-        } 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (cam.IsRunning == true)
-            {
-                cam.Stop();
-                videoWriter.Close();
-                KillSimulations();
-            }
-        }
-        private void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog browser = new FolderBrowserDialog();
-            if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                videorecordpath = browser.SelectedPath;
-                string[] str = videorecordpath.Split('\\');
-                textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
-            }
-        }
-        private void windowFixer_TimerTick(object sender, EventArgs e)
-        { 
-            MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
-            SetParent(simApplication.MainWindowHandle, _3DSimPanel.Handle);
-            MakeExternalWindowBorderless(simApplication.MainWindowHandle);
-            count--;
-            if (count == 0) { windowFixer.Stop(); ToggleUI(true); }
-            else  { ToggleUI(false); }
-        }  
-        private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
-        { 
-            /*MANUAL DEPLOY KOMUTU
-            int currentStatus = Int16.Parse(label_uyduStatus.Text);
-            //MANUAL DEPLOY KOMUTU (CURRENT STATUSUN 1 SONRASINI AKTİFLEŞTİRCEK)
-            currentStatus++;
-            label_uyduStatus.Text=currentStatus.ToString();
-            //MANUAL DEPLOY KOMUTU */
         }
     }
 }

@@ -31,33 +31,33 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TabPage tabPage_serialMonitor;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea28 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend28 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea29 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend29 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea30 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend30 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea31 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend31 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea32 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend32 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea33 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend33 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea34 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend34 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea35 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend35 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea36 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend36 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_logs = new System.Windows.Forms.TextBox();
@@ -103,14 +103,11 @@
             this.label20 = new System.Windows.Forms.Label();
             this.panel_views2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_charts = new System.Windows.Forms.TableLayoutPanel();
-            this.payloadGPSAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.differenceAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.temperature_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.velocity_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.carrierAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.payloadAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.batterVoltage_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.carrierPressure_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.payloadPressure_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label26 = new System.Windows.Forms.Label();
             this.recordInformationLed = new System.Windows.Forms.Panel();
@@ -192,6 +189,18 @@
             this.tableLayoutPanel_views = new System.Windows.Forms.TableLayoutPanel();
             this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
             this.windowFixer = new System.Windows.Forms.Timer(this.components);
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.carrierAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.velocity_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.payloadGPSAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.payloadAltitude_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -202,14 +211,11 @@
             this.groupBox_saveDatasConfig.SuspendLayout();
             this.panel_views2.SuspendLayout();
             this.tableLayoutPanel_charts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.payloadGPSAltitude_Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.differenceAltitude_Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.temperature_Chart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.velocity_Chart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carrierAltitude_Chart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.payloadAltitude_Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batterVoltage_Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.carrierPressure_Chart)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.payloadPressure_Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel_mainInformation.SuspendLayout();
@@ -230,6 +236,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_telemetryDataTable)).BeginInit();
             this.panel7.SuspendLayout();
             this.tableLayoutPanel_views.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.carrierAltitude_Chart)).BeginInit();
+            this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.velocity_Chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.payloadGPSAltitude_Chart)).BeginInit();
+            this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.payloadAltitude_Chart)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_serialMonitor
@@ -772,15 +790,15 @@
             this.tableLayoutPanel_charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel_charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel_charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel_charts.Controls.Add(this.payloadGPSAltitude_Chart, 0, 2);
-            this.tableLayoutPanel_charts.Controls.Add(this.differenceAltitude_Chart, 0, 2);
-            this.tableLayoutPanel_charts.Controls.Add(this.temperature_Chart, 0, 2);
-            this.tableLayoutPanel_charts.Controls.Add(this.velocity_Chart, 2, 1);
-            this.tableLayoutPanel_charts.Controls.Add(this.carrierAltitude_Chart, 1, 1);
-            this.tableLayoutPanel_charts.Controls.Add(this.payloadAltitude_Chart, 0, 1);
-            this.tableLayoutPanel_charts.Controls.Add(this.batterVoltage_Chart, 2, 0);
-            this.tableLayoutPanel_charts.Controls.Add(this.carrierPressure_Chart, 1, 0);
-            this.tableLayoutPanel_charts.Controls.Add(this.payloadPressure_Chart, 0, 0);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel13, 2, 2);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel12, 1, 2);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel3, 0, 0);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel4, 1, 0);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel6, 2, 0);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel8, 0, 1);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel9, 1, 1);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel10, 2, 1);
+            this.tableLayoutPanel_charts.Controls.Add(this.panel11, 0, 2);
             this.tableLayoutPanel_charts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel_charts.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel_charts.Margin = new System.Windows.Forms.Padding(0);
@@ -792,168 +810,103 @@
             this.tableLayoutPanel_charts.Size = new System.Drawing.Size(938, 488);
             this.tableLayoutPanel_charts.TabIndex = 0;
             // 
-            // payloadGPSAltitude_Chart
-            // 
-            chartArea28.Name = "ChartArea1";
-            this.payloadGPSAltitude_Chart.ChartAreas.Add(chartArea28);
-            this.payloadGPSAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend28.Name = "Legend1";
-            this.payloadGPSAltitude_Chart.Legends.Add(legend28);
-            this.payloadGPSAltitude_Chart.Location = new System.Drawing.Point(3, 309);
-            this.payloadGPSAltitude_Chart.Name = "payloadGPSAltitude_Chart";
-            series28.ChartArea = "ChartArea1";
-            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series28.Legend = "Legend1";
-            series28.Name = "P_GPSAltitude";
-            series28.YValuesPerPoint = 4;
-            this.payloadGPSAltitude_Chart.Series.Add(series28);
-            this.payloadGPSAltitude_Chart.Size = new System.Drawing.Size(306, 176);
-            this.payloadGPSAltitude_Chart.TabIndex = 9;
-            this.payloadGPSAltitude_Chart.Text = "chart9";
-            // 
             // differenceAltitude_Chart
             // 
-            chartArea29.Name = "ChartArea1";
-            this.differenceAltitude_Chart.ChartAreas.Add(chartArea29);
-            this.differenceAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend29.Name = "Legend1";
-            this.differenceAltitude_Chart.Legends.Add(legend29);
-            this.differenceAltitude_Chart.Location = new System.Drawing.Point(315, 309);
+            chartArea2.Name = "ChartArea1";
+            this.differenceAltitude_Chart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.differenceAltitude_Chart.Legends.Add(legend2);
+            this.differenceAltitude_Chart.Location = new System.Drawing.Point(0, 0);
             this.differenceAltitude_Chart.Name = "differenceAltitude_Chart";
-            series29.ChartArea = "ChartArea1";
-            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series29.Legend = "Legend1";
-            series29.Name = "D_Altitude";
-            this.differenceAltitude_Chart.Series.Add(series29);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.Legend = "Legend1";
+            series2.Name = "D_Altitude";
+            this.differenceAltitude_Chart.Series.Add(series2);
             this.differenceAltitude_Chart.Size = new System.Drawing.Size(306, 176);
             this.differenceAltitude_Chart.TabIndex = 8;
             this.differenceAltitude_Chart.Text = "chart8";
+            this.differenceAltitude_Chart.Click += new System.EventHandler(this.differenceAltitude_Chart_Click);
             // 
             // temperature_Chart
             // 
-            chartArea30.Name = "ChartArea1";
-            this.temperature_Chart.ChartAreas.Add(chartArea30);
-            this.temperature_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend30.Name = "Legend1";
-            this.temperature_Chart.Legends.Add(legend30);
-            this.temperature_Chart.Location = new System.Drawing.Point(627, 309);
+            chartArea1.Name = "ChartArea1";
+            this.temperature_Chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.temperature_Chart.Legends.Add(legend1);
+            this.temperature_Chart.Location = new System.Drawing.Point(0, 0);
             this.temperature_Chart.Name = "temperature_Chart";
-            series30.ChartArea = "ChartArea1";
-            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series30.Legend = "Legend1";
-            series30.Name = "Temperature";
-            this.temperature_Chart.Series.Add(series30);
-            this.temperature_Chart.Size = new System.Drawing.Size(308, 176);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.Legend = "Legend1";
+            series1.Name = "Temperature";
+            this.temperature_Chart.Series.Add(series1);
+            this.temperature_Chart.Size = new System.Drawing.Size(306, 176);
             this.temperature_Chart.TabIndex = 7;
             this.temperature_Chart.Text = "chart7";
-            // 
-            // velocity_Chart
-            // 
-            chartArea31.Name = "ChartArea1";
-            this.velocity_Chart.ChartAreas.Add(chartArea31);
-            this.velocity_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend31.Name = "Legend1";
-            this.velocity_Chart.Legends.Add(legend31);
-            this.velocity_Chart.Location = new System.Drawing.Point(627, 156);
-            this.velocity_Chart.Name = "velocity_Chart";
-            series31.ChartArea = "ChartArea1";
-            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series31.Legend = "Legend1";
-            series31.Name = "Velocity";
-            this.velocity_Chart.Series.Add(series31);
-            this.velocity_Chart.Size = new System.Drawing.Size(308, 147);
-            this.velocity_Chart.TabIndex = 6;
-            this.velocity_Chart.Text = "chart6";
-            // 
-            // carrierAltitude_Chart
-            // 
-            chartArea32.Name = "ChartArea1";
-            this.carrierAltitude_Chart.ChartAreas.Add(chartArea32);
-            this.carrierAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend32.Name = "Legend1";
-            this.carrierAltitude_Chart.Legends.Add(legend32);
-            this.carrierAltitude_Chart.Location = new System.Drawing.Point(315, 156);
-            this.carrierAltitude_Chart.Name = "carrierAltitude_Chart";
-            series32.ChartArea = "ChartArea1";
-            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series32.Legend = "Legend1";
-            series32.Name = "C_Altitude";
-            this.carrierAltitude_Chart.Series.Add(series32);
-            this.carrierAltitude_Chart.Size = new System.Drawing.Size(306, 147);
-            this.carrierAltitude_Chart.TabIndex = 5;
-            this.carrierAltitude_Chart.Text = "chart5";
-            // 
-            // payloadAltitude_Chart
-            // 
-            chartArea33.Name = "ChartArea1";
-            this.payloadAltitude_Chart.ChartAreas.Add(chartArea33);
-            this.payloadAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend33.Name = "Legend1";
-            this.payloadAltitude_Chart.Legends.Add(legend33);
-            this.payloadAltitude_Chart.Location = new System.Drawing.Point(3, 156);
-            this.payloadAltitude_Chart.Name = "payloadAltitude_Chart";
-            series33.ChartArea = "ChartArea1";
-            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series33.Legend = "Legend1";
-            series33.Name = "P_Altitude";
-            this.payloadAltitude_Chart.Series.Add(series33);
-            this.payloadAltitude_Chart.Size = new System.Drawing.Size(306, 147);
-            this.payloadAltitude_Chart.TabIndex = 4;
-            this.payloadAltitude_Chart.Text = "chart4";
+            this.temperature_Chart.Click += new System.EventHandler(this.temperature_Chart_Click);
             // 
             // batterVoltage_Chart
             // 
-            chartArea34.Name = "ChartArea1";
-            this.batterVoltage_Chart.ChartAreas.Add(chartArea34);
-            this.batterVoltage_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend34.Name = "Legend1";
-            this.batterVoltage_Chart.Legends.Add(legend34);
-            this.batterVoltage_Chart.Location = new System.Drawing.Point(627, 3);
+            chartArea5.Name = "ChartArea1";
+            this.batterVoltage_Chart.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.batterVoltage_Chart.Legends.Add(legend5);
+            this.batterVoltage_Chart.Location = new System.Drawing.Point(-2, 3);
             this.batterVoltage_Chart.Name = "batterVoltage_Chart";
-            series34.ChartArea = "ChartArea1";
-            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series34.Legend = "Legend1";
-            series34.Name = "B_Voltage";
-            this.batterVoltage_Chart.Series.Add(series34);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series5.Legend = "Legend1";
+            series5.Name = "B_Voltage";
+            this.batterVoltage_Chart.Series.Add(series5);
             this.batterVoltage_Chart.Size = new System.Drawing.Size(308, 147);
             this.batterVoltage_Chart.TabIndex = 3;
             this.batterVoltage_Chart.Text = "chart3";
+            this.batterVoltage_Chart.Click += new System.EventHandler(this.batterVoltage_Chart_Click);
             // 
             // carrierPressure_Chart
             // 
-            chartArea35.Name = "ChartArea1";
-            this.carrierPressure_Chart.ChartAreas.Add(chartArea35);
-            this.carrierPressure_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend35.Name = "Legend1";
-            this.carrierPressure_Chart.Legends.Add(legend35);
-            this.carrierPressure_Chart.Location = new System.Drawing.Point(315, 3);
+            chartArea4.Name = "ChartArea1";
+            this.carrierPressure_Chart.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.carrierPressure_Chart.Legends.Add(legend4);
+            this.carrierPressure_Chart.Location = new System.Drawing.Point(0, 3);
             this.carrierPressure_Chart.Name = "carrierPressure_Chart";
-            series35.ChartArea = "ChartArea1";
-            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series35.Legend = "Legend1";
-            series35.Name = "C_Pressure";
-            this.carrierPressure_Chart.Series.Add(series35);
-            this.carrierPressure_Chart.Size = new System.Drawing.Size(306, 147);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series4.Legend = "Legend1";
+            series4.Name = "C_Pressure";
+            this.carrierPressure_Chart.Series.Add(series4);
+            this.carrierPressure_Chart.Size = new System.Drawing.Size(306, 144);
             this.carrierPressure_Chart.TabIndex = 2;
             this.carrierPressure_Chart.Text = "chart2";
+            this.carrierPressure_Chart.Click += new System.EventHandler(this.carrierPressure_Chart_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.payloadPressure_Chart);
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(306, 147);
+            this.panel3.TabIndex = 10;
             // 
             // payloadPressure_Chart
             // 
-            chartArea36.Name = "ChartArea1";
-            this.payloadPressure_Chart.ChartAreas.Add(chartArea36);
-            this.payloadPressure_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend36.Name = "Legend1";
-            this.payloadPressure_Chart.Legends.Add(legend36);
+            chartArea3.Name = "ChartArea1";
+            this.payloadPressure_Chart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.payloadPressure_Chart.Legends.Add(legend3);
             this.payloadPressure_Chart.Location = new System.Drawing.Point(3, 3);
             this.payloadPressure_Chart.Name = "payloadPressure_Chart";
-            series36.ChartArea = "ChartArea1";
-            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series36.Legend = "Legend1";
-            series36.Name = "P_Pressure";
-            this.payloadPressure_Chart.Series.Add(series36);
-            this.payloadPressure_Chart.Size = new System.Drawing.Size(306, 147);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series3.Legend = "Legend1";
+            series3.Name = "P_Pressure";
+            this.payloadPressure_Chart.Series.Add(series3);
+            this.payloadPressure_Chart.Size = new System.Drawing.Size(306, 140);
             this.payloadPressure_Chart.TabIndex = 1;
             this.payloadPressure_Chart.Text = "chart1";
+            this.payloadPressure_Chart.Click += new System.EventHandler(this.payloadPressure_Chart_Click);
             // 
             // label26
             // 
@@ -1898,7 +1851,7 @@
             // 
             this.button_MANUAL_DEPLOY.BackColor = System.Drawing.Color.Red;
             this.button_MANUAL_DEPLOY.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button_MANUAL_DEPLOY.Location = new System.Drawing.Point(204, 3);
+            this.button_MANUAL_DEPLOY.Location = new System.Drawing.Point(204, -1);
             this.button_MANUAL_DEPLOY.Name = "button_MANUAL_DEPLOY";
             this.button_MANUAL_DEPLOY.Size = new System.Drawing.Size(113, 69);
             this.button_MANUAL_DEPLOY.TabIndex = 1;
@@ -2023,6 +1976,142 @@
             this.windowFixer.Interval = 500;
             this.windowFixer.Tick += new System.EventHandler(this.windowFixer_TimerTick);
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.carrierPressure_Chart);
+            this.panel4.Location = new System.Drawing.Point(315, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(306, 147);
+            this.panel4.TabIndex = 11;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.batterVoltage_Chart);
+            this.panel6.Location = new System.Drawing.Point(627, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(302, 147);
+            this.panel6.TabIndex = 12;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.payloadAltitude_Chart);
+            this.panel8.Location = new System.Drawing.Point(3, 156);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(306, 147);
+            this.panel8.TabIndex = 13;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.carrierAltitude_Chart);
+            this.panel9.Location = new System.Drawing.Point(315, 156);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(306, 147);
+            this.panel9.TabIndex = 14;
+            // 
+            // carrierAltitude_Chart
+            // 
+            chartArea7.Name = "ChartArea1";
+            this.carrierAltitude_Chart.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.carrierAltitude_Chart.Legends.Add(legend7);
+            this.carrierAltitude_Chart.Location = new System.Drawing.Point(0, 0);
+            this.carrierAltitude_Chart.Name = "carrierAltitude_Chart";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series7.Legend = "Legend1";
+            series7.Name = "C_Altitude";
+            this.carrierAltitude_Chart.Series.Add(series7);
+            this.carrierAltitude_Chart.Size = new System.Drawing.Size(306, 147);
+            this.carrierAltitude_Chart.TabIndex = 6;
+            this.carrierAltitude_Chart.Text = "chart5";
+            this.carrierAltitude_Chart.Click += new System.EventHandler(this.carrierAltitude_Chart_Click);
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.velocity_Chart);
+            this.panel10.Location = new System.Drawing.Point(627, 156);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(308, 147);
+            this.panel10.TabIndex = 15;
+            // 
+            // velocity_Chart
+            // 
+            chartArea8.Name = "ChartArea1";
+            this.velocity_Chart.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.velocity_Chart.Legends.Add(legend8);
+            this.velocity_Chart.Location = new System.Drawing.Point(0, 0);
+            this.velocity_Chart.Name = "velocity_Chart";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series8.Legend = "Legend1";
+            series8.Name = "Velocity";
+            this.velocity_Chart.Series.Add(series8);
+            this.velocity_Chart.Size = new System.Drawing.Size(306, 147);
+            this.velocity_Chart.TabIndex = 7;
+            this.velocity_Chart.Text = "chart6";
+            this.velocity_Chart.Click += new System.EventHandler(this.velocity_Chart_Click);
+            // 
+            // payloadGPSAltitude_Chart
+            // 
+            chartArea9.Name = "ChartArea1";
+            this.payloadGPSAltitude_Chart.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.payloadGPSAltitude_Chart.Legends.Add(legend9);
+            this.payloadGPSAltitude_Chart.Location = new System.Drawing.Point(3, 0);
+            this.payloadGPSAltitude_Chart.Name = "payloadGPSAltitude_Chart";
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series9.Legend = "Legend1";
+            series9.Name = "P_GPSAltitude";
+            series9.YValuesPerPoint = 4;
+            this.payloadGPSAltitude_Chart.Series.Add(series9);
+            this.payloadGPSAltitude_Chart.Size = new System.Drawing.Size(306, 176);
+            this.payloadGPSAltitude_Chart.TabIndex = 9;
+            this.payloadGPSAltitude_Chart.Text = "chart9";
+            this.payloadGPSAltitude_Chart.Click += new System.EventHandler(this.payloadGPSAltitude_Chart_Click);
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.payloadGPSAltitude_Chart);
+            this.panel11.Location = new System.Drawing.Point(3, 309);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(306, 176);
+            this.panel11.TabIndex = 16;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.differenceAltitude_Chart);
+            this.panel12.Location = new System.Drawing.Point(315, 309);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(306, 176);
+            this.panel12.TabIndex = 17;
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.temperature_Chart);
+            this.panel13.Location = new System.Drawing.Point(627, 309);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(308, 176);
+            this.panel13.TabIndex = 18;
+            // 
+            // payloadAltitude_Chart
+            // 
+            chartArea6.Name = "ChartArea1";
+            this.payloadAltitude_Chart.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.payloadAltitude_Chart.Legends.Add(legend6);
+            this.payloadAltitude_Chart.Location = new System.Drawing.Point(3, 0);
+            this.payloadAltitude_Chart.Name = "payloadAltitude_Chart";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series6.Legend = "Legend1";
+            series6.Name = "P_Altitude";
+            this.payloadAltitude_Chart.Series.Add(series6);
+            this.payloadAltitude_Chart.Size = new System.Drawing.Size(303, 147);
+            this.payloadAltitude_Chart.TabIndex = 6;
+            this.payloadAltitude_Chart.Text = "chart4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2037,7 +2126,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TAISAT ARAYÜZ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing); 
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             tabPage_serialMonitor.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
@@ -2052,14 +2141,11 @@
             this.groupBox_saveDatasConfig.PerformLayout();
             this.panel_views2.ResumeLayout(false);
             this.tableLayoutPanel_charts.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.payloadGPSAltitude_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.differenceAltitude_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.temperature_Chart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.velocity_Chart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carrierAltitude_Chart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.payloadAltitude_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batterVoltage_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.carrierPressure_Chart)).EndInit();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.payloadPressure_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel_mainInformation.ResumeLayout(false);
@@ -2088,6 +2174,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_telemetryDataTable)).EndInit();
             this.panel7.ResumeLayout(false);
             this.tableLayoutPanel_views.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.carrierAltitude_Chart)).EndInit();
+            this.panel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.velocity_Chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.payloadGPSAltitude_Chart)).EndInit();
+            this.panel11.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.payloadAltitude_Chart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2217,17 +2315,26 @@
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.Label label_AltitudeDiff;
         private CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart payloadGPSAltitude_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart differenceAltitude_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart temperature_Chart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart velocity_Chart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart carrierAltitude_Chart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart payloadAltitude_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart batterVoltage_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart carrierPressure_Chart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart payloadPressure_Chart;
         private System.Windows.Forms.Panel _3DSimPanel;
         private System.Windows.Forms.Timer windowFixer;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart payloadPressure_Chart;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.DataVisualization.Charting.Chart carrierAltitude_Chart;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.DataVisualization.Charting.Chart velocity_Chart;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.DataVisualization.Charting.Chart payloadGPSAltitude_Chart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart payloadAltitude_Chart;
     }
 }
 
