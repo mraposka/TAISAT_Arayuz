@@ -413,7 +413,10 @@ namespace TAISAT_Arayuz
             takeScreenShotOfChart(temperature_Chart);
         }
         void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
-        { 
+        {
+            //MANUAL DEPLOY KOMUTU  
+            var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };
+            port.Write(data, 0, data.Length);
             //MANUAL DEPLOY KOMUTU 
         }
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
