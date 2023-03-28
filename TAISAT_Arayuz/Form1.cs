@@ -27,6 +27,9 @@ using CefSharp.DevTools.Browser;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Net;
 using System.Runtime.InteropServices.ComTypes;
+using System.Globalization;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace TAISAT_Arayuz
 {
@@ -36,6 +39,9 @@ namespace TAISAT_Arayuz
         {
             InitializeComponent();
         }
+        List<CSV> logs=new List<CSV>();
+
+
         //3D Simulation Değişkenleri
         [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
         [DllImport("user32.dll", SetLastError = true)] internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
@@ -124,7 +130,7 @@ namespace TAISAT_Arayuz
                 process.Kill();
             }
         }
-        private void ToggleUI(bool toggle)
+        void ToggleUI(bool toggle)
         {
             Type[] types = { typeof(TextBox), typeof(Button), typeof(ComboBox) };
             foreach (Type type in types)
@@ -145,10 +151,20 @@ namespace TAISAT_Arayuz
             chart.Size = new Size(1920, 1080);
             chart.SaveImage(chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
             chart.Size = oldSize;
-        }
-        private void SaveFlight(string log)
+        } 
+        void SaveFlight(string log)
         {
-            //Save everything
+            File.AppendAllText("log.txt", log);
+        }
+        void SaveFlight()
+        { 
+            var configPersons = new CsvConfiguration(CultureInfo.InvariantCulture)
+            { HasHeaderRecord = false };
+            using (var stream = File.Open("log.csv", FileMode.Append))
+            using (var writer = new StreamWriter(stream))
+            using (var csv = new CsvWriter(writer, configPersons)) 
+                if (logs.Count > 0)  csv.WriteRecords(logs);
+             
         }
         void ListComPorts()
         {
@@ -156,9 +172,9 @@ namespace TAISAT_Arayuz
             foreach (var port in SerialPort.GetPortNames())
                 comboBox_COMPortTelemetry.Items.Add(port);
         }
-        private void Upload()
-        { 
-            string url = "ftp://" + textbox_ftpAddress.Text + "/allfiles/" + textBox_videoPathToSend.Text.Split('\\').Last();
+        void Upload()
+        {
+            string url = "ftp://" + textbox_ftpAddress.Text + "/" + textBox_videoPathToSend.Text.Split('\\').Last();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
             request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
             request.Method = WebRequestMethods.Ftp.UploadFile;
@@ -184,13 +200,13 @@ namespace TAISAT_Arayuz
                         if (progressBar_sendVideo.Value == progressBar_sendVideo.Maximum) label_fileSendingStatus.Text = "Gönderildi!";
                     });
                 }
-            } 
+            }
         }
         private bool isValidConnection(string url, string user, string password)
         {
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://"+url);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + url);
                 request.Method = WebRequestMethods.Ftp.ListDirectory;
                 request.Credentials = new NetworkCredential(user, password);
                 request.GetResponse();
@@ -210,7 +226,7 @@ namespace TAISAT_Arayuz
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
-        private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
             {
@@ -231,7 +247,7 @@ namespace TAISAT_Arayuz
         //My Events
 
         //Form Events
-        private void Form1_Load(object sender, EventArgs e)
+        void Form1_Load(object sender, EventArgs e)
         {
             KillSimulations();
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -255,7 +271,7 @@ namespace TAISAT_Arayuz
             comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
             chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
         }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
@@ -269,15 +285,15 @@ namespace TAISAT_Arayuz
             catch { }
 
         }
-        private void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
         {
             port = new SerialPort(comboBox_COMPortTelemetry.SelectedItem.ToString(), Int32.Parse(comboBox_baudRateTelemetry.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
         }
-        private void button_refreshCOMPort_Click(object sender, EventArgs e)
+        void button_refreshCOMPort_Click(object sender, EventArgs e)
         {
             ListComPorts();
         }
-        private void button_cameraOpenClose_Click(object sender, EventArgs e)
+        void button_cameraOpenClose_Click(object sender, EventArgs e)
         {
             if (button_cameraOpenClose.Text == "Open Camera")
             {
@@ -304,7 +320,7 @@ namespace TAISAT_Arayuz
                 button_cameraOpenClose.BackColor = Color.Lime;
             }
         }
-        private void button_recordStartStop_Click(object sender, EventArgs e)
+        void button_recordStartStop_Click(object sender, EventArgs e)
         {
             try
             {
@@ -325,27 +341,21 @@ namespace TAISAT_Arayuz
                     recordInformationLed.BackColor = Color.Transparent;
                 }
                 else
-                {
                     MessageBox.Show("You have to open the camera and select a folder to start record!");
-                }
             }
             catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
         }
-        private void timer_videoRecordTime_Tick(object sender, EventArgs e)
+        void timer_videoRecordTime_Tick(object sender, EventArgs e)
         {
             currentTime = DateTime.Now.TimeOfDay;
             elapsedTime = currentTime.Subtract(startTime);
             label_videoRecordTime.Text = elapsedTime.ToString(@"hh\:mm\:ss");
             if (recordInformationLed.BackColor == Color.Transparent)
-            {
                 recordInformationLed.BackColor = Color.Red;
-            }
             else if (recordInformationLed.BackColor == Color.Red)
-            {
                 recordInformationLed.BackColor = Color.Transparent;
-            }
         }
-        private void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
+        void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog browser = new FolderBrowserDialog();
             if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -355,7 +365,7 @@ namespace TAISAT_Arayuz
                 textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
             }
         }
-        private void windowFixer_TimerTick(object sender, EventArgs e)
+        void windowFixer_TimerTick(object sender, EventArgs e)
         {
             MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
             SetParent(simApplication.MainWindowHandle, _3DSimPanel.Handle);
@@ -366,55 +376,47 @@ namespace TAISAT_Arayuz
             else
                 ToggleUI(false);
         }
-        private void payloadPressure_Chart_Click(object sender, EventArgs e)
+        void payloadPressure_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(payloadPressure_Chart);
         }
-        private void carrierPressure_Chart_Click(object sender, EventArgs e)
+        void carrierPressure_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(carrierPressure_Chart);
-        }
-
-        private void batterVoltage_Chart_Click(object sender, EventArgs e)
+        } 
+        void batterVoltage_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(batterVoltage_Chart);
         }
-        private void payloadAltitude_Chart_Click(object sender, EventArgs e)
+        void payloadAltitude_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(payloadAltitude_Chart);
         }
-        private void carrierAltitude_Chart_Click(object sender, EventArgs e)
+        void carrierAltitude_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(carrierAltitude_Chart);
         }
-        private void velocity_Chart_Click(object sender, EventArgs e)
+        void velocity_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(velocity_Chart);
         }
-        private void payloadGPSAltitude_Chart_Click(object sender, EventArgs e)
+        void payloadGPSAltitude_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(payloadGPSAltitude_Chart);
         }
-        private void differenceAltitude_Chart_Click(object sender, EventArgs e)
+        void differenceAltitude_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(differenceAltitude_Chart);
         }
-        private void temperature_Chart_Click(object sender, EventArgs e)
+        void temperature_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(temperature_Chart);
         }
-        private void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
-        {
-            payloadPressure_Chart.Size = new Size(1920, 1080);
-            MessageBox.Show(payloadPressure_Chart.Size.Width.ToString());
-            /*MANUAL DEPLOY KOMUTU
-            int currentStatus = Int16.Parse(label_uyduStatus.Text);
-            //MANUAL DEPLOY KOMUTU (CURRENT STATUSUN 1 SONRASINI AKTİFLEŞTİRCEK)
-            currentStatus++;
-            label_uyduStatus.Text=currentStatus.ToString();
-            //MANUAL DEPLOY KOMUTU */
+        void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
+        { 
+            //MANUAL DEPLOY KOMUTU 
         }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle)
             if (buffer.Contains("\n"))//Bufferın tamamı okunduysa veriyi işle
@@ -422,39 +424,38 @@ namespace TAISAT_Arayuz
 
                 serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                 serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
-                buffer = buffer.Replace("<", "").Replace(">", "");
+                string telemetryTable = buffer;
                 string[] telemetryData = buffer.Split(',');
-                // 0 <paket numarasi>,
-                // 1 <uydu statusu>,
-                // 2 <hata kodu>,
-                // 3 <gonderme saati>,(2 parça geliyor  GÜN/AY/YIL,SAAT/DAKİKA/SANİYE) TARİH
-                // 4 <gonderme saati>,(2 parça geliyor  GÜN/AY/YIL,SAAT/DAKİKA/SANİYE) SAAT
-                // 5 <basinc1>,
-                // 6 <basinc2>,//Carrier
-                // 7 <yukseklik1>,
-                // 8 <yukseklik2>,//Carrier
-                // 9 <irtifa farki>,
-                // 10 <inis hizi>,
-                // 11 <sicaklik>,
-                // 12 <pil gerilimi>,
-                // 13 <gps latitude>,
-                // 14 <gps longitude>,
-                // 15 <gps altitude>,
-                // 16 <pitch>,
-                // 17 <roll>,
-                // 18 <yaw>,
-                // 19 <takim no>, 
-                // 20 <sıcaklık> //carrier 
-                // 21 <pil gerilimi> //carrier
-                // 22 <gps latitude> /carrier
-                // 23 <gps longitude> //carrier
+                var telemetry = new CSV();
+                telemetry.packageNo = telemetryData[0];
+                telemetry.uyduStatus = telemetryData[1];
+                telemetry.errorCode = telemetryData[2];
+                telemetry.time = telemetryData[3];
+                telemetry.pressure1 = telemetryData[5];
+                telemetry.pressure2 = telemetryData[6];
+                telemetry.altitude1 = telemetryData[7];
+                telemetry.altitude2 = telemetryData[8];
+                telemetry.altitudeDiff = telemetryData[9];
+                telemetry.velocity = telemetryData[10];
+                telemetry.temperature = telemetryData[11];
+                telemetry.velocity = telemetryData[12];
+                telemetry.gpsLatitude = telemetryData[13];
+                telemetry.gpsLongitude = telemetryData[14];
+                telemetry.gpsAltitude = telemetryData[15];
+                telemetry.pitch = telemetryData[16];
+                telemetry.roll = telemetryData[17];
+                telemetry.yaw = telemetryData[18];
+                telemetry.takimNo = telemetryData[19];
+                logs.Add(telemetry); 
+                /* Array.Clear(telemetryData, 0, telemetryData.Length);*/
+                buffer = buffer.Replace("<", "").Replace(">", "");
+                telemetryData = buffer.Split(',');
                 //Data Gelmesini bekle
-                if (telemetryData.Length > 19)
+                if (telemetryData.Length > 19)//Telemetry To Labels
                 {
-                    //Telemetry To Labels
                     label_packageNo.Text = telemetryData[0];
                     label_uyduStatus.Text = telemetryData[1];
-                    label_hataKod.Text = telemetryData[2];
+                    label_errorCode.Text = telemetryData[2];
                     label_currentDate.Text = telemetryData[3].Replace("/", ".");
                     label_currentTime.Text = telemetryData[4].Replace("/", ":");
                     label_containerPressure.Text = telemetryData[6];
@@ -477,10 +478,13 @@ namespace TAISAT_Arayuz
                     label_carrierGPSLatitude.Text = telemetryData[22];
                     label_carrierGPSLongitude.Text = telemetryData[23];
                     //Telemetry To Labels 
-                    string log = label_packageNo.Text + " numaralı " + label_currentTime.Text + " saatinde gelen veriler" + Environment.NewLine +
+                    //Saving Data
+                    string log =
+                        "---------------------------------------------------" + Environment.NewLine +
+                        label_packageNo.Text + " numaralı " + label_currentTime.Text + " saatinde gelen veriler" + Environment.NewLine +
                         "Paket Numarasi:" + label_packageNo.Text + Environment.NewLine +
                         "Uydu Statusu:" + label_uyduStatus.Text + Environment.NewLine +
-                        "Hata Kodu:" + label_hataKod.Text + Environment.NewLine +
+                        "Hata Kodu:" + label_errorCode.Text + Environment.NewLine +
                         "Gonderme Saati:" + label_currentDate.Text + " - " + label_currentTime.Text + Environment.NewLine +
                         "Basinc1:" + label_containerPressure.Text + Environment.NewLine +
                         "Basinc2:" + label_payloadPressure.Text + Environment.NewLine +
@@ -502,39 +506,23 @@ namespace TAISAT_Arayuz
                         "Gps Latitude Carrier:" + label_carrierGPSLatitude.Text + Environment.NewLine +
                         "Gps Longitude Carrier:" + label_carrierGPSLongitude.Text + Environment.NewLine +
                         "---------------------------------------------------" + Environment.NewLine;
-                    //Sending Gyro To Model Simulation
-                    //Pitch:X Yaw:Y Roll:Z
+                    SaveFlight(log);
+                    //Saving Data
+                    //Sending Gyro To Model Simulation 
                     string gyroData = label_payloadPitch.Text + "," + label_payloadYaw.Text + "," + label_payloadRoll.Text;
                     try { new UdpClient().Send(Encoding.ASCII.GetBytes(gyroData), Encoding.ASCII.GetBytes(gyroData).Length, "127.0.0.1", 11000); } catch { }
-                    //Sending Gyro To Model Simulation
-
+                    //Sending Gyro To Model Simulation 
                     //Uydu Status
                     switch (Int16.Parse(label_uyduStatus.Text))
                     {
-                        case 0:
-                            statusLabels[0].BackColor = Color.Lime;
-                            break;
-                        case 1:
-                            statusLabels[1].BackColor = Color.Lime;
-                            break;
-                        case 2:
-                            statusLabels[2].BackColor = Color.Lime;
-                            break;
-                        case 3:
-                            statusLabels[3].BackColor = Color.Lime;
-                            break;
-                        case 4:
-                            statusLabels[4].BackColor = Color.Lime;
-                            break;
-                        case 5:
-                            statusLabels[5].BackColor = Color.Lime;
-                            break;
-                        case 6:
-                            statusLabels[6].BackColor = Color.Lime;
-                            break;
-                        case 7:
-                            statusLabels[7].BackColor = Color.Lime;
-                            break;
+                        case 0: statusLabels[0].BackColor = Color.Lime;break;
+                        case 1: statusLabels[1].BackColor = Color.Lime;break;
+                        case 2: statusLabels[2].BackColor = Color.Lime;break;
+                        case 3: statusLabels[3].BackColor = Color.Lime;break;
+                        case 4: statusLabels[4].BackColor = Color.Lime;break;
+                        case 5: statusLabels[5].BackColor = Color.Lime;break;
+                        case 6: statusLabels[6].BackColor = Color.Lime;break;
+                        case 7: statusLabels[7].BackColor = Color.Lime;break;
                     }
                     //Uydu Status
                     //Charts
@@ -549,11 +537,11 @@ namespace TAISAT_Arayuz
                     carrierPressure_Chart.Series["C_Pressure"].Points.AddXY(label_currentTime.Text, label_containerPressure.Text);
                     //Charts
                     //Error Code 
-                    errorBit1.BackColor = label_hataKod.Text[0] == '0' ? Color.Lime : Color.Red;
-                    errorBit2.BackColor = label_hataKod.Text[1] == '0' ? Color.Lime : Color.Red;
-                    errorBit3.BackColor = label_hataKod.Text[2] == '0' ? Color.Lime : Color.Red;
-                    errorBit4.BackColor = label_hataKod.Text[3] == '0' ? Color.Lime : Color.Red;
-                    errorBit5.BackColor = label_hataKod.Text[4] == '0' ? Color.Lime : Color.Red;
+                    errorBit1.BackColor = label_errorCode.Text[0] == '0' ? Color.Lime : Color.Red;
+                    errorBit2.BackColor = label_errorCode.Text[1] == '0' ? Color.Lime : Color.Red;
+                    errorBit3.BackColor = label_errorCode.Text[2] == '0' ? Color.Lime : Color.Red;
+                    errorBit4.BackColor = label_errorCode.Text[3] == '0' ? Color.Lime : Color.Red;
+                    errorBit5.BackColor = label_errorCode.Text[4] == '0' ? Color.Lime : Color.Red;
                     //Error Code
                     //GPS To Map 
                     chromiumWebBrowser1.EvaluateScriptAsync("delLastMark();");
@@ -563,7 +551,7 @@ namespace TAISAT_Arayuz
                 buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
             }
         }
-        private void button_browseVideoFileToSend_Click(object sender, EventArgs e)
+        void button_browseVideoFileToSend_Click(object sender, EventArgs e)
         {
             progressBar_sendVideo.Value = 0;
             int size = -1;
@@ -577,30 +565,22 @@ namespace TAISAT_Arayuz
                 {
                     string text = File.ReadAllText(file);
                     size = text.Length;
-                }
-                catch (IOException err)
-                {
-                    MessageBox.Show(err.Message);
-                }
+                } catch (IOException err) { MessageBox.Show(err.Message); }
             }
         }
-        private void button_sendVideo_Click(object sender, EventArgs e)
+        void button_sendVideo_Click(object sender, EventArgs e)
         {
-            if (textbox_ftpAddress.Text != ""&&textBox_videoPathToSend.Text!="")
-            {
-                Task.Run(() => Upload());
-            }
-            else { MessageBox.Show("FTP adresini veya gönderilecek olan dosyayı boş bırakmayınız!"); }
+            if (textbox_ftpAddress.Text != "" && textBox_videoPathToSend.Text != "")
+                Task.Run(() => Upload()); 
+            else MessageBox.Show("FTP adresini veya gönderilecek olan dosyayı boş bırakmayınız!");
         }
-        private void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
+        void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
-                MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword)?"FTP Connection Established":"FTP Connection Error!");
-            }
+                MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
         }
 
-        private void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
+        void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
             if (button_telemetryCOMPortOpenClose.BackColor != Color.Green)
             {
@@ -609,6 +589,7 @@ namespace TAISAT_Arayuz
             }
             else
             {
+                SaveFlight();
                 serialMonitorListBox.Items.Clear();
                 port.Close();
                 port.Dispose();
