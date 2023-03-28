@@ -25,14 +25,14 @@ using System.Diagnostics;
 using static System.Windows.Forms.AxHost;
 using CefSharp.DevTools.Browser;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace TAISAT_Arayuz
 {
-    public partial class Form1 : Form
+    public partial class TAISAT : Form
     {
-        //PACKAGE INCELENECEK SAAT 2 PARÇA GELİYOR?
-        //PACKAGE KURALI ??
-        public Form1()
+        public TAISAT()
         {
             InitializeComponent();
         }
@@ -78,6 +78,10 @@ namespace TAISAT_Arayuz
             SetWindowPos(MainWindowHandle, new IntPtr(0), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
         }
         //3D Simulation Değişkenleri
+        //FTP Değişkenleri
+        string ftpUserName = "pi";
+        string ftpPassword = "raspberry";
+        //FTP Değişkenleri
         Label[] statusLabels;//0-7 Arası Uydu Statusu Belirten labellar 
 
         //Video Kaydı Değişkenleri
@@ -98,6 +102,8 @@ namespace TAISAT_Arayuz
         SerialPort port;
         string buffer = string.Empty;
         //Port Okuma Değişkenleri
+
+        //My Functions
         public void InitBrowser()
         {
             var settings = new CefSettings();
@@ -110,11 +116,6 @@ namespace TAISAT_Arayuz
             port.DataReceived += Port_DataReceived;
             port.Open();
             Console.ReadLine();
-        }
-        public void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (!backgroundWorker1.IsBusy)
-                backgroundWorker1.RunWorkerAsync();
         }
         void KillSimulations()
         {
@@ -155,6 +156,119 @@ namespace TAISAT_Arayuz
             foreach (var port in SerialPort.GetPortNames())
                 comboBox_COMPortTelemetry.Items.Add(port);
         }
+        private void Upload()
+        { 
+            string url = "ftp://" + textbox_ftpAddress.Text + "/allfiles/" + textBox_videoPathToSend.Text.Split('\\').Last();
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
+            request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            label_fileSendingStatus.Text = "Gönderiliyor";
+            using (Stream fileStream = File.OpenRead(textBox_videoPathToSend.Text))
+            using (Stream ftpStream = request.GetRequestStream())
+            {
+                progressBar_sendVideo.Invoke(
+                (MethodInvoker)delegate
+                {
+                    progressBar_sendVideo.Maximum = (int)fileStream.Length;
+                });
+
+                byte[] buffer = new byte[10240];
+                int read;
+                while ((read = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ftpStream.Write(buffer, 0, read);
+                    progressBar_sendVideo.Invoke(
+                    (MethodInvoker)delegate
+                    {
+                        progressBar_sendVideo.Value = (int)fileStream.Position;
+                        if (progressBar_sendVideo.Value == progressBar_sendVideo.Maximum) label_fileSendingStatus.Text = "Gönderildi!";
+                    });
+                }
+            } 
+        }
+        private bool isValidConnection(string url, string user, string password)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://"+url);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(user, password);
+                request.GetResponse();
+            }
+            catch (WebException err)
+            {
+                MessageBox.Show(err.Message);
+                return false;
+            }
+            return true;
+        }
+        //My Functions
+
+        //My Events
+        public void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
+        }
+        private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                if (button_recordStartStop.Text == "Stop Record")
+                {
+                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
+                    videoWriter.WriteVideoFrame(videoBitmap);
+                    pictureBox_camera.Image = videoBitmap;
+                }
+                else
+                {
+                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
+                    pictureBox_camera.Image = videoBitmap;
+                }
+            }
+            catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
+        }
+        //My Events
+
+        //Form Events
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            KillSimulations();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = _3DSimExePath;
+            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            simApplication = Process.Start(startInfo);
+            simApplication.WaitForInputIdle();
+            MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
+            windowFixer.Start();
+            if (resolution == 480) { width = 640; height = 480; }
+            if (resolution == 720) { width = 1280; height = 720; }
+            if (resolution == 1080) { width = 1920; height = 1080; }
+            statusLabels = new Label[8] { label_status00, label_status01, label_status02, label_status03, label_status04, label_status05, label_status06, label_status07 };
+            fCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo item in fCollection)
+            {
+                comboBox_chooseCamera.Items.Add(item.Name);
+                cam = new VideoCaptureDevice();
+            }
+            ListComPorts();
+            comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
+            chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (cam.IsRunning == true)
+                {
+                    cam.Stop();
+                    videoWriter.Close();
+                    KillSimulations();
+                }
+            }
+            catch { }
+
+        }
         private void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
         {
             port = new SerialPort(comboBox_COMPortTelemetry.SelectedItem.ToString(), Int32.Parse(comboBox_baudRateTelemetry.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
@@ -189,24 +303,6 @@ namespace TAISAT_Arayuz
                 button_cameraOpenClose.Text = "Open Camera";
                 button_cameraOpenClose.BackColor = Color.Lime;
             }
-        }
-        private void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            try
-            {
-                if (button_recordStartStop.Text == "Stop Record")
-                {
-                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
-                    videoWriter.WriteVideoFrame(videoBitmap);
-                    pictureBox_camera.Image = videoBitmap;
-                }
-                else
-                {
-                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
-                    pictureBox_camera.Image = videoBitmap;
-                }
-            }
-            catch (Exception error) { textBox_logs.AppendText(error.Message + Environment.NewLine); }
         }
         private void button_recordStartStop_Click(object sender, EventArgs e)
         {
@@ -247,15 +343,6 @@ namespace TAISAT_Arayuz
             else if (recordInformationLed.BackColor == Color.Red)
             {
                 recordInformationLed.BackColor = Color.Transparent;
-            }
-        }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (cam.IsRunning == true)
-            {
-                cam.Stop();
-                videoWriter.Close();
-                KillSimulations();
             }
         }
         private void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
@@ -332,29 +419,35 @@ namespace TAISAT_Arayuz
             buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle)
             if (buffer.Contains("\n"))//Bufferın tamamı okunduysa veriyi işle
             {
+
                 serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                 serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
+                buffer = buffer.Replace("<", "").Replace(">", "");
                 string[] telemetryData = buffer.Split(',');
                 // 0 <paket numarasi>,
                 // 1 <uydu statusu>,
                 // 2 <hata kodu>,
-                // 3 <gonderme saati>,(2 parça geliyor  GÜN/AY/YIL,SAAT/DAKİKA/SANİYE)
-                // 4 <basinc1>,
-                // 5 <basinc2>,//Carrier
-                // 6 <yukseklik1>,
-                // 7 <yukseklik2>,//Carrier
-                // 8 <irtifa farki>,
-                // 9 <inis hizi>,
-                // 10 <sicaklik>,
-                // 11 <pil gerilimi>,
-                // 12 <gps latitude>,
-                // 13 <gps longitude>,
-                // 14 <gps altitude>,
-                // 15 <pitch>,
-                // 16 <roll>,
-                // 17 <yaw>,
-                // 18 <takim no>,
-
+                // 3 <gonderme saati>,(2 parça geliyor  GÜN/AY/YIL,SAAT/DAKİKA/SANİYE) TARİH
+                // 4 <gonderme saati>,(2 parça geliyor  GÜN/AY/YIL,SAAT/DAKİKA/SANİYE) SAAT
+                // 5 <basinc1>,
+                // 6 <basinc2>,//Carrier
+                // 7 <yukseklik1>,
+                // 8 <yukseklik2>,//Carrier
+                // 9 <irtifa farki>,
+                // 10 <inis hizi>,
+                // 11 <sicaklik>,
+                // 12 <pil gerilimi>,
+                // 13 <gps latitude>,
+                // 14 <gps longitude>,
+                // 15 <gps altitude>,
+                // 16 <pitch>,
+                // 17 <roll>,
+                // 18 <yaw>,
+                // 19 <takim no>, 
+                // 20 <sıcaklık> //carrier 
+                // 21 <pil gerilimi> //carrier
+                // 22 <gps latitude> /carrier
+                // 23 <gps longitude> //carrier
                 //Data Gelmesini bekle
                 if (telemetryData.Length > 19)
                 {
@@ -379,6 +472,10 @@ namespace TAISAT_Arayuz
                     label_payloadRoll.Text = telemetryData[17];
                     label_payloadYaw.Text = telemetryData[18];
                     label_teamID.Text = telemetryData[19];
+                    label_carrierTemperature.Text = telemetryData[20];
+                    label_carrierVoltage.Text = telemetryData[21];
+                    label_carrierGPSLatitude.Text = telemetryData[22];
+                    label_carrierGPSLongitude.Text = telemetryData[23];
                     //Telemetry To Labels 
                     string log = label_packageNo.Text + " numaralı " + label_currentTime.Text + " saatinde gelen veriler" + Environment.NewLine +
                         "Paket Numarasi:" + label_packageNo.Text + Environment.NewLine +
@@ -399,7 +496,12 @@ namespace TAISAT_Arayuz
                         "Pitch:" + label_payloadPitch.Text + Environment.NewLine +
                         "Roll:" + label_payloadRoll.Text + Environment.NewLine +
                         "Yaw:" + label_payloadYaw.Text + Environment.NewLine +
-                        "Takim No:" + label_teamID.Text + Environment.NewLine + "---------------------------------------------------" + Environment.NewLine;
+                        "Takim No:" + label_teamID.Text + Environment.NewLine +
+                        "Sıcaklık Carrier:" + label_carrierTemperature.Text + Environment.NewLine +
+                        "Pil Gerilimi Carrier:" + label_carrierVoltage.Text + Environment.NewLine +
+                        "Gps Latitude Carrier:" + label_carrierGPSLatitude.Text + Environment.NewLine +
+                        "Gps Longitude Carrier:" + label_carrierGPSLongitude.Text + Environment.NewLine +
+                        "---------------------------------------------------" + Environment.NewLine;
                     //Sending Gyro To Model Simulation
                     //Pitch:X Yaw:Y Roll:Z
                     string gyroData = label_payloadPitch.Text + "," + label_payloadYaw.Text + "," + label_payloadRoll.Text;
@@ -455,36 +557,49 @@ namespace TAISAT_Arayuz
                     //Error Code
                     //GPS To Map 
                     chromiumWebBrowser1.EvaluateScriptAsync("delLastMark();");
-                    chromiumWebBrowser1.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + ");");
+                    chromiumWebBrowser1.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + "," + label_carrierGPSLatitude.Text + "," + label_carrierGPSLongitude.Text + ");");
                     //GPS To Map
                 }
                 buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
             }
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void button_browseVideoFileToSend_Click(object sender, EventArgs e)
         {
-            KillSimulations();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = _3DSimExePath;
-            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
-            simApplication = Process.Start(startInfo);
-            simApplication.WaitForInputIdle();
-            MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
-            windowFixer.Start();
-            if (resolution == 480) { width = 640; height = 480; }
-            if (resolution == 720) { width = 1280; height = 720; }
-            if (resolution == 1080) { width = 1920; height = 1080; }
-            statusLabels = new Label[8] { label_status00, label_status01, label_status02, label_status03, label_status04, label_status05, label_status06, label_status07 };
-            fCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo item in fCollection)
+            progressBar_sendVideo.Value = 0;
+            int size = -1;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
             {
-                comboBox_chooseCamera.Items.Add(item.Name);
-                cam = new VideoCaptureDevice();
+                string file = openFileDialog1.FileName;
+                textBox_videoPathToSend.Text = file;
+                try
+                {
+                    string text = File.ReadAllText(file);
+                    size = text.Length;
+                }
+                catch (IOException err)
+                {
+                    MessageBox.Show(err.Message);
+                }
             }
-            ListComPorts();
-            comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
-            chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
         }
+        private void button_sendVideo_Click(object sender, EventArgs e)
+        {
+            if (textbox_ftpAddress.Text != ""&&textBox_videoPathToSend.Text!="")
+            {
+                Task.Run(() => Upload());
+            }
+            else { MessageBox.Show("FTP adresini veya gönderilecek olan dosyayı boş bırakmayınız!"); }
+        }
+        private void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword)?"FTP Connection Established":"FTP Connection Error!");
+            }
+        }
+
         private void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
             if (button_telemetryCOMPortOpenClose.BackColor != Color.Green)
@@ -501,5 +616,6 @@ namespace TAISAT_Arayuz
                 MessageBox.Show("Uçuş Tamamlandı!");
             }
         }
+        //Form Events
     }
 }
