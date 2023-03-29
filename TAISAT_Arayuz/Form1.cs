@@ -30,6 +30,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
+using System.Security.Policy;
 
 namespace TAISAT_Arayuz
 {
@@ -172,10 +173,12 @@ namespace TAISAT_Arayuz
             foreach (var port in SerialPort.GetPortNames())
                 comboBox_COMPortTelemetry.Items.Add(port);
         }
+        
         void Upload()
         {
             string url = "ftp://" + textbox_ftpAddress.Text + "/" + textBox_videoPathToSend.Text.Split('\\').Last();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
+            request.KeepAlive = false;
             request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
             request.Method = WebRequestMethods.Ftp.UploadFile;
             label_fileSendingStatus.Text = "Gönderiliyor";
@@ -197,16 +200,33 @@ namespace TAISAT_Arayuz
                     (MethodInvoker)delegate
                     {
                         progressBar_sendVideo.Value = (int)fileStream.Position;
-                        if (progressBar_sendVideo.Value == progressBar_sendVideo.Maximum) label_fileSendingStatus.Text = "Gönderildi!";
+                        if (progressBar_sendVideo.Value == progressBar_sendVideo.Maximum) 
+                            label_fileSendingStatus.Text = "Gönderildi!";  
                     });
                 }
             }
+            while (progressBar_sendVideo.Value != progressBar_sendVideo.Maximum)
+            {
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                if (isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword))
+                {
+                    label_fileSendingStatus.Text = "Doğrulandı!"; 
+                }
+                else
+                {
+                    label_fileSendingStatus.Text = "Doğrulandı!";
+
+                }
+            }
         }
-        private bool isValidConnection(string url, string user, string password)
+         bool isValidConnection(string url, string user, string password)
         {
             try
             {
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + url);
+                request.KeepAlive = false;
                 request.Method = WebRequestMethods.Ftp.ListDirectory;
                 request.Credentials = new NetworkCredential(user, password);
                 request.GetResponse();
@@ -581,8 +601,7 @@ namespace TAISAT_Arayuz
         {
             if (e.KeyCode == Keys.Enter)
                 MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
-        }
-
+        }  
         void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
             if (button_telemetryCOMPortOpenClose.BackColor != Color.Green)
