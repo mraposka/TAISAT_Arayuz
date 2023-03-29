@@ -153,7 +153,7 @@ namespace TAISAT_Arayuz
             chart.SaveImage(chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
             chart.Size = oldSize;
         } 
-        void SaveFlight(string log)
+        void SaveFlightTxt()
         {
             File.AppendAllText("log.txt", log);
         }
@@ -176,9 +176,10 @@ namespace TAISAT_Arayuz
         
         void Upload()
         {
+            if (textbox_ftpAddress.Text == "") textbox_ftpAddress.Text = "192.168.0.100";
             string url = "ftp://" + textbox_ftpAddress.Text + "/" + textBox_videoPathToSend.Text.Split('\\').Last();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.KeepAlive = false;
+            
             request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
             request.Method = WebRequestMethods.Ftp.UploadFile;
             label_fileSendingStatus.Text = "Gönderiliyor";
@@ -210,23 +211,26 @@ namespace TAISAT_Arayuz
             }
             for (int i = 0; i < 10; i++)
             {
-                if (isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword))
-                {
-                    label_fileSendingStatus.Text = "Doğrulandı!"; 
-                }
-                else
+                if (isValidConnection(textbox_ftpAddress.Text == "" ? "192.168.1.100" : textbox_ftpAddress.Text, ftpUserName, ftpPassword))
                 {
                     label_fileSendingStatus.Text = "Doğrulandı!";
-
-                }
+                    VideoSended();
+                } 
             }
         }
-         bool isValidConnection(string url, string user, string password)
+
+        private void VideoSended()
+        {
+            var data = new byte[] { 0x20, 0x20, 0x2f, (byte)'G' };
+            port.Write(data, 0, data.Length);
+        }
+
+        bool isValidConnection(string url, string user, string password)
         {
             try
             {
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + url);
-                request.KeepAlive = false;
+                
                 request.Method = WebRequestMethods.Ftp.ListDirectory;
                 request.Credentials = new NetworkCredential(user, password);
                 request.GetResponse();
@@ -269,6 +273,25 @@ namespace TAISAT_Arayuz
         //Form Events
         void Form1_Load(object sender, EventArgs e)
         {
+            dataGridView_telemetryDataTable.Columns.Add("PAKET NUMARASI", "PAKET NUMARASI");
+            dataGridView_telemetryDataTable.Columns.Add("UYDU STATÜSÜ", "UYDU STATÜSÜ");
+            dataGridView_telemetryDataTable.Columns.Add("HATA KODU", "HATA KODU");
+            dataGridView_telemetryDataTable.Columns.Add("GÖNDERME SAATİ", "GÖNDERME SAATİ");
+            dataGridView_telemetryDataTable.Columns.Add("BASINÇ1", "BASINÇ1");
+            dataGridView_telemetryDataTable.Columns.Add("BASINÇ2", "BASINÇ2");
+            dataGridView_telemetryDataTable.Columns.Add("YÜKSEKLİK1", "YÜKSEKLİK1");
+            dataGridView_telemetryDataTable.Columns.Add("YÜKSEKLİK2", "YÜKSEKLİK2");
+            dataGridView_telemetryDataTable.Columns.Add("İRTİFA FARKI", "İRTİFA FARKI");
+            dataGridView_telemetryDataTable.Columns.Add("İNİŞ HIZI", "İNİŞ HIZI");
+            dataGridView_telemetryDataTable.Columns.Add("SICAKLIK", "SICAKLIK");
+            dataGridView_telemetryDataTable.Columns.Add("PİL GERİLİMİ", "PİL GERİLİMİ");
+            dataGridView_telemetryDataTable.Columns.Add("GPS1 LATITUDE", "GPS1 LATITUDE");
+            dataGridView_telemetryDataTable.Columns.Add("GPS1 LONGITUDE", "GPS1 LONGITUDE");
+            dataGridView_telemetryDataTable.Columns.Add("GPS1 ALTITUDE", "GPS1 ALTITUDE");
+            dataGridView_telemetryDataTable.Columns.Add("PITCH", "PITCH");
+            dataGridView_telemetryDataTable.Columns.Add("ROLL", "ROLL");
+            dataGridView_telemetryDataTable.Columns.Add("YAW", "YAW");
+            dataGridView_telemetryDataTable.Columns.Add("TAKIM NO", "TAKIM NO");
             KillSimulations();
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = _3DSimExePath;
@@ -434,17 +457,20 @@ namespace TAISAT_Arayuz
         }
         void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
         {
-            //MANUAL DEPLOY KOMUTU  
-            var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };
-            port.Write(data, 0, data.Length);
+            //MANUAL DEPLOY KOMUTU   
+            var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };//Carrier
+            for (int i = 0; i < 10; i++)
+                port.Write(data, 0, data.Length);
             //MANUAL DEPLOY KOMUTU 
         }
+        string[] cache;
+        string log = "";
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle)
             if (buffer.Contains("\n"))//Bufferın tamamı okunduysa veriyi işle
             {
-
+              if(!dataCheck.Enabled) dataCheck.Start();
                 serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                 serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
                 string telemetryTable = buffer;
@@ -453,7 +479,7 @@ namespace TAISAT_Arayuz
                 telemetry.packageNo = telemetryData[0];
                 telemetry.uyduStatus = telemetryData[1];
                 telemetry.errorCode = telemetryData[2];
-                telemetry.time = telemetryData[3];
+                telemetry.time = telemetryData[3]+ telemetryData[4];
                 telemetry.pressure1 = telemetryData[5];
                 telemetry.pressure2 = telemetryData[6];
                 telemetry.altitude1 = telemetryData[7];
@@ -500,9 +526,32 @@ namespace TAISAT_Arayuz
                     label_carrierVoltage.Text = telemetryData[21];
                     label_carrierGPSLatitude.Text = telemetryData[22];
                     label_carrierGPSLongitude.Text = telemetryData[23];
-                    //Telemetry To Labels 
+                    //Telemetry To Labels  
+                    string[] telemetryTableDatas = {
+                        telemetryData[0],
+                        telemetryData[1],
+                        telemetryData[2],
+                        (telemetryData[3]+telemetryData[4]),
+                        telemetryData[5],
+                        telemetryData[6],
+                        telemetryData[7],
+                        telemetryData[8],
+                        telemetryData[9],
+                        telemetryData[10],
+                        telemetryData[11],
+                        telemetryData[12],
+                        telemetryData[13],
+                        telemetryData[14],
+                        telemetryData[15],
+                        telemetryData[16],
+                        telemetryData[17],
+                        telemetryData[18],
+                        telemetryData[19] 
+                    };
+                    cache = telemetryTableDatas;
+                    new Thread(new ThreadStart(AddTelemetryTable)).Start(); 
                     //Saving Data
-                    string log =
+                    log =
                         "---------------------------------------------------" + Environment.NewLine +
                         label_packageNo.Text + " numaralı " + label_currentTime.Text + " saatinde gelen veriler" + Environment.NewLine +
                         "Paket Numarasi:" + label_packageNo.Text + Environment.NewLine +
@@ -529,7 +578,7 @@ namespace TAISAT_Arayuz
                         "Gps Latitude Carrier:" + label_carrierGPSLatitude.Text + Environment.NewLine +
                         "Gps Longitude Carrier:" + label_carrierGPSLongitude.Text + Environment.NewLine +
                         "---------------------------------------------------" + Environment.NewLine;
-                    SaveFlight(log);
+                    new Thread(new ThreadStart(SaveFlightTxt)).Start();  
                     //Saving Data
                     //Sending Gyro To Model Simulation 
                     string gyroData = label_payloadPitch.Text + "," + label_payloadYaw.Text + "," + label_payloadRoll.Text;
@@ -574,6 +623,12 @@ namespace TAISAT_Arayuz
                 buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
             }
         }
+
+        private void AddTelemetryTable()
+        { 
+            dataGridView_telemetryDataTable.Rows.Add(cache); 
+        }
+
         void button_browseVideoFileToSend_Click(object sender, EventArgs e)
         {
             progressBar_sendVideo.Value = 0;
@@ -600,8 +655,48 @@ namespace TAISAT_Arayuz
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
-        }  
+                MessageBox.Show(isValidConnection(textbox_ftpAddress.Text == "" ? "192.168.1.100" : textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
+        }
+        int _data = 0;
+        int data = 0;
+        int resetWait = 5;
+        private void dataCheck_Tick(object sender, EventArgs e)
+        {
+            data = serialMonitorListBox.Items.Count;
+            if (data == _data) { resetWait--; if (resetWait == 0) {ResetData(); } }
+            else _data = data; 
+            
+        }
+        void ResetData()
+        {  
+            label_errorCode.Text = "11111";
+            label_currentDate.Text = "0";
+            label_currentTime.Text = "0";
+            label_containerPressure.Text = "0";
+            label_payloadPressure.Text = "0";
+            label_containerAltitude.Text = "0";
+            label_payloadAltitude.Text = "0";
+            label_AltitudeDiff.Text = "0";
+            label_payloadVelocity.Text = "0";
+            label_payloadTemperature.Text = "0";
+            label_payloadBataryVoltage.Text = "0";
+            label_payloadGPSLatitude.Text = "0";
+            label_payloadGPSLongitude.Text = "0";
+            label_payloadGPSAltitude.Text = "0";
+            label_payloadPitch.Text = "0";
+            label_payloadRoll.Text = "0";
+            label_payloadYaw.Text = "0"; 
+            label_carrierTemperature.Text = "0";
+            label_carrierVoltage.Text = "0";
+            label_carrierGPSLatitude.Text = "0";
+            label_carrierGPSLongitude.Text = "0";
+            errorBit1.BackColor = label_errorCode.Text[0] == '0' ? Color.Lime : Color.Red;
+            errorBit2.BackColor = label_errorCode.Text[1] == '0' ? Color.Lime : Color.Red;
+            errorBit3.BackColor = label_errorCode.Text[2] == '0' ? Color.Lime : Color.Red;
+            errorBit4.BackColor = label_errorCode.Text[3] == '0' ? Color.Lime : Color.Red;
+            errorBit5.BackColor = label_errorCode.Text[4] == '0' ? Color.Lime : Color.Red;
+            resetWait = 5;
+        }
         void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
             if (button_telemetryCOMPortOpenClose.BackColor != Color.Green)

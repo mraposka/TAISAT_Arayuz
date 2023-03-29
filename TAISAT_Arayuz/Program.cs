@@ -17,7 +17,11 @@ namespace TAISAT_Arayuz
             Control.CheckForIllegalCrossThreadCalls = false;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TAISAT());
+            try
+            {
+                Application.Run(new TAISAT());
+            }
+            catch {  } 
         }
     }
 }

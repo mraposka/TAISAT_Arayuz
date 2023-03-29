@@ -2208,7 +2208,7 @@
   <data name="label_errors.Text" xml:space="preserve">
     <value>1- Satt. velocity is not range of 12-14 m/s.
 2- Payload velocity is not range of 6-8 m/s.
-3- Unable to get container location.
+3- Unable to get carrier pressure
 4- Unable to get payload location.
 5- Autonomous separation did not occur.</value>
   </data>
@@ -2217,6 +2217,9 @@
   </metadata>
   <metadata name="windowFixer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>365, 10</value>
+  </metadata>
+  <metadata name="dataCheck.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>484, 10</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>40</value>
