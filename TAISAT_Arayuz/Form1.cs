@@ -40,7 +40,7 @@ namespace TAISAT_Arayuz
         {
             InitializeComponent();
         }
-        List<CSV> logs=new List<CSV>();
+        List<CSV> logs = new List<CSV>();
 
 
         //3D Simulation Değişkenleri
@@ -110,6 +110,7 @@ namespace TAISAT_Arayuz
         string buffer = string.Empty;
         //Port Okuma Değişkenleri
 
+        int _data = 0, data = 0, resetWait = 5; //İletişim kontrolü için değişkenler
         //My Functions
         public void InitBrowser()
         {
@@ -152,20 +153,20 @@ namespace TAISAT_Arayuz
             chart.Size = new Size(1920, 1080);
             chart.SaveImage(chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
             chart.Size = oldSize;
-        } 
+        }
         void SaveFlightTxt()
         {
             File.AppendAllText("log.txt", log);
         }
         void SaveFlight()
-        { 
+        {
             var configPersons = new CsvConfiguration(CultureInfo.InvariantCulture)
             { HasHeaderRecord = false };
             using (var stream = File.Open("log.csv", FileMode.Append))
             using (var writer = new StreamWriter(stream))
-            using (var csv = new CsvWriter(writer, configPersons)) 
-                if (logs.Count > 0)  csv.WriteRecords(logs);
-             
+            using (var csv = new CsvWriter(writer, configPersons))
+                if (logs.Count > 0) csv.WriteRecords(logs);
+
         }
         void ListComPorts()
         {
@@ -173,13 +174,13 @@ namespace TAISAT_Arayuz
             foreach (var port in SerialPort.GetPortNames())
                 comboBox_COMPortTelemetry.Items.Add(port);
         }
-        
+
         void Upload()
         {
             if (textbox_ftpAddress.Text == "") textbox_ftpAddress.Text = "192.168.0.100";
             string url = "ftp://" + textbox_ftpAddress.Text + "/" + textBox_videoPathToSend.Text.Split('\\').Last();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            
+
             request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
             request.Method = WebRequestMethods.Ftp.UploadFile;
             label_fileSendingStatus.Text = "Gönderiliyor";
@@ -201,8 +202,8 @@ namespace TAISAT_Arayuz
                     (MethodInvoker)delegate
                     {
                         progressBar_sendVideo.Value = (int)fileStream.Position;
-                        if (progressBar_sendVideo.Value == progressBar_sendVideo.Maximum) 
-                            label_fileSendingStatus.Text = "Gönderildi!";  
+                        if (progressBar_sendVideo.Value == progressBar_sendVideo.Maximum)
+                            label_fileSendingStatus.Text = "Gönderildi!";
                     });
                 }
             }
@@ -215,7 +216,7 @@ namespace TAISAT_Arayuz
                 {
                     label_fileSendingStatus.Text = "Doğrulandı!";
                     VideoSended();
-                } 
+                }
             }
         }
 
@@ -230,7 +231,7 @@ namespace TAISAT_Arayuz
             try
             {
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + url);
-                
+
                 request.Method = WebRequestMethods.Ftp.ListDirectory;
                 request.Credentials = new NetworkCredential(user, password);
                 request.GetResponse();
@@ -426,7 +427,7 @@ namespace TAISAT_Arayuz
         void carrierPressure_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(carrierPressure_Chart);
-        } 
+        }
         void batterVoltage_Chart_Click(object sender, EventArgs e)
         {
             takeScreenShotOfChart(batterVoltage_Chart);
@@ -461,7 +462,7 @@ namespace TAISAT_Arayuz
             var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };//Carrier
             for (int i = 0; i < 10; i++)
                 port.Write(data, 0, data.Length);
-            //MANUAL DEPLOY KOMUTU 
+            //MANUAL DEPLOY KOMUTU  
         }
         string[] cache;
         string log = "";
@@ -470,7 +471,7 @@ namespace TAISAT_Arayuz
             buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle)
             if (buffer.Contains("\n"))//Bufferın tamamı okunduysa veriyi işle
             {
-              if(!dataCheck.Enabled) dataCheck.Start();
+                if (!dataCheck.Enabled) dataCheck.Start();
                 serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                 serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
                 string telemetryTable = buffer;
@@ -479,7 +480,7 @@ namespace TAISAT_Arayuz
                 telemetry.packageNo = telemetryData[0];
                 telemetry.uyduStatus = telemetryData[1];
                 telemetry.errorCode = telemetryData[2];
-                telemetry.time = telemetryData[3]+ telemetryData[4];
+                telemetry.time = telemetryData[3] + telemetryData[4];
                 telemetry.pressure1 = telemetryData[5];
                 telemetry.pressure2 = telemetryData[6];
                 telemetry.altitude1 = telemetryData[7];
@@ -495,7 +496,7 @@ namespace TAISAT_Arayuz
                 telemetry.roll = telemetryData[17];
                 telemetry.yaw = telemetryData[18];
                 telemetry.takimNo = telemetryData[19];
-                logs.Add(telemetry); 
+                logs.Add(telemetry);
                 /* Array.Clear(telemetryData, 0, telemetryData.Length);*/
                 buffer = buffer.Replace("<", "").Replace(">", "");
                 telemetryData = buffer.Split(',');
@@ -546,10 +547,10 @@ namespace TAISAT_Arayuz
                         telemetryData[16],
                         telemetryData[17],
                         telemetryData[18],
-                        telemetryData[19] 
+                        telemetryData[19]
                     };
                     cache = telemetryTableDatas;
-                    new Thread(new ThreadStart(AddTelemetryTable)).Start(); 
+                    new Thread(new ThreadStart(AddTelemetryTable)).Start();
                     //Saving Data
                     log =
                         "---------------------------------------------------" + Environment.NewLine +
@@ -578,7 +579,7 @@ namespace TAISAT_Arayuz
                         "Gps Latitude Carrier:" + label_carrierGPSLatitude.Text + Environment.NewLine +
                         "Gps Longitude Carrier:" + label_carrierGPSLongitude.Text + Environment.NewLine +
                         "---------------------------------------------------" + Environment.NewLine;
-                    new Thread(new ThreadStart(SaveFlightTxt)).Start();  
+                    new Thread(new ThreadStart(SaveFlightTxt)).Start();
                     //Saving Data
                     //Sending Gyro To Model Simulation 
                     string gyroData = label_payloadPitch.Text + "," + label_payloadYaw.Text + "," + label_payloadRoll.Text;
@@ -587,14 +588,17 @@ namespace TAISAT_Arayuz
                     //Uydu Status
                     switch (Int16.Parse(label_uyduStatus.Text))
                     {
-                        case 0: statusLabels[0].BackColor = Color.Lime;break;
-                        case 1: statusLabels[1].BackColor = Color.Lime;break;
-                        case 2: statusLabels[2].BackColor = Color.Lime;break;
-                        case 3: statusLabels[3].BackColor = Color.Lime;break;
-                        case 4: statusLabels[4].BackColor = Color.Lime;break;
-                        case 5: statusLabels[5].BackColor = Color.Lime;break;
-                        case 6: statusLabels[6].BackColor = Color.Lime;break;
-                        case 7: statusLabels[7].BackColor = Color.Lime;break;
+                        case 0: statusLabels[0].BackColor = Color.Lime; break;
+                        case 1: statusLabels[1].BackColor = Color.Lime; break;
+                        case 2: statusLabels[2].BackColor = Color.Lime; break;
+                        case 3:
+                            statusLabels[3].BackColor = Color.Lime;
+                            try { new UdpClient().Send(Encoding.ASCII.GetBytes("separation"), Encoding.ASCII.GetBytes("separation").Length, "127.0.0.1", 11000); } catch { }
+                            break;
+                        case 4: statusLabels[4].BackColor = Color.Lime; break;
+                        case 5: statusLabels[5].BackColor = Color.Lime; break;
+                        case 6: statusLabels[6].BackColor = Color.Lime; break;
+                        case 7: statusLabels[7].BackColor = Color.Lime; break;
                     }
                     //Uydu Status
                     //Charts
@@ -625,8 +629,8 @@ namespace TAISAT_Arayuz
         }
 
         private void AddTelemetryTable()
-        { 
-            dataGridView_telemetryDataTable.Rows.Add(cache); 
+        {
+            dataGridView_telemetryDataTable.Rows.Add(cache);
         }
 
         void button_browseVideoFileToSend_Click(object sender, EventArgs e)
@@ -643,13 +647,14 @@ namespace TAISAT_Arayuz
                 {
                     string text = File.ReadAllText(file);
                     size = text.Length;
-                } catch (IOException err) { MessageBox.Show(err.Message); }
+                }
+                catch (IOException err) { MessageBox.Show(err.Message); }
             }
         }
         void button_sendVideo_Click(object sender, EventArgs e)
         {
             if (textbox_ftpAddress.Text != "" && textBox_videoPathToSend.Text != "")
-                Task.Run(() => Upload()); 
+                Task.Run(() => Upload());
             else MessageBox.Show("FTP adresini veya gönderilecek olan dosyayı boş bırakmayınız!");
         }
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
@@ -657,18 +662,15 @@ namespace TAISAT_Arayuz
             if (e.KeyCode == Keys.Enter)
                 MessageBox.Show(isValidConnection(textbox_ftpAddress.Text == "" ? "192.168.1.100" : textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
         }
-        int _data = 0;
-        int data = 0;
-        int resetWait = 5;
         private void dataCheck_Tick(object sender, EventArgs e)
         {
             data = serialMonitorListBox.Items.Count;
-            if (data == _data) { resetWait--; if (resetWait == 0) {ResetData(); } }
-            else _data = data; 
-            
+            if (data == _data) { resetWait--; if (resetWait == 0) { ResetData(); } }
+            else _data = data;
+
         }
         void ResetData()
-        {  
+        {
             label_errorCode.Text = "11111";
             label_currentDate.Text = "0";
             label_currentTime.Text = "0";
@@ -685,7 +687,7 @@ namespace TAISAT_Arayuz
             label_payloadGPSAltitude.Text = "0";
             label_payloadPitch.Text = "0";
             label_payloadRoll.Text = "0";
-            label_payloadYaw.Text = "0"; 
+            label_payloadYaw.Text = "0";
             label_carrierTemperature.Text = "0";
             label_carrierVoltage.Text = "0";
             label_carrierGPSLatitude.Text = "0";
