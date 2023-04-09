@@ -41,6 +41,8 @@ namespace TAISAT_Arayuz
             InitializeComponent();
         }
         //TO-DO
+        //data-filtering
+        //manual deploy editing
         //try catch
         //TO-DO 
         List<CSV> logs = new List<CSV>();//CSV kaydı için oluşturulan liste 
