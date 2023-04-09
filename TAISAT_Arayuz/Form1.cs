@@ -274,6 +274,8 @@ namespace TAISAT_Arayuz
         //Form Events
         void Form1_Load(object sender, EventArgs e)
         {
+            textBox_videoFolderToSave.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            videorecordpath = textBox_videoFolderToSave.Text;
             dataGridView_telemetryDataTable.Columns.Add("PAKET NUMARASI", "PAKET NUMARASI");
             dataGridView_telemetryDataTable.Columns.Add("UYDU STATÜSÜ", "UYDU STATÜSÜ");
             dataGridView_telemetryDataTable.Columns.Add("HATA KODU", "HATA KODU");

@@ -269,7 +269,7 @@
             tabPage_serialMonitor.Margin = new System.Windows.Forms.Padding(4);
             tabPage_serialMonitor.Name = "tabPage_serialMonitor";
             tabPage_serialMonitor.Padding = new System.Windows.Forms.Padding(4);
-            tabPage_serialMonitor.Size = new System.Drawing.Size(1542, 228);
+            tabPage_serialMonitor.Size = new System.Drawing.Size(1584, 228);
             tabPage_serialMonitor.TabIndex = 1;
             tabPage_serialMonitor.Text = "Serial Monitor";
             tabPage_serialMonitor.UseVisualStyleBackColor = true;
@@ -287,7 +287,7 @@
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1534, 220);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1576, 220);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // tableLayoutPanel13
@@ -297,13 +297,13 @@
             this.tableLayoutPanel13.Controls.Add(this.textBox_logs, 0, 1);
             this.tableLayoutPanel13.Controls.Add(this.text_Logs, 0, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(1077, 4);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(1107, 4);
             this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 2;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(453, 212);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(465, 212);
             this.tableLayoutPanel13.TabIndex = 1;
             // 
             // textBox_logs
@@ -315,7 +315,7 @@
             this.textBox_logs.Name = "textBox_logs";
             this.textBox_logs.ReadOnly = true;
             this.textBox_logs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_logs.Size = new System.Drawing.Size(445, 179);
+            this.textBox_logs.Size = new System.Drawing.Size(457, 179);
             this.textBox_logs.TabIndex = 1;
             // 
             // text_Logs
@@ -325,7 +325,7 @@
             this.text_Logs.Location = new System.Drawing.Point(4, 0);
             this.text_Logs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.text_Logs.Name = "text_Logs";
-            this.text_Logs.Size = new System.Drawing.Size(445, 25);
+            this.text_Logs.Size = new System.Drawing.Size(457, 25);
             this.text_Logs.TabIndex = 2;
             this.text_Logs.Text = "Logs";
             this.text_Logs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -338,7 +338,7 @@
             this.serialMonitorListBox.Location = new System.Drawing.Point(4, 4);
             this.serialMonitorListBox.Margin = new System.Windows.Forms.Padding(4);
             this.serialMonitorListBox.Name = "serialMonitorListBox";
-            this.serialMonitorListBox.Size = new System.Drawing.Size(1065, 212);
+            this.serialMonitorListBox.Size = new System.Drawing.Size(1095, 212);
             this.serialMonitorListBox.TabIndex = 7;
             // 
             // backgroundWorker1
@@ -1183,6 +1183,7 @@
             this.textBox_videoFolderToSave.ReadOnly = true;
             this.textBox_videoFolderToSave.Size = new System.Drawing.Size(213, 27);
             this.textBox_videoFolderToSave.TabIndex = 12;
+            this.textBox_videoFolderToSave.Text = "..\\Desktop";
             // 
             // comboBox_chooseCamera
             // 
@@ -1413,10 +1414,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_camera.BackColor = System.Drawing.Color.Black;
-            this.pictureBox_camera.Location = new System.Drawing.Point(-25, 174);
+            this.pictureBox_camera.Location = new System.Drawing.Point(8, 300);
             this.pictureBox_camera.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_camera.Name = "pictureBox_camera";
-            this.pictureBox_camera.Size = new System.Drawing.Size(509, 261);
+            this.pictureBox_camera.Size = new System.Drawing.Size(509, 209);
             this.pictureBox_camera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_camera.TabIndex = 17;
             this.pictureBox_camera.TabStop = false;
@@ -1425,7 +1426,6 @@
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.Controls.Add(this.pictureBox_camera);
             this.panel5.Controls.Add(this.label_fileSendingStatus);
             this.panel5.Controls.Add(this.textbox_ftpAddress);
             this.panel5.Controls.Add(this.label14);
@@ -1488,7 +1488,7 @@
             this._3DSimPanel.Location = new System.Drawing.Point(11, 4);
             this._3DSimPanel.Margin = new System.Windows.Forms.Padding(4);
             this._3DSimPanel.Name = "_3DSimPanel";
-            this._3DSimPanel.Size = new System.Drawing.Size(505, 513);
+            this._3DSimPanel.Size = new System.Drawing.Size(505, 294);
             this._3DSimPanel.TabIndex = 16;
             // 
             // panel_camera
@@ -1497,6 +1497,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_camera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_camera.Controls.Add(this.pictureBox_camera);
             this.panel_camera.Controls.Add(this._3DSimPanel);
             this.panel_camera.Location = new System.Drawing.Point(-8, 89);
             this.panel_camera.Margin = new System.Windows.Forms.Padding(0);
