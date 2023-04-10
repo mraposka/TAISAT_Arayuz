@@ -2299,13 +2299,14 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl1.Controls.Add(this.tabPage_telemetryTable);
             this.tabControl1.Controls.Add(tabPage_serialMonitor);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(452, 4);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1592, 257);
+            this.tabControl1.Size = new System.Drawing.Size(1900, 270);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage_telemetryTable
@@ -2315,7 +2316,7 @@
             this.tabPage_telemetryTable.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage_telemetryTable.Name = "tabPage_telemetryTable";
             this.tabPage_telemetryTable.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage_telemetryTable.Size = new System.Drawing.Size(1584, 228);
+            this.tabPage_telemetryTable.Size = new System.Drawing.Size(1892, 241);
             this.tabPage_telemetryTable.TabIndex = 0;
             this.tabPage_telemetryTable.Text = "Telemetry Table";
             this.tabPage_telemetryTable.UseVisualStyleBackColor = true;
@@ -2328,19 +2329,18 @@
             this.dataGridView_telemetryDataTable.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_telemetryDataTable.Name = "dataGridView_telemetryDataTable";
             this.dataGridView_telemetryDataTable.RowHeadersWidth = 51;
-            this.dataGridView_telemetryDataTable.Size = new System.Drawing.Size(1576, 220);
+            this.dataGridView_telemetryDataTable.Size = new System.Drawing.Size(1884, 233);
             this.dataGridView_telemetryDataTable.TabIndex = 0;
             // 
             // panel7
             // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.tabControl1);
-            this.panel7.Location = new System.Drawing.Point(452, 692);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(0, 684);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1594, 259);
+            this.panel7.Size = new System.Drawing.Size(1924, 269);
             this.panel7.TabIndex = 19;
             // 
             // tableLayoutPanel_views
