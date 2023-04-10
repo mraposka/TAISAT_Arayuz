@@ -242,7 +242,20 @@ namespace TAISAT_Arayuz
         }
         void SaveFlightTxt()
         {
-            try { File.AppendAllText("log.txt", log); } catch (Exception) { }
+            try
+            {
+                takeScreenShotOfChart(payloadPressure_Chart);
+                takeScreenShotOfChart(carrierPressure_Chart);
+                takeScreenShotOfChart(batterVoltage_Chart);
+                takeScreenShotOfChart(payloadAltitude_Chart);
+                takeScreenShotOfChart(carrierAltitude_Chart);
+                takeScreenShotOfChart(velocity_Chart);
+                takeScreenShotOfChart(payloadGPSAltitude_Chart);
+                takeScreenShotOfChart(differenceAltitude_Chart);
+                takeScreenShotOfChart(temperature_Chart);
+                File.AppendAllText("log.txt", log);
+            }
+            catch (Exception) { }
         }
         void SaveFlight()
         {
@@ -657,7 +670,7 @@ namespace TAISAT_Arayuz
             try
             {
                 buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle)
-                if (buffer.Contains("\n")&&buffer.Split(',').Length==24)//Bufferın tamamı okunduysa veriyi işle
+                if (buffer.Contains("\n") && buffer.Split(',').Length == 24)//Bufferın tamamı okunduysa veriyi işle
                 {
                     serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                     serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
