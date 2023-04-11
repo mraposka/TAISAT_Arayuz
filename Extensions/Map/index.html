@@ -1,0 +1,118 @@
+<style>
+  #map {
+    height: 100%;
+  }
+
+  /* Optional: Makes the sample page fill the window. */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<html>
+
+<head>
+  <title>Simple Markers</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> 
+  <script>
+
+    //var image = 'C:\\Users\\Administrator\\source\\repos\\mraposka\\TAISAT_Arayuz\\TAISAT_Arayuz\\bin\\Debug\\uydu.png';
+    var image = 'https://taisat.com/uydu.png';
+    var allMarkers = [];
+    let myMap;
+    function initMap() {
+      const station = { lat: 40.8236469, lng: 29.9244924 };
+      const uydu = { lat: 40.7431871, lng: 29.9463566 };
+      const myCenter = { lat: (station.lat + uydu.lat) / 2, lng: (station.lng + uydu.lng) / 2 }
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        center: myCenter,
+      });
+      var m1 = new google.maps.Marker({
+        position: station,
+        map,
+        title: "İstasyon",
+      });
+      m1.setMap(map);
+      myMap = map;
+    }
+    function delLastMark() {
+     for(let j=0;j<50;j++)
+      for(let i=0;i<allMarkers.length;i++)
+      allMarkers.pop().setMap(null);
+    }
+    function setmark(_lat, _lng,_lat2,_lng2) {
+      const station = { lat: 40.8236469, lng: 29.9244924 };
+      const uydu = { lat: _lat, lng: _lng };
+      const carrier = { lat: _lat2, lng: _lng2 };
+      const myCenter = { lat: (station.lat + uydu.lat) / 2, lng: (station.lng + uydu.lng) / 2 };
+      const markericon = {
+        url: image, // url
+        scaledSize: new google.maps.Size(128, 128), // scaled size
+        origin: new google.maps.Point(0, 0), // origin
+        anchor: new google.maps.Point(60, 50) // anchor
+      }; 
+      var m2 = new google.maps.Marker({
+        position: uydu, 
+        map,
+        title: "Uydu",
+        icon: markericon,
+        label: { color: '#FF0000', fontWeight: 'bold', fontSize: '16px', text: calcCrow(uydu.lat,uydu.lng,station.lat,station.lng).toFixed(1)+"m" }
+      });   
+      var m3 = new google.maps.Marker({
+        position: carrier, 
+        map,
+        title: "Carrier",
+        icon: markericon,
+        label: { color: '#FF0000', fontWeight: 'bold', fontSize: '16px', text: calcCrow(uydu.lat,uydu.lng,carrier.lat,carrier.lng).toFixed(1)+"m" }
+      });  
+      var coords = [];
+      coords.push(station, uydu,carrier);
+      var line = new google.maps.Polyline({
+        path: coords, 
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+      allMarkers.push(markericon);
+      allMarkers.push(line); 
+      allMarkers.push(m2);
+      allMarkers.push(m3);
+      line.setMap(myMap);
+      m2.setMap(myMap);
+      m3.setMap(myMap);
+      //myMap.setCenter(myCenter);
+    }
+
+    function calcCrow(lat1, lon1, lat2, lon2) 
+    {
+      var R = 6371; // km
+      var dLat = toRad(lat2-lat1);
+      var dLon = toRad(lon2-lon1);
+      var lat1 = toRad(lat1);
+      var lat2 = toRad(lat2);
+
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c;
+      return d*1000;
+    }
+
+    // Converts numeric degrees to radians
+    function toRad(Value) 
+    {
+        return Value * Math.PI / 180;
+    }
+  </script>
+</head>
+
+<body>
+  <div id="map"></div> 
+  <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3quMlph_NW_CtaJ2ls_s0aJBJeUvcYzY&callback=initMap&v=weekly"></script>
+</body>
+
+</html>
