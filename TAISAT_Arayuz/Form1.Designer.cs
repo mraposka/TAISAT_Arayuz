@@ -31,33 +31,33 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TabPage tabPage_serialMonitor;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TAISAT));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea21 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend21 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea22 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend22 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea23 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend23 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea24 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend24 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea25 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend25 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea26 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend26 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea27 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend27 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea187 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend187 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series187 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea181 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend181 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series181 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea182 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend182 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series182 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea183 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend183 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series183 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea188 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend188 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series188 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea184 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend184 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series184 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea185 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend185 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series185 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea189 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend189 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series189 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea186 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend186 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series186 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_logs = new System.Windows.Forms.TextBox();
@@ -199,6 +199,7 @@
             this.errorBit2 = new System.Windows.Forms.Label();
             this.errorBit1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label_errors = new System.Windows.Forms.Label();
             this.button_MANUAL_DEPLOY = new System.Windows.Forms.Button();
             this.tableLayoutPanel_dateTime = new System.Windows.Forms.TableLayoutPanel();
@@ -213,7 +214,15 @@
             this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
             this.windowFixer = new System.Windows.Forms.Timer(this.components);
             this.dataCheck = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -255,13 +264,13 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel_errorBits.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel_dateTime.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_telemetryTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_telemetryDataTable)).BeginInit();
             this.panel7.SuspendLayout();
             this.tableLayoutPanel_views.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_serialMonitor
@@ -271,7 +280,7 @@
             tabPage_serialMonitor.Margin = new System.Windows.Forms.Padding(4);
             tabPage_serialMonitor.Name = "tabPage_serialMonitor";
             tabPage_serialMonitor.Padding = new System.Windows.Forms.Padding(4);
-            tabPage_serialMonitor.Size = new System.Drawing.Size(1892, 241);
+            tabPage_serialMonitor.Size = new System.Drawing.Size(3115, 355);
             tabPage_serialMonitor.TabIndex = 1;
             tabPage_serialMonitor.Text = "Serial Monitor";
             tabPage_serialMonitor.UseVisualStyleBackColor = true;
@@ -289,7 +298,7 @@
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1884, 233);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(3107, 347);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // tableLayoutPanel13
@@ -299,13 +308,13 @@
             this.tableLayoutPanel13.Controls.Add(this.textBox_logs, 0, 1);
             this.tableLayoutPanel13.Controls.Add(this.text_Logs, 0, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(1322, 4);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(2178, 4);
             this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 2;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(558, 225);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(925, 339);
             this.tableLayoutPanel13.TabIndex = 1;
             // 
             // textBox_logs
@@ -317,7 +326,7 @@
             this.textBox_logs.Name = "textBox_logs";
             this.textBox_logs.ReadOnly = true;
             this.textBox_logs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_logs.Size = new System.Drawing.Size(550, 192);
+            this.textBox_logs.Size = new System.Drawing.Size(917, 306);
             this.textBox_logs.TabIndex = 1;
             // 
             // text_Logs
@@ -327,7 +336,7 @@
             this.text_Logs.Location = new System.Drawing.Point(4, 0);
             this.text_Logs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.text_Logs.Name = "text_Logs";
-            this.text_Logs.Size = new System.Drawing.Size(550, 25);
+            this.text_Logs.Size = new System.Drawing.Size(917, 25);
             this.text_Logs.TabIndex = 2;
             this.text_Logs.Text = "Logs";
             this.text_Logs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -340,7 +349,7 @@
             this.serialMonitorListBox.Location = new System.Drawing.Point(4, 4);
             this.serialMonitorListBox.Margin = new System.Windows.Forms.Padding(4);
             this.serialMonitorListBox.Name = "serialMonitorListBox";
-            this.serialMonitorListBox.Size = new System.Drawing.Size(1310, 225);
+            this.serialMonitorListBox.Size = new System.Drawing.Size(2166, 339);
             this.serialMonitorListBox.TabIndex = 7;
             // 
             // backgroundWorker1
@@ -366,10 +375,10 @@
             this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button9.BackColor = System.Drawing.Color.Lime;
-            this.button9.Location = new System.Drawing.Point(132, 89);
+            this.button9.Location = new System.Drawing.Point(58, 90);
             this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(135, 47);
+            this.button9.Size = new System.Drawing.Size(241, 47);
             this.button9.TabIndex = 4;
             this.button9.Text = "Open COM Port";
             this.button9.UseVisualStyleBackColor = false;
@@ -383,7 +392,7 @@
             this.comboBox_baudRateVideoTransfer.Location = new System.Drawing.Point(132, 49);
             this.comboBox_baudRateVideoTransfer.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_baudRateVideoTransfer.Name = "comboBox_baudRateVideoTransfer";
-            this.comboBox_baudRateVideoTransfer.Size = new System.Drawing.Size(133, 24);
+            this.comboBox_baudRateVideoTransfer.Size = new System.Drawing.Size(167, 24);
             this.comboBox_baudRateVideoTransfer.TabIndex = 3;
             // 
             // comboBox_COMPortVideoTransfer
@@ -395,7 +404,7 @@
             this.comboBox_COMPortVideoTransfer.Location = new System.Drawing.Point(132, 16);
             this.comboBox_COMPortVideoTransfer.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_COMPortVideoTransfer.Name = "comboBox_COMPortVideoTransfer";
-            this.comboBox_COMPortVideoTransfer.Size = new System.Drawing.Size(133, 24);
+            this.comboBox_COMPortVideoTransfer.Size = new System.Drawing.Size(167, 24);
             this.comboBox_COMPortVideoTransfer.TabIndex = 2;
             // 
             // label23
@@ -422,36 +431,34 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.button_refreshCOMPortV);
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Controls.Add(this.comboBox_baudRateVideoTransfer);
             this.groupBox4.Controls.Add(this.comboBox_COMPortVideoTransfer);
             this.groupBox4.Controls.Add(this.label23);
             this.groupBox4.Controls.Add(this.label25);
-            this.groupBox4.Location = new System.Drawing.Point(957, 147);
+            this.groupBox4.Location = new System.Drawing.Point(768, 11);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(283, 150);
+            this.groupBox4.Size = new System.Drawing.Size(317, 142);
             this.groupBox4.TabIndex = 24;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Video Transfer Config";
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.button_refreshCOMPort);
             this.groupBox3.Controls.Add(this.button_telemetryCOMPortOpenClose);
             this.groupBox3.Controls.Add(this.comboBox_baudRateTelemetry);
             this.groupBox3.Controls.Add(this.comboBox_COMPortTelemetry);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(957, -4);
+            this.groupBox3.Location = new System.Drawing.Point(768, 171);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(283, 143);
+            this.groupBox3.Size = new System.Drawing.Size(317, 149);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Telemetry Config";
@@ -476,10 +483,10 @@
             this.button_telemetryCOMPortOpenClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_telemetryCOMPortOpenClose.BackColor = System.Drawing.Color.Lime;
-            this.button_telemetryCOMPortOpenClose.Location = new System.Drawing.Point(132, 82);
+            this.button_telemetryCOMPortOpenClose.Location = new System.Drawing.Point(86, 90);
             this.button_telemetryCOMPortOpenClose.Margin = new System.Windows.Forms.Padding(4);
             this.button_telemetryCOMPortOpenClose.Name = "button_telemetryCOMPortOpenClose";
-            this.button_telemetryCOMPortOpenClose.Size = new System.Drawing.Size(135, 46);
+            this.button_telemetryCOMPortOpenClose.Size = new System.Drawing.Size(223, 41);
             this.button_telemetryCOMPortOpenClose.TabIndex = 4;
             this.button_telemetryCOMPortOpenClose.Text = "Open COM Port";
             this.button_telemetryCOMPortOpenClose.UseVisualStyleBackColor = false;
@@ -502,10 +509,10 @@
             "38400",
             "57600",
             "115200"});
-            this.comboBox_baudRateTelemetry.Location = new System.Drawing.Point(132, 49);
+            this.comboBox_baudRateTelemetry.Location = new System.Drawing.Point(111, 50);
             this.comboBox_baudRateTelemetry.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_baudRateTelemetry.Name = "comboBox_baudRateTelemetry";
-            this.comboBox_baudRateTelemetry.Size = new System.Drawing.Size(133, 24);
+            this.comboBox_baudRateTelemetry.Size = new System.Drawing.Size(200, 24);
             this.comboBox_baudRateTelemetry.TabIndex = 3;
             // 
             // comboBox_COMPortTelemetry
@@ -515,10 +522,10 @@
             this.comboBox_COMPortTelemetry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_COMPortTelemetry.DropDownWidth = 150;
             this.comboBox_COMPortTelemetry.FormattingEnabled = true;
-            this.comboBox_COMPortTelemetry.Location = new System.Drawing.Point(132, 16);
+            this.comboBox_COMPortTelemetry.Location = new System.Drawing.Point(111, 16);
             this.comboBox_COMPortTelemetry.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_COMPortTelemetry.Name = "comboBox_COMPortTelemetry";
-            this.comboBox_COMPortTelemetry.Size = new System.Drawing.Size(133, 24);
+            this.comboBox_COMPortTelemetry.Size = new System.Drawing.Size(200, 24);
             this.comboBox_COMPortTelemetry.TabIndex = 2;
             this.comboBox_COMPortTelemetry.SelectedIndexChanged += new System.EventHandler(this.comboBox_COMPortTelemetry_SelectedIndexChanged);
             // 
@@ -570,7 +577,7 @@
             this.groupBox_status.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox_status.Name = "groupBox_status";
             this.groupBox_status.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox_status.Size = new System.Drawing.Size(722, 305);
+            this.groupBox_status.Size = new System.Drawing.Size(764, 324);
             this.groupBox_status.TabIndex = 26;
             this.groupBox_status.TabStop = false;
             this.groupBox_status.Text = "Status";
@@ -583,7 +590,7 @@
             this.label_status07.Location = new System.Drawing.Point(1, 261);
             this.label_status07.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status07.Name = "label_status07";
-            this.label_status07.Size = new System.Drawing.Size(721, 39);
+            this.label_status07.Size = new System.Drawing.Size(625, 39);
             this.label_status07.TabIndex = 7;
             this.label_status07.Text = "7- Paket Video Gönderildi";
             this.label_status07.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -597,7 +604,7 @@
             this.label_status05.Location = new System.Drawing.Point(1, 192);
             this.label_status05.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status05.Name = "label_status05";
-            this.label_status05.Size = new System.Drawing.Size(721, 39);
+            this.label_status05.Size = new System.Drawing.Size(625, 39);
             this.label_status05.TabIndex = 6;
             this.label_status05.Text = "5- Kurtarma (Görev Yükü Yere Teması)";
             this.label_status05.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -610,7 +617,7 @@
             this.label_status06.Location = new System.Drawing.Point(1, 226);
             this.label_status06.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status06.Name = "label_status06";
-            this.label_status06.Size = new System.Drawing.Size(721, 39);
+            this.label_status06.Size = new System.Drawing.Size(625, 39);
             this.label_status06.TabIndex = 5;
             this.label_status06.Text = "6- Paket Video Alındı";
             this.label_status06.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -623,7 +630,7 @@
             this.label_status04.Location = new System.Drawing.Point(1, 158);
             this.label_status04.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status04.Name = "label_status04";
-            this.label_status04.Size = new System.Drawing.Size(721, 39);
+            this.label_status04.Size = new System.Drawing.Size(625, 39);
             this.label_status04.TabIndex = 4;
             this.label_status04.Text = "4- Görev Yükü İniş";
             this.label_status04.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -637,7 +644,7 @@
             this.label_status03.Location = new System.Drawing.Point(1, 123);
             this.label_status03.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status03.Name = "label_status03";
-            this.label_status03.Size = new System.Drawing.Size(721, 39);
+            this.label_status03.Size = new System.Drawing.Size(625, 39);
             this.label_status03.TabIndex = 3;
             this.label_status03.Text = "3- Ayrılma";
             this.label_status03.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -651,7 +658,7 @@
             this.label_status02.Location = new System.Drawing.Point(1, 89);
             this.label_status02.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status02.Name = "label_status02";
-            this.label_status02.Size = new System.Drawing.Size(721, 39);
+            this.label_status02.Size = new System.Drawing.Size(625, 39);
             this.label_status02.TabIndex = 2;
             this.label_status02.Text = "2- Model Uydu İniş";
             this.label_status02.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -665,7 +672,7 @@
             this.label_status01.Location = new System.Drawing.Point(1, 54);
             this.label_status01.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status01.Name = "label_status01";
-            this.label_status01.Size = new System.Drawing.Size(721, 39);
+            this.label_status01.Size = new System.Drawing.Size(625, 39);
             this.label_status01.TabIndex = 1;
             this.label_status01.Text = "1- Yükselme";
             this.label_status01.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -679,7 +686,7 @@
             this.label_status00.Location = new System.Drawing.Point(1, 20);
             this.label_status00.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_status00.Name = "label_status00";
-            this.label_status00.Size = new System.Drawing.Size(721, 39);
+            this.label_status00.Size = new System.Drawing.Size(625, 39);
             this.label_status00.TabIndex = 0;
             this.label_status00.Text = "0- Uçuşa Hazır";
             this.label_status00.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -817,7 +824,7 @@
             this.label_teamID.Location = new System.Drawing.Point(4, 47);
             this.label_teamID.Margin = new System.Windows.Forms.Padding(4);
             this.label_teamID.Name = "label_teamID";
-            this.label_teamID.Size = new System.Drawing.Size(195, 35);
+            this.label_teamID.Size = new System.Drawing.Size(230, 35);
             this.label_teamID.TabIndex = 4;
             this.label_teamID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -829,7 +836,7 @@
             this.label20.Location = new System.Drawing.Point(4, 4);
             this.label20.Margin = new System.Windows.Forms.Padding(4);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(195, 35);
+            this.label20.Size = new System.Drawing.Size(230, 35);
             this.label20.TabIndex = 0;
             this.label20.Text = "Team ID";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -839,10 +846,10 @@
             this.panel_views2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_views2.Controls.Add(this.tableLayoutPanel_charts);
             this.panel_views2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_views2.Location = new System.Drawing.Point(825, 1);
+            this.panel_views2.Location = new System.Drawing.Point(971, 1);
             this.panel_views2.Margin = new System.Windows.Forms.Padding(4, 0, 0, 7);
             this.panel_views2.Name = "panel_views2";
-            this.panel_views2.Size = new System.Drawing.Size(1254, 604);
+            this.panel_views2.Size = new System.Drawing.Size(1108, 604);
             this.panel_views2.TabIndex = 32;
             // 
             // tableLayoutPanel_charts
@@ -868,258 +875,333 @@
             this.tableLayoutPanel_charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel_charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel_charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 224F));
-            this.tableLayoutPanel_charts.Size = new System.Drawing.Size(1252, 602);
+            this.tableLayoutPanel_charts.Size = new System.Drawing.Size(1106, 602);
             this.tableLayoutPanel_charts.TabIndex = 0;
             // 
             // panel13
             // 
+            this.panel13.Controls.Add(this.label42);
             this.panel13.Controls.Add(this.temperature_Chart);
-            this.panel13.Location = new System.Drawing.Point(838, 382);
+            this.panel13.Location = new System.Drawing.Point(740, 382);
             this.panel13.Margin = new System.Windows.Forms.Padding(4);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(410, 216);
+            this.panel13.Size = new System.Drawing.Size(362, 216);
             this.panel13.TabIndex = 18;
             // 
             // temperature_Chart
             // 
-            chartArea19.Name = "ChartArea1";
-            this.temperature_Chart.ChartAreas.Add(chartArea19);
-            legend19.Name = "Legend1";
-            this.temperature_Chart.Legends.Add(legend19);
+            chartArea187.AxisX.MajorGrid.Enabled = false;
+            chartArea187.AxisY.MajorGrid.Enabled = false;
+            chartArea187.Name = "ChartArea1";
+            this.temperature_Chart.ChartAreas.Add(chartArea187);
+            this.temperature_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend187.BackColor = System.Drawing.Color.Transparent;
+            legend187.DockedToChartArea = "ChartArea1";
+            legend187.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend187.Enabled = false;
+            legend187.Name = "Legend1";
+            this.temperature_Chart.Legends.Add(legend187);
             this.temperature_Chart.Location = new System.Drawing.Point(0, 0);
             this.temperature_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.temperature_Chart.Name = "temperature_Chart";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series19.Legend = "Legend1";
-            series19.Name = "Temperature";
-            this.temperature_Chart.Series.Add(series19);
-            this.temperature_Chart.Size = new System.Drawing.Size(408, 217);
+            series187.ChartArea = "ChartArea1";
+            series187.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series187.Legend = "Legend1";
+            series187.Name = "Temperature";
+            this.temperature_Chart.Series.Add(series187);
+            this.temperature_Chart.Size = new System.Drawing.Size(362, 216);
             this.temperature_Chart.TabIndex = 7;
             this.temperature_Chart.Text = "chart7";
             this.temperature_Chart.Click += new System.EventHandler(this.temperature_Chart_Click);
             // 
             // panel12
             // 
+            this.panel12.Controls.Add(this.label39);
             this.panel12.Controls.Add(this.differenceAltitude_Chart);
-            this.panel12.Location = new System.Drawing.Point(421, 382);
+            this.panel12.Location = new System.Drawing.Point(372, 382);
             this.panel12.Margin = new System.Windows.Forms.Padding(4);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(408, 216);
+            this.panel12.Size = new System.Drawing.Size(360, 216);
             this.panel12.TabIndex = 17;
             // 
             // differenceAltitude_Chart
             // 
-            chartArea20.Name = "ChartArea1";
-            this.differenceAltitude_Chart.ChartAreas.Add(chartArea20);
-            legend20.Name = "Legend1";
-            this.differenceAltitude_Chart.Legends.Add(legend20);
+            chartArea181.AxisX.MajorGrid.Enabled = false;
+            chartArea181.AxisY.MajorGrid.Enabled = false;
+            chartArea181.Name = "ChartArea1";
+            this.differenceAltitude_Chart.ChartAreas.Add(chartArea181);
+            this.differenceAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend181.BackColor = System.Drawing.Color.Transparent;
+            legend181.DockedToChartArea = "ChartArea1";
+            legend181.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend181.Enabled = false;
+            legend181.Name = "Legend1";
+            this.differenceAltitude_Chart.Legends.Add(legend181);
             this.differenceAltitude_Chart.Location = new System.Drawing.Point(0, 0);
             this.differenceAltitude_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.differenceAltitude_Chart.Name = "differenceAltitude_Chart";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series20.Legend = "Legend1";
-            series20.Name = "D_Altitude";
-            this.differenceAltitude_Chart.Series.Add(series20);
-            this.differenceAltitude_Chart.Size = new System.Drawing.Size(408, 217);
+            series181.ChartArea = "ChartArea1";
+            series181.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series181.Legend = "Legend1";
+            series181.Name = "D_Altitude";
+            this.differenceAltitude_Chart.Series.Add(series181);
+            this.differenceAltitude_Chart.Size = new System.Drawing.Size(360, 216);
             this.differenceAltitude_Chart.TabIndex = 8;
             this.differenceAltitude_Chart.Text = "chart8";
             this.differenceAltitude_Chart.Click += new System.EventHandler(this.differenceAltitude_Chart_Click);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label16);
             this.panel3.Controls.Add(this.payloadPressure_Chart);
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(408, 181);
+            this.panel3.Size = new System.Drawing.Size(360, 181);
             this.panel3.TabIndex = 10;
             // 
             // payloadPressure_Chart
             // 
-            chartArea21.Name = "ChartArea1";
-            this.payloadPressure_Chart.ChartAreas.Add(chartArea21);
-            legend21.Name = "Legend1";
-            this.payloadPressure_Chart.Legends.Add(legend21);
-            this.payloadPressure_Chart.Location = new System.Drawing.Point(4, 4);
+            chartArea182.AxisX.MajorGrid.Enabled = false;
+            chartArea182.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea182.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea182.AxisY.MajorGrid.Enabled = false;
+            chartArea182.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea182.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea182.Name = "ChartArea1";
+            this.payloadPressure_Chart.ChartAreas.Add(chartArea182);
+            this.payloadPressure_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend182.BackColor = System.Drawing.Color.Transparent;
+            legend182.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend182.Enabled = false;
+            legend182.Name = "Legend1";
+            this.payloadPressure_Chart.Legends.Add(legend182);
+            this.payloadPressure_Chart.Location = new System.Drawing.Point(0, 0);
             this.payloadPressure_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.payloadPressure_Chart.Name = "payloadPressure_Chart";
-            series21.ChartArea = "ChartArea1";
-            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series21.Legend = "Legend1";
-            series21.Name = "P_Pressure";
-            this.payloadPressure_Chart.Series.Add(series21);
-            this.payloadPressure_Chart.Size = new System.Drawing.Size(408, 172);
+            series182.ChartArea = "ChartArea1";
+            series182.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series182.Legend = "Legend1";
+            series182.Name = "P_Pressure";
+            this.payloadPressure_Chart.Series.Add(series182);
+            this.payloadPressure_Chart.Size = new System.Drawing.Size(360, 181);
             this.payloadPressure_Chart.TabIndex = 1;
             this.payloadPressure_Chart.Text = "chart1";
             this.payloadPressure_Chart.Click += new System.EventHandler(this.payloadPressure_Chart_Click);
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label34);
             this.panel4.Controls.Add(this.carrierPressure_Chart);
-            this.panel4.Location = new System.Drawing.Point(421, 4);
+            this.panel4.Location = new System.Drawing.Point(372, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(408, 181);
+            this.panel4.Size = new System.Drawing.Size(360, 181);
             this.panel4.TabIndex = 11;
             // 
             // carrierPressure_Chart
             // 
-            chartArea22.Name = "ChartArea1";
-            this.carrierPressure_Chart.ChartAreas.Add(chartArea22);
-            legend22.Name = "Legend1";
-            this.carrierPressure_Chart.Legends.Add(legend22);
-            this.carrierPressure_Chart.Location = new System.Drawing.Point(0, 4);
+            chartArea183.AxisX.MajorGrid.Enabled = false;
+            chartArea183.AxisY.MajorGrid.Enabled = false;
+            chartArea183.Name = "ChartArea1";
+            this.carrierPressure_Chart.ChartAreas.Add(chartArea183);
+            this.carrierPressure_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend183.BackColor = System.Drawing.Color.Transparent;
+            legend183.DockedToChartArea = "ChartArea1";
+            legend183.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend183.Enabled = false;
+            legend183.Name = "Legend1";
+            this.carrierPressure_Chart.Legends.Add(legend183);
+            this.carrierPressure_Chart.Location = new System.Drawing.Point(0, 0);
             this.carrierPressure_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.carrierPressure_Chart.Name = "carrierPressure_Chart";
-            series22.ChartArea = "ChartArea1";
-            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series22.Legend = "Legend1";
-            series22.Name = "C_Pressure";
-            this.carrierPressure_Chart.Series.Add(series22);
-            this.carrierPressure_Chart.Size = new System.Drawing.Size(408, 177);
+            series183.ChartArea = "ChartArea1";
+            series183.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series183.Legend = "Legend1";
+            series183.Name = "C_Pressure";
+            this.carrierPressure_Chart.Series.Add(series183);
+            this.carrierPressure_Chart.Size = new System.Drawing.Size(360, 181);
             this.carrierPressure_Chart.TabIndex = 2;
             this.carrierPressure_Chart.Text = "chart2";
             this.carrierPressure_Chart.Click += new System.EventHandler(this.carrierPressure_Chart_Click);
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.label40);
             this.panel6.Controls.Add(this.batterVoltage_Chart);
-            this.panel6.Location = new System.Drawing.Point(838, 4);
+            this.panel6.Location = new System.Drawing.Point(740, 4);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(403, 181);
+            this.panel6.Size = new System.Drawing.Size(362, 181);
             this.panel6.TabIndex = 12;
             // 
             // batterVoltage_Chart
             // 
-            chartArea23.Name = "ChartArea1";
-            this.batterVoltage_Chart.ChartAreas.Add(chartArea23);
-            legend23.Name = "Legend1";
-            this.batterVoltage_Chart.Legends.Add(legend23);
-            this.batterVoltage_Chart.Location = new System.Drawing.Point(-3, 4);
+            chartArea188.AxisX.MajorGrid.Enabled = false;
+            chartArea188.AxisY.MajorGrid.Enabled = false;
+            chartArea188.Name = "ChartArea1";
+            this.batterVoltage_Chart.ChartAreas.Add(chartArea188);
+            this.batterVoltage_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend188.BackColor = System.Drawing.Color.Transparent;
+            legend188.DockedToChartArea = "ChartArea1";
+            legend188.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend188.Enabled = false;
+            legend188.Name = "Legend1";
+            this.batterVoltage_Chart.Legends.Add(legend188);
+            this.batterVoltage_Chart.Location = new System.Drawing.Point(0, 0);
             this.batterVoltage_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.batterVoltage_Chart.Name = "batterVoltage_Chart";
-            series23.ChartArea = "ChartArea1";
-            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series23.Legend = "Legend1";
-            series23.Name = "B_Voltage";
-            this.batterVoltage_Chart.Series.Add(series23);
-            this.batterVoltage_Chart.Size = new System.Drawing.Size(411, 181);
+            series188.ChartArea = "ChartArea1";
+            series188.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series188.Legend = "Legend1";
+            series188.Name = "B_Voltage";
+            this.batterVoltage_Chart.Series.Add(series188);
+            this.batterVoltage_Chart.Size = new System.Drawing.Size(362, 181);
             this.batterVoltage_Chart.TabIndex = 3;
             this.batterVoltage_Chart.Text = "chart3";
             this.batterVoltage_Chart.Click += new System.EventHandler(this.batterVoltage_Chart_Click);
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.label36);
             this.panel8.Controls.Add(this.payloadAltitude_Chart);
             this.panel8.Location = new System.Drawing.Point(4, 193);
             this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(408, 181);
+            this.panel8.Size = new System.Drawing.Size(360, 181);
             this.panel8.TabIndex = 13;
             // 
             // payloadAltitude_Chart
             // 
-            chartArea24.Name = "ChartArea1";
-            this.payloadAltitude_Chart.ChartAreas.Add(chartArea24);
-            legend24.Name = "Legend1";
-            this.payloadAltitude_Chart.Legends.Add(legend24);
-            this.payloadAltitude_Chart.Location = new System.Drawing.Point(4, 0);
+            chartArea184.AxisX.MajorGrid.Enabled = false;
+            chartArea184.AxisY.MajorGrid.Enabled = false;
+            chartArea184.Name = "ChartArea1";
+            this.payloadAltitude_Chart.ChartAreas.Add(chartArea184);
+            this.payloadAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend184.BackColor = System.Drawing.Color.Transparent;
+            legend184.DockedToChartArea = "ChartArea1";
+            legend184.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend184.Enabled = false;
+            legend184.Name = "Legend1";
+            this.payloadAltitude_Chart.Legends.Add(legend184);
+            this.payloadAltitude_Chart.Location = new System.Drawing.Point(0, 0);
             this.payloadAltitude_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.payloadAltitude_Chart.Name = "payloadAltitude_Chart";
-            series24.ChartArea = "ChartArea1";
-            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series24.Legend = "Legend1";
-            series24.Name = "P_Altitude";
-            this.payloadAltitude_Chart.Series.Add(series24);
-            this.payloadAltitude_Chart.Size = new System.Drawing.Size(404, 181);
+            series184.ChartArea = "ChartArea1";
+            series184.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series184.Legend = "Legend1";
+            series184.Name = "P_Altitude";
+            this.payloadAltitude_Chart.Series.Add(series184);
+            this.payloadAltitude_Chart.Size = new System.Drawing.Size(360, 181);
             this.payloadAltitude_Chart.TabIndex = 6;
             this.payloadAltitude_Chart.Text = "chart4";
             this.payloadAltitude_Chart.Click += new System.EventHandler(this.payloadAltitude_Chart_Click);
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.label38);
             this.panel9.Controls.Add(this.carrierAltitude_Chart);
-            this.panel9.Location = new System.Drawing.Point(421, 193);
+            this.panel9.Location = new System.Drawing.Point(372, 193);
             this.panel9.Margin = new System.Windows.Forms.Padding(4);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(408, 181);
+            this.panel9.Size = new System.Drawing.Size(360, 181);
             this.panel9.TabIndex = 14;
             // 
             // carrierAltitude_Chart
             // 
-            chartArea25.Name = "ChartArea1";
-            this.carrierAltitude_Chart.ChartAreas.Add(chartArea25);
-            legend25.Name = "Legend1";
-            this.carrierAltitude_Chart.Legends.Add(legend25);
+            chartArea185.AxisX.MajorGrid.Enabled = false;
+            chartArea185.AxisY.MajorGrid.Enabled = false;
+            chartArea185.Name = "ChartArea1";
+            this.carrierAltitude_Chart.ChartAreas.Add(chartArea185);
+            this.carrierAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend185.BackColor = System.Drawing.Color.Transparent;
+            legend185.DockedToChartArea = "ChartArea1";
+            legend185.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend185.Enabled = false;
+            legend185.Name = "Legend1";
+            this.carrierAltitude_Chart.Legends.Add(legend185);
             this.carrierAltitude_Chart.Location = new System.Drawing.Point(0, 0);
             this.carrierAltitude_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.carrierAltitude_Chart.Name = "carrierAltitude_Chart";
-            series25.ChartArea = "ChartArea1";
-            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series25.Legend = "Legend1";
-            series25.Name = "C_Altitude";
-            this.carrierAltitude_Chart.Series.Add(series25);
-            this.carrierAltitude_Chart.Size = new System.Drawing.Size(408, 181);
+            series185.ChartArea = "ChartArea1";
+            series185.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series185.Legend = "Legend1";
+            series185.Name = "C_Altitude";
+            this.carrierAltitude_Chart.Series.Add(series185);
+            this.carrierAltitude_Chart.Size = new System.Drawing.Size(360, 181);
             this.carrierAltitude_Chart.TabIndex = 6;
             this.carrierAltitude_Chart.Text = "chart5";
             this.carrierAltitude_Chart.Click += new System.EventHandler(this.carrierAltitude_Chart_Click);
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.label41);
             this.panel10.Controls.Add(this.velocity_Chart);
-            this.panel10.Location = new System.Drawing.Point(838, 193);
+            this.panel10.Location = new System.Drawing.Point(740, 193);
             this.panel10.Margin = new System.Windows.Forms.Padding(4);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(410, 181);
+            this.panel10.Size = new System.Drawing.Size(362, 181);
             this.panel10.TabIndex = 15;
             // 
             // velocity_Chart
             // 
-            chartArea26.Name = "ChartArea1";
-            this.velocity_Chart.ChartAreas.Add(chartArea26);
-            legend26.Name = "Legend1";
-            this.velocity_Chart.Legends.Add(legend26);
+            chartArea189.AxisX.MajorGrid.Enabled = false;
+            chartArea189.AxisY.MajorGrid.Enabled = false;
+            chartArea189.Name = "ChartArea1";
+            this.velocity_Chart.ChartAreas.Add(chartArea189);
+            this.velocity_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend189.BackColor = System.Drawing.Color.Transparent;
+            legend189.DockedToChartArea = "ChartArea1";
+            legend189.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend189.Enabled = false;
+            legend189.Name = "Legend1";
+            this.velocity_Chart.Legends.Add(legend189);
             this.velocity_Chart.Location = new System.Drawing.Point(0, 0);
             this.velocity_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.velocity_Chart.Name = "velocity_Chart";
-            series26.ChartArea = "ChartArea1";
-            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series26.Legend = "Legend1";
-            series26.Name = "Velocity";
-            this.velocity_Chart.Series.Add(series26);
-            this.velocity_Chart.Size = new System.Drawing.Size(408, 181);
+            series189.ChartArea = "ChartArea1";
+            series189.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series189.Legend = "Legend1";
+            series189.Name = "Velocity";
+            this.velocity_Chart.Series.Add(series189);
+            this.velocity_Chart.Size = new System.Drawing.Size(362, 181);
             this.velocity_Chart.TabIndex = 7;
             this.velocity_Chart.Text = "chart6";
             this.velocity_Chart.Click += new System.EventHandler(this.velocity_Chart_Click);
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.label37);
             this.panel11.Controls.Add(this.payloadGPSAltitude_Chart);
             this.panel11.Location = new System.Drawing.Point(4, 382);
             this.panel11.Margin = new System.Windows.Forms.Padding(4);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(408, 216);
+            this.panel11.Size = new System.Drawing.Size(360, 216);
             this.panel11.TabIndex = 16;
             // 
             // payloadGPSAltitude_Chart
             // 
-            chartArea27.Name = "ChartArea1";
-            this.payloadGPSAltitude_Chart.ChartAreas.Add(chartArea27);
-            legend27.Name = "Legend1";
-            this.payloadGPSAltitude_Chart.Legends.Add(legend27);
-            this.payloadGPSAltitude_Chart.Location = new System.Drawing.Point(4, 0);
+            chartArea186.AxisX.MajorGrid.Enabled = false;
+            chartArea186.AxisY.MajorGrid.Enabled = false;
+            chartArea186.Name = "ChartArea1";
+            this.payloadGPSAltitude_Chart.ChartAreas.Add(chartArea186);
+            this.payloadGPSAltitude_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend186.BackColor = System.Drawing.Color.Transparent;
+            legend186.DockedToChartArea = "ChartArea1";
+            legend186.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend186.Enabled = false;
+            legend186.Name = "Legend1";
+            this.payloadGPSAltitude_Chart.Legends.Add(legend186);
+            this.payloadGPSAltitude_Chart.Location = new System.Drawing.Point(0, 0);
             this.payloadGPSAltitude_Chart.Margin = new System.Windows.Forms.Padding(4);
             this.payloadGPSAltitude_Chart.Name = "payloadGPSAltitude_Chart";
-            series27.ChartArea = "ChartArea1";
-            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series27.Legend = "Legend1";
-            series27.Name = "P_GPSAltitude";
-            series27.YValuesPerPoint = 4;
-            this.payloadGPSAltitude_Chart.Series.Add(series27);
-            this.payloadGPSAltitude_Chart.Size = new System.Drawing.Size(408, 217);
+            series186.ChartArea = "ChartArea1";
+            series186.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series186.Legend = "Legend1";
+            series186.Name = "P_GPSAltitude";
+            series186.YValuesPerPoint = 4;
+            this.payloadGPSAltitude_Chart.Series.Add(series186);
+            this.payloadGPSAltitude_Chart.Size = new System.Drawing.Size(360, 216);
             this.payloadGPSAltitude_Chart.TabIndex = 9;
             this.payloadGPSAltitude_Chart.Text = "chart9";
             this.payloadGPSAltitude_Chart.Click += new System.EventHandler(this.payloadGPSAltitude_Chart_Click);
@@ -1129,10 +1211,10 @@
             this.label26.AutoSize = true;
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label26.Location = new System.Drawing.Point(207, 4);
+            this.label26.Location = new System.Drawing.Point(242, 4);
             this.label26.Margin = new System.Windows.Forms.Padding(4);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(195, 35);
+            this.label26.Size = new System.Drawing.Size(230, 35);
             this.label26.TabIndex = 1;
             this.label26.Text = "Package No";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1141,7 +1223,7 @@
             // 
             this.recordInformationLed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.recordInformationLed.BackColor = System.Drawing.Color.Transparent;
-            this.recordInformationLed.Location = new System.Drawing.Point(169, 148);
+            this.recordInformationLed.Location = new System.Drawing.Point(159, 148);
             this.recordInformationLed.Margin = new System.Windows.Forms.Padding(4);
             this.recordInformationLed.Name = "recordInformationLed";
             this.recordInformationLed.Size = new System.Drawing.Size(25, 22);
@@ -1152,7 +1234,7 @@
             this.label_videoRecordTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_videoRecordTime.AutoSize = true;
             this.label_videoRecordTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_videoRecordTime.Location = new System.Drawing.Point(203, 148);
+            this.label_videoRecordTime.Location = new System.Drawing.Point(193, 148);
             this.label_videoRecordTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_videoRecordTime.Name = "label_videoRecordTime";
             this.label_videoRecordTime.Size = new System.Drawing.Size(64, 18);
@@ -1164,7 +1246,7 @@
             // 
             this.button_browseVideoFolderToSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_browseVideoFolderToSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button_browseVideoFolderToSave.Location = new System.Drawing.Point(229, 100);
+            this.button_browseVideoFolderToSave.Location = new System.Drawing.Point(211, 100);
             this.button_browseVideoFolderToSave.Margin = new System.Windows.Forms.Padding(4);
             this.button_browseVideoFolderToSave.Name = "button_browseVideoFolderToSave";
             this.button_browseVideoFolderToSave.Size = new System.Drawing.Size(47, 34);
@@ -1183,7 +1265,7 @@
             this.textBox_videoFolderToSave.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_videoFolderToSave.Name = "textBox_videoFolderToSave";
             this.textBox_videoFolderToSave.ReadOnly = true;
-            this.textBox_videoFolderToSave.Size = new System.Drawing.Size(213, 27);
+            this.textBox_videoFolderToSave.Size = new System.Drawing.Size(187, 27);
             this.textBox_videoFolderToSave.TabIndex = 12;
             this.textBox_videoFolderToSave.Text = "..\\Desktop";
             // 
@@ -1197,17 +1279,17 @@
             this.comboBox_chooseCamera.Location = new System.Drawing.Point(9, 18);
             this.comboBox_chooseCamera.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_chooseCamera.Name = "comboBox_chooseCamera";
-            this.comboBox_chooseCamera.Size = new System.Drawing.Size(268, 30);
+            this.comboBox_chooseCamera.Size = new System.Drawing.Size(249, 30);
             this.comboBox_chooseCamera.TabIndex = 11;
             // 
             // progressBar_sendVideo
             // 
             this.progressBar_sendVideo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar_sendVideo.Location = new System.Drawing.Point(5, 462);
+            this.progressBar_sendVideo.Location = new System.Drawing.Point(11, 462);
             this.progressBar_sendVideo.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar_sendVideo.Name = "progressBar_sendVideo";
-            this.progressBar_sendVideo.Size = new System.Drawing.Size(272, 50);
+            this.progressBar_sendVideo.Size = new System.Drawing.Size(246, 50);
             this.progressBar_sendVideo.Step = 1;
             this.progressBar_sendVideo.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar_sendVideo.TabIndex = 0;
@@ -1217,7 +1299,7 @@
             // 
             this.button_browseVideoFileToSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_browseVideoFileToSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button_browseVideoFileToSend.Location = new System.Drawing.Point(237, 359);
+            this.button_browseVideoFileToSend.Location = new System.Drawing.Point(217, 359);
             this.button_browseVideoFileToSend.Margin = new System.Windows.Forms.Padding(4);
             this.button_browseVideoFileToSend.Name = "button_browseVideoFileToSend";
             this.button_browseVideoFileToSend.Size = new System.Drawing.Size(40, 28);
@@ -1231,11 +1313,11 @@
             this.textBox_videoPathToSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_videoPathToSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox_videoPathToSend.Location = new System.Drawing.Point(5, 359);
+            this.textBox_videoPathToSend.Location = new System.Drawing.Point(11, 359);
             this.textBox_videoPathToSend.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_videoPathToSend.Name = "textBox_videoPathToSend";
             this.textBox_videoPathToSend.ReadOnly = true;
-            this.textBox_videoPathToSend.Size = new System.Drawing.Size(225, 27);
+            this.textBox_videoPathToSend.Size = new System.Drawing.Size(199, 27);
             this.textBox_videoPathToSend.TabIndex = 9;
             this.textBox_videoPathToSend.Text = "Select Video For Sending";
             // 
@@ -1245,10 +1327,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_sendVideo.BackColor = System.Drawing.Color.Transparent;
             this.button_sendVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button_sendVideo.Location = new System.Drawing.Point(5, 395);
+            this.button_sendVideo.Location = new System.Drawing.Point(11, 395);
             this.button_sendVideo.Margin = new System.Windows.Forms.Padding(4);
             this.button_sendVideo.Name = "button_sendVideo";
-            this.button_sendVideo.Size = new System.Drawing.Size(273, 39);
+            this.button_sendVideo.Size = new System.Drawing.Size(247, 39);
             this.button_sendVideo.TabIndex = 8;
             this.button_sendVideo.Text = "Send Video";
             this.button_sendVideo.UseVisualStyleBackColor = false;
@@ -1263,7 +1345,7 @@
             this.button_recordStartStop.Location = new System.Drawing.Point(9, 140);
             this.button_recordStartStop.Margin = new System.Windows.Forms.Padding(4);
             this.button_recordStartStop.Name = "button_recordStartStop";
-            this.button_recordStartStop.Size = new System.Drawing.Size(152, 34);
+            this.button_recordStartStop.Size = new System.Drawing.Size(142, 34);
             this.button_recordStartStop.TabIndex = 2;
             this.button_recordStartStop.Text = "Start Record";
             this.button_recordStartStop.UseVisualStyleBackColor = false;
@@ -1300,10 +1382,10 @@
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label28.Location = new System.Drawing.Point(410, 4);
+            this.label28.Location = new System.Drawing.Point(480, 4);
             this.label28.Margin = new System.Windows.Forms.Padding(4);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(195, 35);
+            this.label28.Size = new System.Drawing.Size(230, 35);
             this.label28.TabIndex = 6;
             this.label28.Text = "Status";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1330,7 +1412,7 @@
             this.tableLayoutPanel_mainInformation.RowCount = 2;
             this.tableLayoutPanel_mainInformation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel_mainInformation.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel_mainInformation.Size = new System.Drawing.Size(812, 86);
+            this.tableLayoutPanel_mainInformation.Size = new System.Drawing.Size(955, 86);
             this.tableLayoutPanel_mainInformation.TabIndex = 20;
             // 
             // label_uyduStatus
@@ -1338,10 +1420,10 @@
             this.label_uyduStatus.AutoSize = true;
             this.label_uyduStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_uyduStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_uyduStatus.Location = new System.Drawing.Point(410, 47);
+            this.label_uyduStatus.Location = new System.Drawing.Point(480, 47);
             this.label_uyduStatus.Margin = new System.Windows.Forms.Padding(4);
             this.label_uyduStatus.Name = "label_uyduStatus";
-            this.label_uyduStatus.Size = new System.Drawing.Size(195, 35);
+            this.label_uyduStatus.Size = new System.Drawing.Size(230, 35);
             this.label_uyduStatus.TabIndex = 10;
             this.label_uyduStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1350,10 +1432,10 @@
             this.label_errorCode.AutoSize = true;
             this.label_errorCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_errorCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_errorCode.Location = new System.Drawing.Point(613, 47);
+            this.label_errorCode.Location = new System.Drawing.Point(718, 47);
             this.label_errorCode.Margin = new System.Windows.Forms.Padding(4);
             this.label_errorCode.Name = "label_errorCode";
-            this.label_errorCode.Size = new System.Drawing.Size(195, 35);
+            this.label_errorCode.Size = new System.Drawing.Size(233, 35);
             this.label_errorCode.TabIndex = 9;
             this.label_errorCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1362,10 +1444,10 @@
             this.label32.AutoSize = true;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label32.Location = new System.Drawing.Point(613, 4);
+            this.label32.Location = new System.Drawing.Point(718, 4);
             this.label32.Margin = new System.Windows.Forms.Padding(4);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(195, 35);
+            this.label32.Size = new System.Drawing.Size(233, 35);
             this.label32.TabIndex = 8;
             this.label32.Text = "Error Code";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1375,10 +1457,10 @@
             this.label_packageNo.AutoSize = true;
             this.label_packageNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_packageNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_packageNo.Location = new System.Drawing.Point(207, 47);
+            this.label_packageNo.Location = new System.Drawing.Point(242, 47);
             this.label_packageNo.Margin = new System.Windows.Forms.Padding(4);
             this.label_packageNo.Name = "label_packageNo";
-            this.label_packageNo.Size = new System.Drawing.Size(195, 35);
+            this.label_packageNo.Size = new System.Drawing.Size(230, 35);
             this.label_packageNo.TabIndex = 5;
             this.label_packageNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1388,10 +1470,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_header.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_header.Controls.Add(this.tableLayoutPanel_mainInformation);
-            this.panel_header.Location = new System.Drawing.Point(-8, -7);
+            this.panel_header.Location = new System.Drawing.Point(0, -7);
             this.panel_header.Margin = new System.Windows.Forms.Padding(4);
             this.panel_header.Name = "panel_header";
-            this.panel_header.Size = new System.Drawing.Size(814, 88);
+            this.panel_header.Size = new System.Drawing.Size(957, 88);
             this.panel_header.TabIndex = 29;
             // 
             // button_cameraOpenClose
@@ -1403,7 +1485,7 @@
             this.button_cameraOpenClose.Location = new System.Drawing.Point(9, 55);
             this.button_cameraOpenClose.Margin = new System.Windows.Forms.Padding(4);
             this.button_cameraOpenClose.Name = "button_cameraOpenClose";
-            this.button_cameraOpenClose.Size = new System.Drawing.Size(269, 42);
+            this.button_cameraOpenClose.Size = new System.Drawing.Size(249, 42);
             this.button_cameraOpenClose.TabIndex = 0;
             this.button_cameraOpenClose.Text = "Open Camera";
             this.button_cameraOpenClose.UseVisualStyleBackColor = false;
@@ -1415,10 +1497,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_camera.BackColor = System.Drawing.Color.Black;
-            this.pictureBox_camera.Location = new System.Drawing.Point(8, 300);
+            this.pictureBox_camera.Location = new System.Drawing.Point(8, 289);
             this.pictureBox_camera.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_camera.Name = "pictureBox_camera";
-            this.pictureBox_camera.Size = new System.Drawing.Size(509, 209);
+            this.pictureBox_camera.Size = new System.Drawing.Size(670, 230);
             this.pictureBox_camera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_camera.TabIndex = 17;
             this.pictureBox_camera.TabStop = false;
@@ -1442,11 +1524,11 @@
             this.panel5.Controls.Add(this.button_recordStartStop);
             this.panel5.Controls.Add(this.label33);
             this.panel5.Controls.Add(this.button_cameraOpenClose);
-            this.panel5.Location = new System.Drawing.Point(513, 89);
+            this.panel5.Location = new System.Drawing.Point(691, 89);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.MinimumSize = new System.Drawing.Size(193, 308);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(292, 516);
+            this.panel5.Size = new System.Drawing.Size(266, 516);
             this.panel5.TabIndex = 16;
             // 
             // label_fileSendingStatus
@@ -1455,7 +1537,7 @@
             this.label_fileSendingStatus.AutoSize = true;
             this.label_fileSendingStatus.BackColor = System.Drawing.Color.Transparent;
             this.label_fileSendingStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label_fileSendingStatus.Location = new System.Drawing.Point(95, 478);
+            this.label_fileSendingStatus.Location = new System.Drawing.Point(101, 478);
             this.label_fileSendingStatus.Name = "label_fileSendingStatus";
             this.label_fileSendingStatus.Size = new System.Drawing.Size(87, 20);
             this.label_fileSendingStatus.TabIndex = 19;
@@ -1463,10 +1545,10 @@
             // 
             // textbox_ftpAddress
             // 
-            this.textbox_ftpAddress.Location = new System.Drawing.Point(124, 322);
+            this.textbox_ftpAddress.Location = new System.Drawing.Point(121, 322);
             this.textbox_ftpAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textbox_ftpAddress.Name = "textbox_ftpAddress";
-            this.textbox_ftpAddress.Size = new System.Drawing.Size(153, 22);
+            this.textbox_ftpAddress.Size = new System.Drawing.Size(136, 22);
             this.textbox_ftpAddress.TabIndex = 18;
             this.textbox_ftpAddress.Text = "192.168.0.100";
             this.textbox_ftpAddress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbox_ftpAddress_KeyDown);
@@ -1489,7 +1571,7 @@
             this._3DSimPanel.Location = new System.Drawing.Point(11, 4);
             this._3DSimPanel.Margin = new System.Windows.Forms.Padding(4);
             this._3DSimPanel.Name = "_3DSimPanel";
-            this._3DSimPanel.Size = new System.Drawing.Size(505, 294);
+            this._3DSimPanel.Size = new System.Drawing.Size(667, 277);
             this._3DSimPanel.TabIndex = 16;
             // 
             // panel_camera
@@ -1500,11 +1582,11 @@
             this.panel_camera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_camera.Controls.Add(this.pictureBox_camera);
             this.panel_camera.Controls.Add(this._3DSimPanel);
-            this.panel_camera.Location = new System.Drawing.Point(-8, 89);
+            this.panel_camera.Location = new System.Drawing.Point(4, 85);
             this.panel_camera.Margin = new System.Windows.Forms.Padding(0);
             this.panel_camera.MinimumSize = new System.Drawing.Size(641, 316);
             this.panel_camera.Name = "panel_camera";
-            this.panel_camera.Size = new System.Drawing.Size(814, 524);
+            this.panel_camera.Size = new System.Drawing.Size(684, 528);
             this.panel_camera.TabIndex = 28;
             // 
             // panel_views1
@@ -1516,7 +1598,7 @@
             this.panel_views1.Location = new System.Drawing.Point(1, 1);
             this.panel_views1.Margin = new System.Windows.Forms.Padding(0, 0, 4, 4);
             this.panel_views1.Name = "panel_views1";
-            this.panel_views1.Size = new System.Drawing.Size(815, 607);
+            this.panel_views1.Size = new System.Drawing.Size(961, 607);
             this.panel_views1.TabIndex = 0;
             // 
             // panel_views4
@@ -1525,11 +1607,10 @@
             this.panel_views4.Controls.Add(this.groupBox_status);
             this.panel_views4.Controls.Add(this.groupBox3);
             this.panel_views4.Controls.Add(this.groupBox4);
-            this.panel_views4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_views4.Location = new System.Drawing.Point(825, 613);
+            this.panel_views4.Location = new System.Drawing.Point(971, 613);
             this.panel_views4.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.panel_views4.Name = "panel_views4";
-            this.panel_views4.Size = new System.Drawing.Size(1254, 393);
+            this.panel_views4.Size = new System.Drawing.Size(1103, 357);
             this.panel_views4.TabIndex = 33;
             // 
             // label_payloadYaw
@@ -1918,7 +1999,7 @@
             this.panel1.Location = new System.Drawing.Point(8, 398);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(441, 553);
+            this.panel1.Size = new System.Drawing.Size(441, 651);
             this.panel1.TabIndex = 4;
             // 
             // label8
@@ -2224,6 +2305,20 @@
             this.panel2.Size = new System.Drawing.Size(429, 390);
             this.panel2.TabIndex = 18;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(9, 1);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(138, 110);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 22;
+            this.pictureBox2.TabStop = false;
+            // 
             // label_errors
             // 
             this.label_errors.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -2304,11 +2399,12 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl1.Controls.Add(this.tabPage_telemetryTable);
             this.tabControl1.Controls.Add(tabPage_serialMonitor);
-            this.tabControl1.Location = new System.Drawing.Point(452, 4);
+            this.tabControl1.Location = new System.Drawing.Point(450, 4);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1900, 270);
+            this.tabControl1.Size = new System.Drawing.Size(2000, 250);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage_telemetryTable
@@ -2318,7 +2414,7 @@
             this.tabPage_telemetryTable.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage_telemetryTable.Name = "tabPage_telemetryTable";
             this.tabPage_telemetryTable.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage_telemetryTable.Size = new System.Drawing.Size(1892, 241);
+            this.tabPage_telemetryTable.Size = new System.Drawing.Size(1992, 221);
             this.tabPage_telemetryTable.TabIndex = 0;
             this.tabPage_telemetryTable.Text = "Telemetry Table";
             this.tabPage_telemetryTable.UseVisualStyleBackColor = true;
@@ -2331,7 +2427,7 @@
             this.dataGridView_telemetryDataTable.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_telemetryDataTable.Name = "dataGridView_telemetryDataTable";
             this.dataGridView_telemetryDataTable.RowHeadersWidth = 51;
-            this.dataGridView_telemetryDataTable.Size = new System.Drawing.Size(1884, 233);
+            this.dataGridView_telemetryDataTable.Size = new System.Drawing.Size(1984, 213);
             this.dataGridView_telemetryDataTable.TabIndex = 0;
             // 
             // panel7
@@ -2339,22 +2435,22 @@
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.tabControl1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 684);
+            this.panel7.Location = new System.Drawing.Point(0, 782);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1920, 269);
+            this.panel7.Size = new System.Drawing.Size(2400, 269);
             this.panel7.TabIndex = 19;
             // 
             // tableLayoutPanel_views
             // 
             this.tableLayoutPanel_views.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel_views.ColumnCount = 2;
-            this.tableLayoutPanel_views.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.44836F));
-            this.tableLayoutPanel_views.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.55164F));
+            this.tableLayoutPanel_views.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.46465F));
+            this.tableLayoutPanel_views.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.53535F));
             this.tableLayoutPanel_views.Controls.Add(this.chromiumWebBrowser1, 0, 1);
-            this.tableLayoutPanel_views.Controls.Add(this.panel_views4, 1, 1);
             this.tableLayoutPanel_views.Controls.Add(this.panel_views1, 0, 0);
             this.tableLayoutPanel_views.Controls.Add(this.panel_views2, 1, 0);
+            this.tableLayoutPanel_views.Controls.Add(this.panel_views4, 1, 1);
             this.tableLayoutPanel_views.Location = new System.Drawing.Point(452, 7);
             this.tableLayoutPanel_views.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel_views.Name = "tableLayoutPanel_views";
@@ -2371,7 +2467,7 @@
             this.chromiumWebBrowser1.Location = new System.Drawing.Point(5, 617);
             this.chromiumWebBrowser1.Margin = new System.Windows.Forms.Padding(4);
             this.chromiumWebBrowser1.Name = "chromiumWebBrowser1";
-            this.chromiumWebBrowser1.Size = new System.Drawing.Size(811, 385);
+            this.chromiumWebBrowser1.Size = new System.Drawing.Size(957, 385);
             this.chromiumWebBrowser1.TabIndex = 22;
             // 
             // windowFixer
@@ -2384,26 +2480,120 @@
             this.dataCheck.Interval = 1000;
             this.dataCheck.Tick += new System.EventHandler(this.dataCheck_Tick);
             // 
-            // pictureBox2
+            // label16
             // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(9, 1);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(138, 110);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 22;
-            this.pictureBox2.TabStop = false;
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label16.Location = new System.Drawing.Point(113, -2);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(141, 20);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Payload Pressure";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.Color.Transparent;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label34.Location = new System.Drawing.Point(126, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(134, 20);
+            this.label34.TabIndex = 3;
+            this.label34.Text = "Carrier Pressure";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.Transparent;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label36.Location = new System.Drawing.Point(124, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(129, 20);
+            this.label36.TabIndex = 4;
+            this.label36.Text = "Payload Altitude";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.Color.Transparent;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label37.Location = new System.Drawing.Point(101, 1);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(169, 20);
+            this.label37.TabIndex = 7;
+            this.label37.Text = "Payload GPS Altitude";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.Transparent;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label38.Location = new System.Drawing.Point(130, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(122, 20);
+            this.label38.TabIndex = 3;
+            this.label38.Text = "Carrier Altitude";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.Transparent;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label39.Location = new System.Drawing.Point(119, 1);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(148, 20);
+            this.label39.TabIndex = 7;
+            this.label39.Text = "Altitude Difference";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.Color.Transparent;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label40.Location = new System.Drawing.Point(126, -2);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(124, 20);
+            this.label40.TabIndex = 9;
+            this.label40.Text = "Battery Voltage";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.Color.Transparent;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label41.Location = new System.Drawing.Point(148, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(68, 20);
+            this.label41.TabIndex = 10;
+            this.label41.Text = "Velocity";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.BackColor = System.Drawing.Color.Transparent;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label42.Location = new System.Drawing.Point(131, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(104, 20);
+            this.label42.TabIndex = 11;
+            this.label42.Text = "Temperature";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TAISAT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1920, 953);
+            this.ClientSize = new System.Drawing.Size(2400, 1051);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel7);
@@ -2430,22 +2620,31 @@
             this.panel_views2.ResumeLayout(false);
             this.tableLayoutPanel_charts.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.temperature_Chart)).EndInit();
             this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.differenceAltitude_Chart)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.payloadPressure_Chart)).EndInit();
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.carrierPressure_Chart)).EndInit();
             this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batterVoltage_Chart)).EndInit();
             this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.payloadAltitude_Chart)).EndInit();
             this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.carrierAltitude_Chart)).EndInit();
             this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.velocity_Chart)).EndInit();
             this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.payloadGPSAltitude_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel_mainInformation.ResumeLayout(false);
@@ -2467,6 +2666,7 @@
             this.tableLayoutPanel_errorBits.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tableLayoutPanel_dateTime.ResumeLayout(false);
             this.tableLayoutPanel_dateTime.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -2474,7 +2674,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_telemetryDataTable)).EndInit();
             this.panel7.ResumeLayout(false);
             this.tableLayoutPanel_views.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2637,6 +2836,15 @@
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.DataVisualization.Charting.Chart payloadGPSAltitude_Chart;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label37;
     }
 }
 
