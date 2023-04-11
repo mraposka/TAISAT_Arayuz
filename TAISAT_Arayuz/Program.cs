@@ -21,7 +21,10 @@ namespace TAISAT_Arayuz
             {
                 Application.Run(new TAISAT());
             }
-            catch {  } 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
         }
     }
 }

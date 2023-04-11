@@ -18,7 +18,7 @@ namespace TAISAT_Arayuz
         [Name("HATA KODU")]
         [Index(2)]
         public string errorCode { get; set; }
-        [Name("GÖNDERME SAATİ>")]
+        [Name("GÖNDERME SAATİ")]
         [Index(3)]
         public string time { get; set; }
         [Name("BASINÇ1")]
