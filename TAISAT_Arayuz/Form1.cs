@@ -63,7 +63,7 @@ namespace TAISAT_Arayuz
         const int WS_EX_DLGMODALFRAME = (int)0x1L;
         const int SWP_NOMOVE = 0x2;
         const int SWP_NOSIZE = 0x1;
-        const int SWP_FRAMECHANGED = 0x20; 
+        const int SWP_FRAMECHANGED = 0x20;
         int count = 5;
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern int GetWindowLongA(IntPtr hWnd, int nIndex);
@@ -93,7 +93,7 @@ namespace TAISAT_Arayuz
         Label[] statusLabels;//0-7 Arası Uydu Statusu Belirten labellar  
         //Video Kaydı Değişkenleri
         int width, height;
-        int resolution = 720;
+        int resolution = 480;
         string videorecordpath = @"";
         FilterInfoCollection fCollection;
         VideoCaptureDevice cam;
@@ -161,7 +161,7 @@ namespace TAISAT_Arayuz
         }
         private void AddTelemetryTable()
         {
-            try { dataGridView_telemetryDataTable.Rows.Add(cache); dataGridView_telemetryDataTable.FirstDisplayedScrollingRowIndex = dataGridView_telemetryDataTable.RowCount-1; }
+            try { dataGridView_telemetryDataTable.Rows.Add(cache); dataGridView_telemetryDataTable.FirstDisplayedScrollingRowIndex = dataGridView_telemetryDataTable.RowCount - 1; }
             catch (Exception) { MessageBox.Show("AddTelemetryTable"); }
         }
         void Deploy()
@@ -170,9 +170,9 @@ namespace TAISAT_Arayuz
             {
                 var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };//Carrier
                 for (int i = 0; i < 5; i++)
-                { 
-                        port.Write(data, 0, data.Length);
-                        Thread.Sleep(50);  
+                {
+                    port.Write(data, 0, data.Length);
+                    Thread.Sleep(50);
                 }
             }
             catch (Exception) { MessageBox.Show("Deploy"); }
@@ -377,8 +377,6 @@ namespace TAISAT_Arayuz
         {
             try
             {
-                textBox_videoFolderToSave.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                videorecordpath = textBox_videoFolderToSave.Text;
                 if (!dataCheck.Enabled) dataCheck.Start();
                 dataGridView_telemetryDataTable.Columns.Add("PAKET NUMARASI", "PAKET NUMARASI");
                 dataGridView_telemetryDataTable.Columns.Add("UYDU STATÜSÜ", "UYDU STATÜSÜ");
@@ -670,7 +668,7 @@ namespace TAISAT_Arayuz
                     serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                     serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
                     string telemetryTable = buffer;
-                    string[] telemetryData = buffer.Split(','); 
+                    string[] telemetryData = buffer.Split(',');
                     var telemetry = new CSV();
                     telemetry.packageNo = telemetryData[0];
                     telemetry.uyduStatus = telemetryData[1];
@@ -886,7 +884,7 @@ namespace TAISAT_Arayuz
             catch (Exception)
             {
                 MessageBox.Show("button_sendVideo_Click");
-            } 
+            }
         }
         private void TAISAT_MouseEnter(object sender, EventArgs e)
         {
@@ -923,7 +921,7 @@ namespace TAISAT_Arayuz
             {
                 data = serialMonitorListBox.Items.Count;
                 if (data == _data) { resetWait--; if (resetWait == 0) { ResetData(); } }
-                else _data = data;
+                else { _data = data; resetWait = 5; }
             }
             catch (Exception)
             {
