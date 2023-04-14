@@ -34,6 +34,8 @@ using System.Security.Policy;
 using System.Reflection;
 using GMap.NET.MapProviders;
 using GMap.NET;
+using CefSharp.DevTools.Audits;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace TAISAT_Arayuz
 {
@@ -87,6 +89,7 @@ namespace TAISAT_Arayuz
             SetWindowLongA(MainWindowHandle, GWL_EXSTYLE, Style | WS_EX_DLGMODALFRAME);
             SetWindowPos(MainWindowHandle, new IntPtr(0), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
         }
+        Process p = new Process();//CMD Processi
         //3D Simulation Değişkenleri Ve Fonksiyonları
         //FTP Değişkenleri
         string ftpUserName = "pi";
@@ -159,13 +162,13 @@ namespace TAISAT_Arayuz
                 errorBit5.BackColor = label_errorCode.Text[4] == '0' ? Color.Lime : Color.Red;
                 resetWait = 5;
             }
-            catch (Exception) { MessageBox.Show("ResetData"); }
+            catch (Exception) { LogError("ResetData"); }
 
         }
         private void AddTelemetryTable()
         {
             try { dataGridView_telemetryDataTable.Rows.Add(cache); dataGridView_telemetryDataTable.FirstDisplayedScrollingRowIndex = dataGridView_telemetryDataTable.RowCount - 1; }
-            catch (Exception) { MessageBox.Show("AddTelemetryTable"); }
+            catch (Exception) { LogError("AddTelemetryTable"); }
         }
         void Deploy()
         {
@@ -178,8 +181,7 @@ namespace TAISAT_Arayuz
                     Thread.Sleep(50);
                 }
             }
-            catch (Exception) { MessageBox.Show("Deploy"); }
-
+            catch (Exception) { LogError("Deploy"); }
         }
         public void SerialPortProgram()
         {
@@ -189,8 +191,7 @@ namespace TAISAT_Arayuz
                 port.Open();
                 Console.ReadLine();
             }
-            catch (Exception) { MessageBox.Show("SerialPortProgram"); }
-
+            catch (Exception) { LogError("SerialPortProgram"); }
         }
         void KillSimulations()
         {
@@ -199,8 +200,7 @@ namespace TAISAT_Arayuz
                 foreach (var process in Process.GetProcessesByName(_3DSimExePath.Split('/').Last().Split('.')[0]))
                     process.Kill();
             }
-            catch (Exception) { MessageBox.Show("KillSimulations"); }
-
+            catch (Exception) { LogError("KillSimulations"); }
         }
         void ToggleUI(bool toggle)
         {
@@ -211,8 +211,7 @@ namespace TAISAT_Arayuz
                     foreach (var item in GetAll(this, type))
                         item.Enabled = toggle;
             }
-            catch (Exception) { MessageBox.Show("ToggleUI"); }
-
+            catch (Exception) { LogError("ToggleUI"); }
         }
         public IEnumerable<Control> GetAll(Control control, Type type)
         {
@@ -223,8 +222,7 @@ namespace TAISAT_Arayuz
                                           .Concat(controls)
                                           .Where(c => c.GetType() == type);
             }
-            catch (Exception) { MessageBox.Show("GetAll"); return null; }
-
+            catch (Exception) { LogError("GetAll"); return null; }
         }
         void TakeScreenShotOfChart(Chart chart)
         {
@@ -235,7 +233,7 @@ namespace TAISAT_Arayuz
                 chart.SaveImage(chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
                 chart.Size = oldSize;
             }
-            catch (Exception) { MessageBox.Show("TakeScreenShotOfChart"); }
+            catch (Exception) { LogError("TakeScreenShotOfChart"); }
         }
         void SaveFlightTxt()
         {
@@ -243,7 +241,7 @@ namespace TAISAT_Arayuz
             {
                 File.AppendAllText("log.txt", log);
             }
-            catch (Exception) { MessageBox.Show("SaveFlightTxt"); }
+            catch (Exception) { LogError("SaveFlightTxt"); }
         }
         void SaveFlightCSV()
         {
@@ -256,7 +254,7 @@ namespace TAISAT_Arayuz
                 using (var csv = new CsvWriter(writer, configPersons))
                     if (logs.Count > 0) csv.WriteRecords(logs);
             }
-            catch (Exception) { MessageBox.Show("SaveFlight"); }
+            catch (Exception) { LogError("SaveFlight"); }
         }
         void ListComPorts()
         {
@@ -266,7 +264,7 @@ namespace TAISAT_Arayuz
                 foreach (var port in SerialPort.GetPortNames())
                     comboBox_COMPortTelemetry.Items.Add(port);
             }
-            catch (Exception) { MessageBox.Show("ListComPorts"); }
+            catch (Exception) { LogError("ListComPorts"); }
 
         }
         void Upload()
@@ -313,7 +311,7 @@ namespace TAISAT_Arayuz
                     }
                 }
             }
-            catch (Exception) { MessageBox.Show("Upload"); }
+            catch (Exception) { LogError("Upload"); }
         }
         private void VideoSended()
         {
@@ -322,7 +320,7 @@ namespace TAISAT_Arayuz
                 var data = new byte[] { 0x20, 0x20, 0x2f, (byte)'G' };
                 port.Write(data, 0, data.Length);
             }
-            catch (Exception) { MessageBox.Show("VideoSended"); }
+            catch (Exception) { LogError("VideoSended"); }
 
         }
         bool isValidConnection(string url, string user, string password)
@@ -330,17 +328,17 @@ namespace TAISAT_Arayuz
             try
             {
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + url);
-
                 request.Method = WebRequestMethods.Ftp.ListDirectory;
                 request.Credentials = new NetworkCredential(user, password);
                 request.GetResponse();
             }
-            catch (WebException err)
-            {
-                MessageBox.Show(err.Message);
-                return false;
-            }
+            catch (WebException err) { MessageBox.Show(err.Message); return false; }
             return true;
+
+        }
+        void LogError(string text)
+        {
+            textBox_logs.Text += text+Environment.NewLine;
         }
         void ListenUDP()
         {
@@ -359,45 +357,34 @@ namespace TAISAT_Arayuz
                 else if (returnData == "ip")
                 {
                     raspberryIP = RemoteIpEndPoint.Address.ToString();
-                    textbox_ftpAddress.Text= raspberryIP;
+                    textbox_ftpAddress.Text = raspberryIP;
                     label14.BackColor = Color.Lime;
                 }
             }
         }
         void SendUDP()
         {
-            //FTP Download
             for (int i = 0; i < 1000 * 100; i++)
-            {
-                try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); } catch { }
-                Thread.Sleep(1);
-            }
+            { try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); } catch { } Thread.Sleep(1); }
         }
         void KillUDPPorts()
         {
             string[] ports = new string[2] { "11000", "41" };
             foreach (string port in ports)
             {
-                Process p = new Process();
-                // Redirect the output stream of the child process.
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.FileName = "cmd";
                 p.StartInfo.Arguments = "/c netstat -ano | findstr :" + port;
                 p.Start();
                 string output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
                 try
                 {
-                    string command = "/c taskkill /pid " + output.Replace(" ", "").Split('*')[2] + " /F"; 
+                    string command = "/c taskkill /pid " + output.Replace(" ", "").Split('*')[2] + " /F";
                     RunCMD(command);
                 }
                 catch (Exception) { }
                 try
                 {
-                    string command = "/c taskkill /f /im " + output.Replace(" ", "").Split('*')[2]; 
+                    string command = "/c taskkill /f /im " + output.Replace(" ", "").Split('*')[2];
                     RunCMD(command);
                 }
                 catch (Exception) { }
@@ -406,11 +393,6 @@ namespace TAISAT_Arayuz
         }
         void RunCMD(string cmd)
         {
-            Process p = new Process();
-            // Redirect the output stream of the child process.
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.FileName = "cmd";
             p.StartInfo.Arguments = cmd;
             p.Start();
             p.WaitForExit();
@@ -425,8 +407,7 @@ namespace TAISAT_Arayuz
                 if (!backgroundWorker1.IsBusy)
                     backgroundWorker1.RunWorkerAsync();
             }
-            catch (Exception) { MessageBox.Show("Port_DataReceived"); }
-
+            catch (Exception) { LogError("Port_DataReceived"); }
         }
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -444,7 +425,7 @@ namespace TAISAT_Arayuz
                     pictureBox_camera.Image = videoBitmap;
                 }
             }
-            catch (Exception) { MessageBox.Show("Cam_NewFrame"); }
+            catch (Exception) { LogError("Cam_NewFrame"); }
         }
         //My Events
 
@@ -453,6 +434,11 @@ namespace TAISAT_Arayuz
         {
             try
             {
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.FileName = "cmd";
                 new Thread(new ThreadStart(KillUDPPorts)).Start();
                 Thread.Sleep(1000);
                 new Thread(new ThreadStart(ListenUDP)).Start();
@@ -498,7 +484,7 @@ namespace TAISAT_Arayuz
                 comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
                 chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
             }
-            catch (Exception) { MessageBox.Show("Form1_Load"); }
+            catch (Exception) { LogError("Form1_Load"); }
         }
         void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -514,17 +500,17 @@ namespace TAISAT_Arayuz
 
                 }
             }
-            catch (Exception) { MessageBox.Show("Form1_FormClosing"); }
+            catch (Exception) { LogError("Form1_FormClosing"); }
 
         }
         void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
         {
             try { port = new SerialPort(comboBox_COMPortTelemetry.SelectedItem.ToString(), Int32.Parse(comboBox_baudRateTelemetry.SelectedItem.ToString()), Parity.None, 8, StopBits.One); }
-            catch (Exception) { MessageBox.Show("comboBox_COMPortTelemetry_SelectedIndexChanged"); }
+            catch (Exception) { LogError("comboBox_COMPortTelemetry_SelectedIndexChanged"); }
         }
         void button_refreshCOMPort_Click(object sender, EventArgs e)
         {
-            try { ListComPorts(); } catch (Exception) { MessageBox.Show("button_refreshCOMPort_Click"); }
+            try { ListComPorts(); } catch (Exception) { LogError("button_refreshCOMPort_Click"); }
         }
         void button_cameraOpenClose_Click(object sender, EventArgs e)
         {
@@ -555,7 +541,7 @@ namespace TAISAT_Arayuz
                     button_cameraOpenClose.BackColor = Color.Lime;
                 }
             }
-            catch (Exception) { MessageBox.Show("button_cameraOpenClose_Click"); }
+            catch (Exception) { LogError("button_cameraOpenClose_Click"); }
         }
         void button_recordStartStop_Click(object sender, EventArgs e)
         {
@@ -578,9 +564,9 @@ namespace TAISAT_Arayuz
                     recordInformationLed.BackColor = Color.Transparent;
                 }
                 else
-                    MessageBox.Show("You have to open the camera and select a folder to start record!");
+                    LogError("You have to open the camera and select a folder to start record!");
             }
-            catch (Exception) { MessageBox.Show("button_recordStartStop_Click"); }
+            catch (Exception) { LogError("button_recordStartStop_Click"); }
         }
         void timer_videoRecordTime_Tick(object sender, EventArgs e)
         {
@@ -594,7 +580,7 @@ namespace TAISAT_Arayuz
                 else if (recordInformationLed.BackColor == Color.Red)
                     recordInformationLed.BackColor = Color.Transparent;
             }
-            catch (Exception) { MessageBox.Show("timer_videoRecordTime_Tick"); }
+            catch (Exception) { LogError("timer_videoRecordTime_Tick"); }
         }
         void button_browseVideoFolderToSave_Click(object sender, EventArgs e)
         {
@@ -608,7 +594,7 @@ namespace TAISAT_Arayuz
                     textBox_videoFolderToSave.Text = "..\\" + str[str.Length - 1];
                 }
             }
-            catch (Exception) { MessageBox.Show("button_browseVideoFolderToSave_Click"); }
+            catch (Exception) { LogError("button_browseVideoFolderToSave_Click"); }
         }
         void windowFixer_TimerTick(object sender, EventArgs e)
         {
@@ -623,107 +609,52 @@ namespace TAISAT_Arayuz
                 else
                     ToggleUI(false);
             }
-            catch (Exception) { MessageBox.Show("windowFixer_TimerTick"); }
+            catch (Exception) { LogError("windowFixer_TimerTick"); }
         }
         void payloadPressure_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(payloadPressure_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("payloadPressure_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(payloadPressure_Chart); }
+            catch (Exception) { LogError("payloadPressure_Chart_Click"); }
         }
         void carrierPressure_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(carrierPressure_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("carrierPressure_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(carrierPressure_Chart); }
+            catch (Exception) { LogError("carrierPressure_Chart_Click"); }
         }
         void batterVoltage_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(batterVoltage_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("batterVoltage_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(batterVoltage_Chart); }
+            catch (Exception) { LogError("batterVoltage_Chart_Click"); }
         }
         void payloadAltitude_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(payloadAltitude_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("payloadAltitude_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(payloadAltitude_Chart); }
+            catch (Exception) { LogError("payloadAltitude_Chart_Click"); }
         }
         void carrierAltitude_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(carrierAltitude_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("carrierAltitude_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(carrierAltitude_Chart); }
+            catch (Exception) { LogError("carrierAltitude_Chart_Click"); }
         }
         void velocity_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(velocity_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("velocity_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(velocity_Chart); }
+            catch (Exception) { LogError("velocity_Chart_Click"); }
         }
         void payloadGPSAltitude_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(payloadGPSAltitude_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("payloadGPSAltitude_Chart_Click");
-            }
-
+            try { TakeScreenShotOfChart(payloadGPSAltitude_Chart); }
+            catch (Exception) { LogError("payloadGPSAltitude_Chart_Click"); }
         }
         void differenceAltitude_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(differenceAltitude_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("differenceAltitude_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(differenceAltitude_Chart); }
+            catch (Exception) { LogError("differenceAltitude_Chart_Click"); }
         }
         void temperature_Chart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                TakeScreenShotOfChart(temperature_Chart);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("temperature_Chart_Click");
-            }
+            try { TakeScreenShotOfChart(temperature_Chart); }
+            catch (Exception) { LogError("temperature_Chart_Click"); }
         }
         void button_MANUAL_DEPLOY_Click(object sender, EventArgs e)
         {
@@ -735,10 +666,7 @@ namespace TAISAT_Arayuz
                 new Thread(new ThreadStart(Deploy)).Start();
                 new Thread(new ThreadStart(Deploy)).Start();
             }
-            catch (Exception)
-            {
-                MessageBox.Show("button_MANUAL_DEPLOY_Click");
-            }
+            catch (Exception) { LogError("button_MANUAL_DEPLOY_Click"); }
         }
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -918,17 +846,13 @@ namespace TAISAT_Arayuz
                             chromiumWebBrowser1.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + "," + label_carrierGPSLatitude.Text + "," + label_carrierGPSLongitude.Text + ");");
                             //GPS To Map
                         }
-                        catch (Exception)
-                        {
-                        }
+                        catch (Exception) { LogError("Telemetry"); }
                     }
                     buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
                 }
             }
             catch (Exception)
-            {
-                MessageBox.Show("backgroundWorker1_DoWork");
-            }
+            { LogError("backgroundWorker1_DoWork"); }
         }
         void button_browseVideoFileToSend_Click(object sender, EventArgs e)
         {
@@ -951,9 +875,7 @@ namespace TAISAT_Arayuz
                 }
             }
             catch (Exception)
-            {
-                MessageBox.Show("button_browseVideoFileToSend_Click");
-            }
+            { LogError("button_browseVideoFileToSend_Click"); }
         }
         void button_sendVideo_Click(object sender, EventArgs e)
         {
@@ -961,12 +883,9 @@ namespace TAISAT_Arayuz
             {
                 if (textbox_ftpAddress.Text != "" && textBox_videoPathToSend.Text != "")
                     Task.Run(() => Upload());
-                else MessageBox.Show("FTP adresini veya gönderilecek olan dosyayı boş bırakmayınız!");
+                else LogError("FTP adresini veya gönderilecek olan dosyayı boş bırakmayınız!");
             }
-            catch (Exception)
-            {
-                MessageBox.Show("button_sendVideo_Click");
-            }
+            catch (Exception) { LogError("button_sendVideo_Click"); }
         }
         private void TAISAT_MouseEnter(object sender, EventArgs e)
         {
@@ -980,10 +899,7 @@ namespace TAISAT_Arayuz
                     maximized = true;
                 }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("TAISAT_MouseEnter");
-            }
+            catch (Exception) { LogError("TAISAT_MouseEnter"); }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -996,10 +912,7 @@ namespace TAISAT_Arayuz
                 if (e.KeyCode == Keys.Enter)
                     MessageBox.Show(isValidConnection(textbox_ftpAddress.Text == "" ? "192.168.1.100" : textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
             }
-            catch (Exception)
-            {
-                MessageBox.Show("textbox_ftpAddress_KeyDown");
-            }
+            catch (Exception) { LogError("textbox_ftpAddress_KeyDown"); }
         }
         private void dataCheck_Tick(object sender, EventArgs e)
         {
@@ -1009,10 +922,7 @@ namespace TAISAT_Arayuz
                 if (data == _data) { resetWait--; if (resetWait == 0) { ResetData(); } }
                 else { _data = data; resetWait = 5; }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("dataCheck_Tick");
-            }
+            catch (Exception) { LogError("dataCheck_Tick"); }
         }
         void button_telemetryCOMPortOpenClose_Click(object sender, EventArgs e)
         {
@@ -1030,10 +940,10 @@ namespace TAISAT_Arayuz
                     port.Close();
                     port.Dispose();
                     button_telemetryCOMPortOpenClose.BackColor = Color.Lime;
-                    MessageBox.Show("Uçuş Tamamlandı!");
+                    MessageBox.Show("Uçuş Tamamlandı!", "TAISAT MARM-99 Uçuş Bilgisi",MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (Exception) { MessageBox.Show("button_telemetryCOMPortOpenClose_Click"); }
+            catch (Exception) { LogError("button_telemetryCOMPortOpenClose_Click"); }
         }
         //Form Events
     }
