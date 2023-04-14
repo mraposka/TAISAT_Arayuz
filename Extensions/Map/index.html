@@ -23,11 +23,11 @@
     var allMarkers = [];
     let myMap;
     function initMap() {
-      const station = { lat: 40.8236469, lng: 29.9244924 };
-      const uydu = { lat: 40.7431871, lng: 29.9463566 };
+      const station = { lat: 38.398427, lng: 33.711058 };
+      const uydu = { lat: 38.399125, lng: 33.708420 };
       const myCenter = { lat: (station.lat + uydu.lat) / 2, lng: (station.lng + uydu.lng) / 2 }
       const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 13,
+        zoom: 15,
         center: myCenter,
       });
       var m1 = new google.maps.Marker({
@@ -44,7 +44,7 @@
       allMarkers.pop().setMap(null);
     }
     function setmark(_lat, _lng,_lat2,_lng2) {
-      const station = { lat: 40.8236469, lng: 29.9244924 };
+      const station = { lat: 38.398427, lng: 33.711058 };
       const uydu = { lat: _lat, lng: _lng };
       const carrier = { lat: _lat2, lng: _lng2 };
       const myCenter = { lat: (station.lat + uydu.lat) / 2, lng: (station.lng + uydu.lng) / 2 };
