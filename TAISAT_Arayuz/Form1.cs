@@ -32,6 +32,8 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.Security.Policy;
 using System.Reflection;
+using GMap.NET.MapProviders;
+using GMap.NET;
 
 namespace TAISAT_Arayuz
 {
@@ -103,7 +105,8 @@ namespace TAISAT_Arayuz
         TimeSpan startTime;
         TimeSpan finishTime;
         TimeSpan elapsedTime;
-        //Video Kaydı Değişkenleri 
+        //Video Kaydı Değişkenleri  
+        string raspberryIP = ""; //Video Gönderen IP
         //Log
         string[] cache;
         string log = "";
@@ -339,6 +342,79 @@ namespace TAISAT_Arayuz
             }
             return true;
         }
+        void ListenUDP()
+        {
+            UdpClient udpClient = new UdpClient(41);
+            while (true)
+            {
+                IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
+                string returnData = Encoding.ASCII.GetString(receiveBytes);
+                if (returnData == "video1")
+                {
+                    raspberryIP = RemoteIpEndPoint.Address.ToString();
+                    //video indir
+                    new Thread(new ThreadStart(SendUDP)).Start();
+                }
+                else if (returnData == "ip")
+                {
+                    raspberryIP = RemoteIpEndPoint.Address.ToString();
+                    textbox_ftpAddress.Text= raspberryIP;
+                    label14.BackColor = Color.Lime;
+                }
+            }
+        }
+        void SendUDP()
+        {
+            //FTP Download
+            for (int i = 0; i < 1000 * 100; i++)
+            {
+                try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); } catch { }
+                Thread.Sleep(1);
+            }
+        }
+        void KillUDPPorts()
+        {
+            string[] ports = new string[2] { "11000", "41" };
+            foreach (string port in ports)
+            {
+                Process p = new Process();
+                // Redirect the output stream of the child process.
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.FileName = "cmd";
+                p.StartInfo.Arguments = "/c netstat -ano | findstr :" + port;
+                p.Start();
+                string output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+                try
+                {
+                    string command = "/c taskkill /pid " + output.Replace(" ", "").Split('*')[2] + " /F"; 
+                    RunCMD(command);
+                }
+                catch (Exception) { }
+                try
+                {
+                    string command = "/c taskkill /f /im " + output.Replace(" ", "").Split('*')[2]; 
+                    RunCMD(command);
+                }
+                catch (Exception) { }
+            }
+
+        }
+        void RunCMD(string cmd)
+        {
+            Process p = new Process();
+            // Redirect the output stream of the child process.
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.FileName = "cmd";
+            p.StartInfo.Arguments = cmd;
+            p.Start();
+            p.WaitForExit();
+        }
         //My Functions
 
         //My Events
@@ -377,6 +453,9 @@ namespace TAISAT_Arayuz
         {
             try
             {
+                new Thread(new ThreadStart(KillUDPPorts)).Start();
+                Thread.Sleep(1000);
+                new Thread(new ThreadStart(ListenUDP)).Start();
                 if (!dataCheck.Enabled) dataCheck.Start();
                 dataGridView_telemetryDataTable.Columns.Add("PAKET NUMARASI", "PAKET NUMARASI");
                 dataGridView_telemetryDataTable.Columns.Add("UYDU STATÜSÜ", "UYDU STATÜSÜ");
@@ -425,11 +504,14 @@ namespace TAISAT_Arayuz
         {
             try
             {
+                KillSimulations();
+                KillUDPPorts();
                 if (cam.IsRunning == true)
                 {
                     cam.Stop();
                     videoWriter.Close();
                     KillSimulations();
+
                 }
             }
             catch (Exception) { MessageBox.Show("Form1_FormClosing"); }
@@ -902,6 +984,10 @@ namespace TAISAT_Arayuz
             {
                 MessageBox.Show("TAISAT_MouseEnter");
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
         }
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
         {
