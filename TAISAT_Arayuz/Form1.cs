@@ -120,6 +120,7 @@ namespace TAISAT_Arayuz
         //Port Okuma Değişkenleri
         SerialPort port;
         string buffer = string.Empty;
+        int bufferSize = 175;
         //Port Okuma Değişkenleri 
         int _data = 0, data = 0, resetWait = 5; //İletişim kontrolü için değişkenler
         //My Functions
@@ -362,9 +363,8 @@ namespace TAISAT_Arayuz
             }
         }
         void SendUDP()
-        {
-            for (int i = 0; i < 1000 * 100; i++)
-            { try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); } catch { } Thread.Sleep(1); }
+        { 
+            try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); } catch { } Thread.Sleep(1);
         }
         void KillUDPPorts()
         {
@@ -862,6 +862,11 @@ namespace TAISAT_Arayuz
                         catch (Exception) { MessageBox.Show("Telemetry"); }
                     }
                     buffer = string.Empty;//Buffer Temizleme (tam veri gelip işlendiyse)
+                }
+                else
+                {
+                    if(buffer.Contains("\n"))textBox_logs.Text += buffer + Environment.NewLine;
+                    if(buffer.Length>bufferSize) buffer = string.Empty; 
                 }
             }
             catch (Exception)
