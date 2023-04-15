@@ -48,7 +48,7 @@ namespace TAISAT_Arayuz
         //TO-DO 
         //power
         //TO-DO 
-        List<CSV> logs = new List<CSV>();//CSV kaydı için oluşturulan liste 
+        List<string> logs = new List<string>();//CSV kaydı için oluşturulan liste 
         bool maximized = false;//Tek seferlik tam ekran moduna geçmek için gerekli değişken 
         //3D Simulation Değişkenleri
         [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
@@ -250,12 +250,11 @@ namespace TAISAT_Arayuz
         {
             try
             {
-                var configPersons = new CsvConfiguration(CultureInfo.InvariantCulture)
-                { HasHeaderRecord = true, ShouldQuote = (field) => false };
-                using (var stream = File.Open("log.csv", FileMode.Append))
-                using (var writer = new StreamWriter(stream))
-                using (var csv = new CsvWriter(writer, configPersons))
-                    if (logs.Count > 0) csv.WriteRecords(logs);
+                var csv = new StringBuilder();
+                csv.AppendLine("<PAKETNUMARASI>;<UYDUSTATÜSÜ>;<HATAKODU>;<GÖNDERMESAATİ>;<BASINÇ1>;<BASINÇ2>;<YÜKSEKLİK1>;<YÜKSEKLİK2>;<İRTİFAFARKI>;<İNİŞHIZI>;<SICAKLIK>;<PİLGERİLİMİ>;<GPS1LATITUDE>;<GPS1LONGITUDE>;<GPS1ALTITUDE>;<PITCH>;<ROLL>;<YAW>;<TAKIMNO>;");
+                foreach (var log in logs)
+                    csv.AppendLine(log);
+                File.WriteAllText("logs.csv", csv.ToString());
             }
             catch (Exception) { MessageBox.Show("SaveFlight"); }
         }
@@ -692,27 +691,28 @@ namespace TAISAT_Arayuz
                     serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
                     string telemetryTable = buffer;
                     string[] telemetryData = buffer.Split(',');
-                    var telemetry = new CSV();
-                    telemetry.packageNo = telemetryData[0];
-                    telemetry.uyduStatus = telemetryData[1];
-                    telemetry.errorCode = telemetryData[2];
-                    telemetry.time = telemetryData[3] + "," + telemetryData[4];
-                    telemetry.pressure1 = telemetryData[5];
-                    telemetry.pressure2 = telemetryData[6];
-                    telemetry.altitude1 = telemetryData[7];
-                    telemetry.altitude2 = telemetryData[8];
-                    telemetry.altitudeDiff = telemetryData[9];
-                    telemetry.velocity = telemetryData[10];
-                    telemetry.temperature = telemetryData[11];
-                    telemetry.velocity = telemetryData[12];
-                    telemetry.gpsLatitude = telemetryData[13];
-                    telemetry.gpsLongitude = telemetryData[14];
-                    telemetry.gpsAltitude = telemetryData[15];
-                    telemetry.pitch = telemetryData[16];
-                    telemetry.roll = telemetryData[17];
-                    telemetry.yaw = telemetryData[18];
-                    telemetry.takimNo = telemetryData[19];
+                    string telemetry = "";
+                    telemetry += telemetryData[0]+";";
+                    telemetry += telemetryData[1] + ";";
+                    telemetry += telemetryData[2] + ";";
+                    telemetry += telemetryData[3] + "," + telemetryData[4] + ";";
+                    telemetry += telemetryData[5] + ";";
+                    telemetry += telemetryData[6] + ";";
+                    telemetry += telemetryData[7] + ";";
+                    telemetry += telemetryData[8] + ";";
+                    telemetry += telemetryData[9] + ";";
+                    telemetry += telemetryData[10] + ";";
+                    telemetry += telemetryData[11] + ";";
+                    telemetry += telemetryData[13] + ";";
+                    telemetry += telemetryData[12] + ";";
+                    telemetry += telemetryData[14] + ";";
+                    telemetry += telemetryData[15] + ";";
+                    telemetry += telemetryData[16] + ";";
+                    telemetry += telemetryData[17] + ";";
+                    telemetry += telemetryData[18] + ";";
+                    telemetry += telemetryData[19] + ";";
                     logs.Add(telemetry);
+                    telemetry = string.Empty;
                     /* Array.Clear(telemetryData, 0, telemetryData.Length);*/
                     buffer = buffer.Replace("<", "").Replace(">", "");
                     telemetryData = buffer.Split(',');
