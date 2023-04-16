@@ -48,6 +48,7 @@ namespace TAISAT_Arayuz
         //TO-DO 
         //power
         //TO-DO 
+        bool isStation = false;//Video Transfer için istasyon kontrolü
         List<string> logs = new List<string>();//CSV kaydı için oluşturulan liste 
         bool maximized = false;//Tek seferlik tam ekran moduna geçmek için gerekli değişken 
         //3D Simulation Değişkenleri
@@ -162,14 +163,17 @@ namespace TAISAT_Arayuz
                 errorBit4.BackColor = label_errorCode.Text[3] == '0' ? Color.Lime : Color.Red;
                 errorBit5.BackColor = label_errorCode.Text[4] == '0' ? Color.Lime : Color.Red;
                 resetWait = 5;
+            }
+            catch (Exception) { MessageBox.Show("ResetData"); }
+            try
+            {
                 if (button_telemetryCOMPortOpenClose.BackColor == Color.Green)
                 {
                     port.Close();
                     port.Open();
                 }
             }
-            catch (Exception) { MessageBox.Show("ResetData"); }
-
+            catch (Exception) { }
         }
         private void AddTelemetryTable()
         {
@@ -339,11 +343,11 @@ namespace TAISAT_Arayuz
             return true;
 
         }
-        
+        bool waitVideoTransfer = true;
         void ListenUDP()
         {
             UdpClient udpClient = new UdpClient(41);
-            while (true)
+            while (waitVideoTransfer)
             {
                 IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
                 Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
@@ -351,20 +355,23 @@ namespace TAISAT_Arayuz
                 if (returnData == "video1")
                 {
                     raspberryIP = RemoteIpEndPoint.Address.ToString();
-                    //video indir
-                    //new Thread(new ThreadStart(SendUDP)).Start();
+                    if(!isStation)  new Thread(new ThreadStart(DownloadVideo)).Start();
+                    waitVideoTransfer = false;
                 }
                 else if (returnData == "ip")
                 {
                     raspberryIP = RemoteIpEndPoint.Address.ToString();
                     textbox_ftpAddress.Text = raspberryIP;
                     label14.BackColor = Color.Lime;
+                    if (isStation)
+                        waitVideoTransfer = false;
                 }
             }
         }
         void SendUDP()
-        { 
-            try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); } catch { } Thread.Sleep(1);
+        {
+            try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); waitVideoTransfer = false; } catch { }
+            Thread.Sleep(1);
         }
         void KillUDPPorts()
         {
@@ -433,55 +440,67 @@ namespace TAISAT_Arayuz
         {
             try
             {
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.FileName = "cmd";
-                new Thread(new ThreadStart(KillUDPPorts)).Start();
-                Thread.Sleep(1000);
-                new Thread(new ThreadStart(ListenUDP)).Start();
-                if (!dataCheck.Enabled) dataCheck.Start();
-                dataGridView_telemetryDataTable.Columns.Add("PAKET NUMARASI", "PAKET NUMARASI");
-                dataGridView_telemetryDataTable.Columns.Add("UYDU STATÜSÜ", "UYDU STATÜSÜ");
-                dataGridView_telemetryDataTable.Columns.Add("HATA KODU", "HATA KODU");
-                dataGridView_telemetryDataTable.Columns.Add("GÖNDERME SAATİ", "GÖNDERME SAATİ");
-                dataGridView_telemetryDataTable.Columns.Add("BASINÇ1", "BASINÇ1");
-                dataGridView_telemetryDataTable.Columns.Add("BASINÇ2", "BASINÇ2");
-                dataGridView_telemetryDataTable.Columns.Add("YÜKSEKLİK1", "YÜKSEKLİK1");
-                dataGridView_telemetryDataTable.Columns.Add("YÜKSEKLİK2", "YÜKSEKLİK2");
-                dataGridView_telemetryDataTable.Columns.Add("İRTİFA FARKI", "İRTİFA FARKI");
-                dataGridView_telemetryDataTable.Columns.Add("İNİŞ HIZI", "İNİŞ HIZI");
-                dataGridView_telemetryDataTable.Columns.Add("SICAKLIK", "SICAKLIK");
-                dataGridView_telemetryDataTable.Columns.Add("PİL GERİLİMİ", "PİL GERİLİMİ");
-                dataGridView_telemetryDataTable.Columns.Add("GPS1 LATITUDE", "GPS1 LATITUDE");
-                dataGridView_telemetryDataTable.Columns.Add("GPS1 LONGITUDE", "GPS1 LONGITUDE");
-                dataGridView_telemetryDataTable.Columns.Add("GPS1 ALTITUDE", "GPS1 ALTITUDE");
-                dataGridView_telemetryDataTable.Columns.Add("PITCH", "PITCH");
-                dataGridView_telemetryDataTable.Columns.Add("ROLL", "ROLL");
-                dataGridView_telemetryDataTable.Columns.Add("YAW", "YAW");
-                dataGridView_telemetryDataTable.Columns.Add("TAKIM NO", "TAKIM NO");
-                KillSimulations();
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = _3DSimExePath;
-                startInfo.WindowStyle = ProcessWindowStyle.Maximized;
-                simApplication = Process.Start(startInfo);
-                simApplication.WaitForInputIdle();
-                MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
-                windowFixer.Start();
-                if (resolution == 480) { width = 640; height = 480; }
-                if (resolution == 720) { width = 1280; height = 720; }
-                if (resolution == 1080) { width = 1920; height = 1080; }
-                statusLabels = new Label[8] { label_status00, label_status01, label_status02, label_status03, label_status04, label_status05, label_status06, label_status07 };
-                fCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                foreach (FilterInfo item in fCollection)
+                if (isStation)
                 {
-                    comboBox_chooseCamera.Items.Add(item.Name);
-                    cam = new VideoCaptureDevice();
+                    groupBox4.Enabled = false;
+                    p.StartInfo.UseShellExecute = false;
+                    p.StartInfo.RedirectStandardOutput = true;
+                    p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    p.StartInfo.CreateNoWindow = true;
+                    p.StartInfo.FileName = "cmd";
+                    new Thread(new ThreadStart(KillUDPPorts)).Start();
+                    Thread.Sleep(1000);
+                    new Thread(new ThreadStart(ListenUDP)).Start();
+                    if (!dataCheck.Enabled) dataCheck.Start();
+                    dataGridView_telemetryDataTable.Columns.Add("PAKET NUMARASI", "PAKET NUMARASI");
+                    dataGridView_telemetryDataTable.Columns.Add("UYDU STATÜSÜ", "UYDU STATÜSÜ");
+                    dataGridView_telemetryDataTable.Columns.Add("HATA KODU", "HATA KODU");
+                    dataGridView_telemetryDataTable.Columns.Add("GÖNDERME SAATİ", "GÖNDERME SAATİ");
+                    dataGridView_telemetryDataTable.Columns.Add("BASINÇ1", "BASINÇ1");
+                    dataGridView_telemetryDataTable.Columns.Add("BASINÇ2", "BASINÇ2");
+                    dataGridView_telemetryDataTable.Columns.Add("YÜKSEKLİK1", "YÜKSEKLİK1");
+                    dataGridView_telemetryDataTable.Columns.Add("YÜKSEKLİK2", "YÜKSEKLİK2");
+                    dataGridView_telemetryDataTable.Columns.Add("İRTİFA FARKI", "İRTİFA FARKI");
+                    dataGridView_telemetryDataTable.Columns.Add("İNİŞ HIZI", "İNİŞ HIZI");
+                    dataGridView_telemetryDataTable.Columns.Add("SICAKLIK", "SICAKLIK");
+                    dataGridView_telemetryDataTable.Columns.Add("PİL GERİLİMİ", "PİL GERİLİMİ");
+                    dataGridView_telemetryDataTable.Columns.Add("GPS1 LATITUDE", "GPS1 LATITUDE");
+                    dataGridView_telemetryDataTable.Columns.Add("GPS1 LONGITUDE", "GPS1 LONGITUDE");
+                    dataGridView_telemetryDataTable.Columns.Add("GPS1 ALTITUDE", "GPS1 ALTITUDE");
+                    dataGridView_telemetryDataTable.Columns.Add("PITCH", "PITCH");
+                    dataGridView_telemetryDataTable.Columns.Add("ROLL", "ROLL");
+                    dataGridView_telemetryDataTable.Columns.Add("YAW", "YAW");
+                    dataGridView_telemetryDataTable.Columns.Add("TAKIM NO", "TAKIM NO");
+                    KillSimulations();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.FileName = _3DSimExePath;
+                    startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                    simApplication = Process.Start(startInfo);
+                    simApplication.WaitForInputIdle();
+                    MoveWindow(simApplication.MainWindowHandle, 0, 0, _3DSimPanel.Width, _3DSimPanel.Height, true);
+                    windowFixer.Start();
+                    if (resolution == 480) { width = 640; height = 480; }
+                    if (resolution == 720) { width = 1280; height = 720; }
+                    if (resolution == 1080) { width = 1920; height = 1080; }
+                    statusLabels = new Label[8] { label_status00, label_status01, label_status02, label_status03, label_status04, label_status05, label_status06, label_status07 };
+                    fCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                    foreach (FilterInfo item in fCollection)
+                    {
+                        comboBox_chooseCamera.Items.Add(item.Name);
+                        cam = new VideoCaptureDevice();
+                    }
+                    ListComPorts();
+                    comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
+                    chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
                 }
-                ListComPorts();
-                comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
-                chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
+                else
+                {
+                    ToggleUI(false);
+                    label14.Enabled = true;
+                    textbox_ftpAddress.Enabled = true;
+
+                    new Thread(new ThreadStart(ListenUDP)).Start();
+                }
             }
             catch (Exception) { MessageBox.Show("Form1_Load"); }
         }
@@ -684,15 +703,16 @@ namespace TAISAT_Arayuz
         {
             try
             {
+                downloadStatus_label.Text = bytes != "" ? "İndirilen Byte: " + bytes : "İndirme Bekleniyor";
                 buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle) 
-                if (buffer[buffer.Length-1]=='\n' && buffer.Split(',').Length == 24)//Bufferın tamamı okunduysa veriyi işle
+                if (buffer[buffer.Length - 1] == '\n' && buffer.Split(',').Length == 24)//Bufferın tamamı okunduysa veriyi işle
                 {
                     serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                     serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
                     string telemetryTable = buffer;
                     string[] telemetryData = buffer.Split(',');
                     string telemetry = "";
-                    telemetry += telemetryData[0]+";";
+                    telemetry += telemetryData[0] + ";";
                     telemetry += telemetryData[1] + ";";
                     telemetry += telemetryData[2] + ";";
                     telemetry += telemetryData[3] + "," + telemetryData[4] + ";";
@@ -865,8 +885,8 @@ namespace TAISAT_Arayuz
                 }
                 else
                 {
-                    if(buffer.Contains("\n"))textBox_logs.Text += buffer + Environment.NewLine;
-                    if(buffer.Length>bufferSize) buffer = string.Empty; 
+                    if (buffer.Contains("\n")) textBox_logs.Text += buffer + Environment.NewLine;
+                    if (buffer.Length > bufferSize) buffer = string.Empty;
                 }
             }
             catch (Exception)
@@ -923,6 +943,71 @@ namespace TAISAT_Arayuz
         {
             new Thread(new ThreadStart(SendUDP)).Start();
         }
+        string ftpFile = @"";
+        string bytes = "";
+        void GetVideoFileName()
+        {
+            raspberryIP = textbox_ftpAddress.Text;
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + raspberryIP + "/");
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+                string names = reader.ReadToEnd();
+
+                reader.Close();
+                response.Close();
+                string[] files = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var file in files)
+                {
+                    if (file.Contains(".avi"))
+                        ftpFile = file;
+                } 
+            }
+            catch (Exception ex) { MessageBox.Show("GetVideoFileName" + ex.Message); }
+        }
+        private void DownloadVideo_Click(object sender, EventArgs e)
+        {
+             
+        }
+
+        private void DownloadVideo()
+        {
+            try
+            {
+                new Thread(new ThreadStart(GetVideoFileName)).Start();
+                Thread.Sleep(3000);
+                if (ftpFile != "")
+                {
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + raspberryIP + "/" + ftpFile);
+                    request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
+                    request.Method = WebRequestMethods.Ftp.DownloadFile;
+                    using (Stream ftpStream = request.GetResponse().GetResponseStream())
+                    using (Stream fileStream = File.Create(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), ftpFile)))
+                    {
+                        byte[] buffer = new byte[10240];
+                        int read;
+                        while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            fileStream.Write(buffer, 0, read);
+                            bytes = fileStream.Position.ToString(); 
+                            downloadStatus_label.Text = bytes+" Downloaded";
+                            
+                        }
+                    }
+                    downloadStatus_label.Text = "Download Completed!";
+                    new Thread(new ThreadStart(SendUDP)).Start();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("DownloadVideo_Click");
+            }
+        }
+
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
         {
             try
