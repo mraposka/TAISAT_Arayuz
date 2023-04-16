@@ -40,7 +40,7 @@ namespace TAISAT_Arayuz
         List<string> logs = new List<string>();//CSV kaydı için oluşturulan liste 
         bool maximized = false;//Tek seferlik tam ekran moduna geçmek için gerekli değişken 
         //3D Simulation Değişkenleri
-        string _3DSimExePath = @"C:/Users/Administrator/Desktop/3D Sim/New Unity Project.exe";
+        string _3DSimExePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"/3D Sim/New Unity Project.exe";
         [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
         [DllImport("user32.dll", SetLastError = true)] internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
         Process simApplication;
@@ -80,7 +80,13 @@ namespace TAISAT_Arayuz
         }
         //3D Simulation Değişkenleri Ve Fonksiyonları
         Process p = new Process();//CMD Processi
-        string ftpUserName = "pi";  string ftpPassword = "raspberry";  //FTP Değişkenleri
+        //FTP Değişkenleri
+        string ftpUserName = "pi";
+        string ftpPassword = "raspberry";
+        string ftpFile = @"";
+        bool waitVideoTransfer = true;
+        string bytes = "";
+        //FTP Değişkenleri
         Label[] statusLabels;//0-7 Arası Uydu Statusu Belirten labellar  
         //Video Kaydı Değişkenleri
         int width, height;
@@ -105,19 +111,19 @@ namespace TAISAT_Arayuz
         //Port Okuma Değişkenleri 
         int _data = 0, data = 0, resetWait = 5; //İletişim kontrolü için değişkenler
         //Offline Map
-        internal readonly GMapOverlay objects = new GMapOverlay("objects"); 
+        internal readonly GMapOverlay objects = new GMapOverlay("objects");
         bool gapi = !true;
         bool gmap = !false;
         string mapCacheFolder = @"C:\Users\Administrator\AppData\Local\GMap.NET";
         //Offline Map
         //My Functions
         public void InitBrowser()//Google
-        { 
-                var settings = new CefSettings();
-                settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
-                Cef.Initialize(settings);
-                gapiMap.LoadHtml(File.ReadAllText(@"index.html")); 
-                gmapMap.Overlays.Add(objects); 
+        {
+            var settings = new CefSettings();
+            settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
+            Cef.Initialize(settings);
+            gapiMap.LoadHtml(File.ReadAllText(@"index.html"));
+            gmapMap.Overlays.Add(objects);
         }
         void InitGmap()//Gmap
         {
@@ -181,7 +187,7 @@ namespace TAISAT_Arayuz
         {
             try
             {
-                var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };//Carrier
+                var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'G' };
                 for (int i = 0; i < 5; i++)
                 {
                     port.Write(data, 0, data.Length);
@@ -235,7 +241,7 @@ namespace TAISAT_Arayuz
             {
                 Size oldSize = chart.Size;
                 chart.Size = new Size(1920, 1080);
-                chart.SaveImage(chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
+                chart.SaveImage(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Charts\" + chart.Series[0].ToString() + ".png", ChartImageFormat.Png);
                 chart.Size = oldSize;
             }
             catch (Exception) { MessageBox.Show("TakeScreenShotOfChart"); }
@@ -269,13 +275,11 @@ namespace TAISAT_Arayuz
                     comboBox_COMPortTelemetry.Items.Add(port);
             }
             catch (Exception) { MessageBox.Show("ListComPorts"); }
-
         }
         void Upload()
         {
             try
-            {
-                if (textbox_ftpAddress.Text == "") textbox_ftpAddress.Text = "192.168.0.100";
+            { 
                 string url = "ftp://" + textbox_ftpAddress.Text + "/" + textBox_videoPathToSend.Text.Split('\\').Last();
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
                 request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
@@ -303,30 +307,17 @@ namespace TAISAT_Arayuz
                         });
                     }
                 }
-                while (progressBar_sendVideo.Value != progressBar_sendVideo.Maximum)
-                {
-                }
+                while (progressBar_sendVideo.Value != progressBar_sendVideo.Maximum) { }
                 for (int i = 0; i < 10; i++)
-                {
-                    if (isValidConnection(textbox_ftpAddress.Text == "" ? "192.168.1.100" : textbox_ftpAddress.Text, ftpUserName, ftpPassword))
-                    {
-                        label_fileSendingStatus.Text = "Doğrulandı!";
-                        VideoSended();
+                    if (isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword))
+                    { 
+                        GetVideoFileName();
+                        if(ftpFile== textBox_videoPathToSend.Text.Split('\\').Last()) 
+                            label_fileSendingStatus.Text = "Doğrulandı!"; 
                     }
-                }
             }
             catch (Exception) { MessageBox.Show("Upload"); }
-        }
-        private void VideoSended()
-        {
-            try
-            {
-                var data = new byte[] { 0x20, 0x20, 0x2f, (byte)'G' };
-                port.Write(data, 0, data.Length);
-            }
-            catch (Exception) { MessageBox.Show("VideoSended"); }
-
-        }
+        } 
         bool isValidConnection(string url, string user, string password)
         {
             try
@@ -340,35 +331,38 @@ namespace TAISAT_Arayuz
             return true;
 
         }
-        bool waitVideoTransfer = true;
         void ListenUDP()
         {
-            UdpClient udpClient = new UdpClient(41);
-            while (waitVideoTransfer)
+            try
             {
-                IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
-                string returnData = Encoding.ASCII.GetString(receiveBytes);
-                if (returnData == "video1")
+                UdpClient udpClient = new UdpClient(41);
+                while (waitVideoTransfer)
                 {
-                    raspberryIP = RemoteIpEndPoint.Address.ToString();
-                    if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start();
-                    waitVideoTransfer = false;
-                }
-                else if (returnData == "ip")
-                {
-                    raspberryIP = RemoteIpEndPoint.Address.ToString();
-                    textbox_ftpAddress.Text = raspberryIP;
-                    label14.BackColor = Color.Lime;
-                    if (isStation)
+                    IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                    Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
+                    string returnData = Encoding.ASCII.GetString(receiveBytes);
+                    if (returnData == "video1")
+                    {
+                        raspberryIP = RemoteIpEndPoint.Address.ToString();
+                        if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start();
                         waitVideoTransfer = false;
+                    }
+                    else if (returnData == "ip")
+                    {
+                        raspberryIP = RemoteIpEndPoint.Address.ToString();
+                        textbox_ftpAddress.Text = raspberryIP;
+                        label14.BackColor = Color.Lime;
+                        if (isStation)
+                            waitVideoTransfer = false;
+                    }
                 }
             }
+            catch (Exception) { }
         }
         void SendUDP()
         {
             try { new UdpClient().Send(Encoding.ASCII.GetBytes("x"), Encoding.ASCII.GetBytes("x").Length, raspberryIP, 41); waitVideoTransfer = false; } catch { }
-            Thread.Sleep(1);
+            Thread.Sleep(100);
         }
         void KillUDPPorts()
         {
@@ -392,13 +386,62 @@ namespace TAISAT_Arayuz
                 }
                 catch (Exception) { }
             }
-
         }
         void RunCMD(string cmd)
         {
             p.StartInfo.Arguments = cmd;
             p.Start();
             p.WaitForExit();
+        }
+        void GetVideoFileName()
+        {
+            raspberryIP = textbox_ftpAddress.Text;
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + raspberryIP + "/");
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+                string names = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+                string[] files = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var file in files)
+                    if (file.Contains(".avi"))
+                        ftpFile = file;
+            }
+            catch (Exception) { MessageBox.Show("GetVideoFileName"); }
+        }
+        void DownloadVideo()
+        {
+            try
+            {
+                new Thread(new ThreadStart(GetVideoFileName)).Start();
+                Thread.Sleep(3000);
+                if (ftpFile != "")
+                {
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + raspberryIP + "/" + ftpFile);
+                    request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
+                    request.Method = WebRequestMethods.Ftp.DownloadFile;
+                    using (Stream ftpStream = request.GetResponse().GetResponseStream())
+                    using (Stream fileStream = File.Create(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), ftpFile)))
+                    {
+                        byte[] buffer = new byte[10240];
+                        int read;
+                        while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            fileStream.Write(buffer, 0, read);
+                            bytes = fileStream.Position.ToString();
+                            downloadStatus_label.Text = bytes + " Downloaded";
+                        }
+                    }
+                    downloadStatus_label.Text = "Download Completed!";
+                    new Thread(new ThreadStart(SendUDP)).Start();
+                }
+            }
+            catch (Exception) { MessageBox.Show("DownloadVideo_Click"); }
         }
         //My Functions
 
@@ -434,11 +477,13 @@ namespace TAISAT_Arayuz
         //Form Events
         void Form1_Load(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bu istasyon video alıcı istasyonu mu?", "TAISAT", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
+            if (textbox_ftpAddress.Text == "") textbox_ftpAddress.Text = "192.168.0.100"; 
+            if (MessageBox.Show("Bu istasyon video alıcı istasyonu mu?", "TAISAT", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 isStation = false;
             else
                 isStation = true;
+            try { Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Charts"); }
+            catch (Exception) { }
             try
             {
                 if (isStation)
@@ -502,11 +547,10 @@ namespace TAISAT_Arayuz
                     ToggleUI(false);
                     label14.Enabled = true;
                     textbox_ftpAddress.Enabled = true;
-
                     new Thread(new ThreadStart(ListenUDP)).Start();
                 }
             }
-            catch (Exception) { MessageBox.Show("Form1_Load"); }
+            catch (Exception ex) { MessageBox.Show("Form1_Load"+ex.Message); }
         }
         void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -514,16 +558,10 @@ namespace TAISAT_Arayuz
             {
                 KillSimulations();
                 KillUDPPorts();
-                if (cam.IsRunning == true)
-                {
-                    cam.Stop();
-                    videoWriter.Close();
-                    KillSimulations();
-
-                }
+                if (cam.IsRunning)
+                { cam.Stop(); videoWriter.Close(); }
             }
             catch (Exception) { MessageBox.Show("Form1_FormClosing"); }
-
         }
         void comboBox_COMPortTelemetry_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -707,13 +745,12 @@ namespace TAISAT_Arayuz
         {
             try
             {
-                downloadStatus_label.Text = bytes != "" ? "İndirilen Byte: " + bytes : "İndirme Bekleniyor";
                 buffer += port.ReadExisting();//Buffer okuma(parça parça gelirse ekle) 
                 if (buffer[buffer.Length - 1] == '\n' && buffer.Split(',').Length == 24)//Bufferın tamamı okunduysa veriyi işle
                 {
                     serialMonitorListBox.Items.Add(buffer);//Buffer loglama
                     serialMonitorListBox.TopIndex = serialMonitorListBox.Items.Count - 1;//En sonuncu logu göstermek için listeyi otomatik aşağıya kaydırma
-                    string telemetryTable = buffer;
+                    string rawTelemetry = buffer;
                     string[] telemetryData = buffer.Split(',');
                     string telemetry = "";
                     telemetry += telemetryData[0] + ";";
@@ -820,6 +857,7 @@ namespace TAISAT_Arayuz
                                 "Pil Gerilimi Carrier:" + label_carrierVoltage.Text + Environment.NewLine +
                                 "Gps Latitude Carrier:" + label_carrierGPSLatitude.Text + Environment.NewLine +
                                 "Gps Longitude Carrier:" + label_carrierGPSLongitude.Text + Environment.NewLine +
+                                "Raw Data:"+ rawTelemetry+Environment.NewLine+
                                 "---------------------------------------------------" + Environment.NewLine;
                             new Thread(new ThreadStart(SaveFlightTxt)).Start();
                             //Saving Data
@@ -943,36 +981,6 @@ namespace TAISAT_Arayuz
             }
             catch (Exception) { MessageBox.Show("TAISAT_MouseEnter"); }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new Thread(new ThreadStart(SendUDP)).Start();
-        }
-        string ftpFile = @"";
-        string bytes = "";
-        void GetVideoFileName()
-        {
-            raspberryIP = textbox_ftpAddress.Text;
-            try
-            {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + raspberryIP + "/");
-                request.Method = WebRequestMethods.Ftp.ListDirectory;
-                request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                Stream responseStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(responseStream);
-                string names = reader.ReadToEnd();
-
-                reader.Close();
-                response.Close();
-                string[] files = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var file in files)
-                {
-                    if (file.Contains(".avi"))
-                        ftpFile = file;
-                }
-            }
-            catch (Exception ex) { MessageBox.Show("GetVideoFileName" + ex.Message); }
-        }
         private void mapSwitchButton_Click(object sender, EventArgs e)
         {
             if (mapSwitchButton.Text == "Disconnect")
@@ -994,9 +1002,9 @@ namespace TAISAT_Arayuz
                 gmapMap.Enabled = false;
                 gmapMap.Visible = false;
                 gmapMap.Dock = DockStyle.None;
-                gmapMap.Size = new Size(0, 0); 
+                gmapMap.Size = new Size(0, 0);
                 gapiMap.Enabled = true;
-                gapiMap.Visible = true; 
+                gapiMap.Visible = true;
                 gapiMap.Dock = DockStyle.Fill;
             }
             else if (gmap)
@@ -1004,44 +1012,10 @@ namespace TAISAT_Arayuz
                 gapiMap.Enabled = false;
                 gapiMap.Visible = false;
                 gapiMap.Dock = DockStyle.None;
-                gapiMap.Size = new Size(0, 0); 
+                gapiMap.Size = new Size(0, 0);
                 gmapMap.Enabled = true;
-                gmapMap.Visible = true; 
+                gmapMap.Visible = true;
                 gmapMap.Dock = DockStyle.Fill;
-            }
-        }
-
-        private void DownloadVideo()
-        {
-            try
-            {
-                new Thread(new ThreadStart(GetVideoFileName)).Start();
-                Thread.Sleep(3000);
-                if (ftpFile != "")
-                {
-                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + raspberryIP + "/" + ftpFile);
-                    request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
-                    request.Method = WebRequestMethods.Ftp.DownloadFile;
-                    using (Stream ftpStream = request.GetResponse().GetResponseStream())
-                    using (Stream fileStream = File.Create(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), ftpFile)))
-                    {
-                        byte[] buffer = new byte[10240];
-                        int read;
-                        while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            fileStream.Write(buffer, 0, read);
-                            bytes = fileStream.Position.ToString();
-                            downloadStatus_label.Text = bytes + " Downloaded";
-
-                        }
-                    }
-                    downloadStatus_label.Text = "Download Completed!";
-                    new Thread(new ThreadStart(SendUDP)).Start();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("DownloadVideo_Click");
             }
         }
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
@@ -1049,7 +1023,7 @@ namespace TAISAT_Arayuz
             try
             {
                 if (e.KeyCode == Keys.Enter)
-                    MessageBox.Show(isValidConnection(textbox_ftpAddress.Text == "" ? "192.168.1.100" : textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
+                    MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
             }
             catch (Exception) { MessageBox.Show("textbox_ftpAddress_KeyDown"); }
         }
@@ -1077,7 +1051,6 @@ namespace TAISAT_Arayuz
                     SaveFlightCSV();
                     serialMonitorListBox.Items.Clear();
                     port.Close();
-                    //port.Dispose();
                     button_telemetryCOMPortOpenClose.BackColor = Color.Lime;
                     MessageBox.Show("Uçuş Tamamlandı!", "TAISAT MARM-99 Uçuş Bilgisi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
