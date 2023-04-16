@@ -28,11 +28,12 @@ Uydudan gelen verilerin görselleştirildiği bir programdır. Gelen veriler ara
 Uçuş görevinde verilerin tranferinden ayrı olarak hakem heyetinin vereceği 500kb boyutundaki video payloada gönderilecektir. Ayrıca ekstra puan kazandıracak bonus görev olarak da payloada gönderilen video başka bir yer istasyonu bilgisayarına geri gönderilecektir.(zorunlu değil)
 Bunlardan ayrı olarak gelen veriler belirtilen formatta hakem heyetinin verdiği belleğe kaydedilmesi gereklidir.
 
-### ARAYUZ BİLEŞENLERI
+### ARAYUZ BİLEŞENLERİ
 Kamera: kullanilan kutuphane bilgisayara takilan dahili ve harici kameralari algilayip belirlenen alanda gosterir. Ayrica ayni kutuphane sayesinde goruntuyu istenilen konuma kayıt edebiliyoruz.
 
 ### Harita
 İnternet bağlantısı olmadan çalışması için gmap internet bağlantısı var iken Google API kullanıyorum.
+[GMAP Cache Dosyası](https://drive.google.com/file/d/1C3eWICAsOPw2Q1jk6JOfljbjuAWk_JPL/view?usp=sharing)
 
 ### 3D Uydu Hareketi Simulasyonu 
 Uydudan gelen açı bilgilerinin 3d simule edildiği yerdir. Unity ile yaptığım uygulamaya UDP portundan açı bilgilerini ileterek çalışmasını sağlıyorum.
