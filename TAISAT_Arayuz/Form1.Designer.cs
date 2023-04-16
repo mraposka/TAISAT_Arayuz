@@ -216,9 +216,12 @@
             this.dataGridView_telemetryDataTable = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_views = new System.Windows.Forms.TableLayoutPanel();
-            this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
+            this.mapPanel = new System.Windows.Forms.Panel();
             this.windowFixer = new System.Windows.Forms.Timer(this.components);
             this.dataCheck = new System.Windows.Forms.Timer(this.components);
+            this.gapiMap = new CefSharp.WinForms.ChromiumWebBrowser();
+            this.gmapMap = new GMap.NET.WindowsForms.GMapControl();
+            this.mapSwitchButton = new System.Windows.Forms.Button();
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -267,6 +270,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_telemetryDataTable)).BeginInit();
             this.panel7.SuspendLayout();
             this.tableLayoutPanel_views.SuspendLayout();
+            this.mapPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage_serialMonitor
@@ -1351,7 +1355,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(116, -1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(205, 89);
+            this.pictureBox1.Size = new System.Drawing.Size(201, 89);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
@@ -1995,13 +1999,14 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.mapSwitchButton);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Location = new System.Drawing.Point(6, 323);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(331, 529);
+            this.panel1.Size = new System.Drawing.Size(331, 722);
             this.panel1.TabIndex = 4;
             // 
             // label8
@@ -2431,7 +2436,7 @@
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.tabControl1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 635);
+            this.panel7.Location = new System.Drawing.Point(0, 828);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1851, 219);
             this.panel7.TabIndex = 19;
@@ -2442,10 +2447,10 @@
             this.tableLayoutPanel_views.ColumnCount = 2;
             this.tableLayoutPanel_views.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.46465F));
             this.tableLayoutPanel_views.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.53535F));
-            this.tableLayoutPanel_views.Controls.Add(this.chromiumWebBrowser1, 0, 1);
             this.tableLayoutPanel_views.Controls.Add(this.panel_views1, 0, 0);
             this.tableLayoutPanel_views.Controls.Add(this.panel_views2, 1, 0);
             this.tableLayoutPanel_views.Controls.Add(this.panel_views4, 1, 1);
+            this.tableLayoutPanel_views.Controls.Add(this.mapPanel, 0, 1);
             this.tableLayoutPanel_views.Location = new System.Drawing.Point(339, 6);
             this.tableLayoutPanel_views.Name = "tableLayoutPanel_views";
             this.tableLayoutPanel_views.RowCount = 2;
@@ -2454,14 +2459,15 @@
             this.tableLayoutPanel_views.Size = new System.Drawing.Size(1560, 818);
             this.tableLayoutPanel_views.TabIndex = 20;
             // 
-            // chromiumWebBrowser1
+            // mapPanel
             // 
-            this.chromiumWebBrowser1.ActivateBrowserOnCreation = false;
-            this.chromiumWebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chromiumWebBrowser1.Location = new System.Drawing.Point(4, 501);
-            this.chromiumWebBrowser1.Name = "chromiumWebBrowser1";
-            this.chromiumWebBrowser1.Size = new System.Drawing.Size(717, 313);
-            this.chromiumWebBrowser1.TabIndex = 22;
+            this.mapPanel.Controls.Add(this.gmapMap);
+            this.mapPanel.Controls.Add(this.gapiMap);
+            this.mapPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapPanel.Location = new System.Drawing.Point(4, 501);
+            this.mapPanel.Name = "mapPanel";
+            this.mapPanel.Size = new System.Drawing.Size(717, 313);
+            this.mapPanel.TabIndex = 34;
             // 
             // windowFixer
             // 
@@ -2473,12 +2479,58 @@
             this.dataCheck.Interval = 1000;
             this.dataCheck.Tick += new System.EventHandler(this.dataCheck_Tick);
             // 
+            // gapiMap
+            // 
+            this.gapiMap.ActivateBrowserOnCreation = false;
+            this.gapiMap.Location = new System.Drawing.Point(0, 0);
+            this.gapiMap.Name = "gapiMap";
+            this.gapiMap.Size = new System.Drawing.Size(173, 80);
+            this.gapiMap.TabIndex = 23;
+            // 
+            // gmapMap
+            // 
+            this.gmapMap.Bearing = 0F;
+            this.gmapMap.CanDragMap = true;
+            this.gmapMap.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gmapMap.GrayScaleMode = false;
+            this.gmapMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gmapMap.LevelsKeepInMemory = 5;
+            this.gmapMap.Location = new System.Drawing.Point(210, 7);
+            this.gmapMap.MarkersEnabled = true;
+            this.gmapMap.MaxZoom = 2;
+            this.gmapMap.MinZoom = 2;
+            this.gmapMap.MouseWheelZoomEnabled = true;
+            this.gmapMap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gmapMap.Name = "gmapMap";
+            this.gmapMap.NegativeMode = false;
+            this.gmapMap.PolygonsEnabled = true;
+            this.gmapMap.RetryLoadTile = 0;
+            this.gmapMap.RoutesEnabled = true;
+            this.gmapMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gmapMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gmapMap.ShowTileGridLines = false;
+            this.gmapMap.Size = new System.Drawing.Size(179, 69);
+            this.gmapMap.TabIndex = 24;
+            this.gmapMap.Zoom = 0D;
+            // 
+            // mapSwitchButton
+            // 
+            this.mapSwitchButton.BackColor = System.Drawing.Color.Lime;
+            this.mapSwitchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.mapSwitchButton.Location = new System.Drawing.Point(10, 659);
+            this.mapSwitchButton.Name = "mapSwitchButton";
+            this.mapSwitchButton.Size = new System.Drawing.Size(296, 45);
+            this.mapSwitchButton.TabIndex = 4;
+            this.mapSwitchButton.Text = "Disconnect";
+            this.mapSwitchButton.UseVisualStyleBackColor = false;
+            this.mapSwitchButton.Click += new System.EventHandler(this.mapSwitchButton_Click);
+            // 
             // TAISAT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1851, 854);
+            this.ClientSize = new System.Drawing.Size(1851, 1047);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel7);
@@ -2557,6 +2609,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_telemetryDataTable)).EndInit();
             this.panel7.ResumeLayout(false);
             this.tableLayoutPanel_views.ResumeLayout(false);
+            this.mapPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2679,7 +2732,6 @@
         private System.Windows.Forms.Label label_containerPressure;
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.Label label_AltitudeDiff;
-        private CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser1;
         private System.Windows.Forms.DataVisualization.Charting.Chart temperature_Chart;
         private System.Windows.Forms.DataVisualization.Charting.Chart batterVoltage_Chart;
         private System.Windows.Forms.Panel _3DSimPanel;
@@ -2724,6 +2776,10 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label downloadStatus_label;
+        private System.Windows.Forms.Panel mapPanel;
+        private CefSharp.WinForms.ChromiumWebBrowser gapiMap;
+        private GMap.NET.WindowsForms.GMapControl gmapMap;
+        private System.Windows.Forms.Button mapSwitchButton;
     }
 }
 

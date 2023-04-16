@@ -6,8 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Management;
-using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,27 +13,17 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.SchemeHandler;
 using CefSharp.WinForms;
-using TAISAT_Arayuz.Properties;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using Accord.Video.FFMPEG;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using static System.Windows.Forms.AxHost;
-using CefSharp.DevTools.Browser;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Net;
-using System.Runtime.InteropServices.ComTypes;
-using System.Globalization;
-using CsvHelper;
-using CsvHelper.Configuration;
-using System.Security.Policy;
-using System.Reflection;
 using GMap.NET.MapProviders;
 using GMap.NET;
-using CefSharp.DevTools.Audits;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using GMap.NET.WindowsForms;
 
 namespace TAISAT_Arayuz
 {
@@ -48,13 +36,13 @@ namespace TAISAT_Arayuz
         //TO-DO 
         //power
         //TO-DO 
-        bool isStation = false;//Video Transfer için istasyon kontrolü
+        bool isStation = true;//Video Transfer için istasyon kontrolü
         List<string> logs = new List<string>();//CSV kaydı için oluşturulan liste 
         bool maximized = false;//Tek seferlik tam ekran moduna geçmek için gerekli değişken 
         //3D Simulation Değişkenleri
+        string _3DSimExePath = @"C:/Users/Administrator/Desktop/3D Sim/New Unity Project.exe";
         [DllImport("user32.dll")] static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
         [DllImport("user32.dll", SetLastError = true)] internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
-        string _3DSimExePath = @"C:/Users/Administrator/Desktop/3D Sim/New Unity Project.exe";
         Process simApplication;
         const int WS_BORDER = 8388608;
         const int WS_DLGFRAME = 4194304;
@@ -90,12 +78,9 @@ namespace TAISAT_Arayuz
             SetWindowLongA(MainWindowHandle, GWL_EXSTYLE, Style | WS_EX_DLGMODALFRAME);
             SetWindowPos(MainWindowHandle, new IntPtr(0), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
         }
-        Process p = new Process();//CMD Processi
         //3D Simulation Değişkenleri Ve Fonksiyonları
-        //FTP Değişkenleri
-        string ftpUserName = "pi";
-        string ftpPassword = "raspberry";
-        //FTP Değişkenleri
+        Process p = new Process();//CMD Processi
+        string ftpUserName = "pi";  string ftpPassword = "raspberry";  //FTP Değişkenleri
         Label[] statusLabels;//0-7 Arası Uydu Statusu Belirten labellar  
         //Video Kaydı Değişkenleri
         int width, height;
@@ -104,33 +89,45 @@ namespace TAISAT_Arayuz
         FilterInfoCollection fCollection;
         VideoCaptureDevice cam;
         VideoFileWriter videoWriter = new VideoFileWriter();
-        Bitmap videoBitmap;
+        System.Drawing.Bitmap videoBitmap;
         TimeSpan currentTime;
         TimeSpan startTime;
         TimeSpan finishTime;
         TimeSpan elapsedTime;
         //Video Kaydı Değişkenleri  
-        string raspberryIP = ""; //Video Gönderen IP
-        //Log
-        string[] cache;
-        string log = "";
-        //Log 
-        //Seperation
-        bool seperation = false;
-        //Seperation
+        string raspberryIP = ""; //Video Gönderen IP 
+        string[] cache; string log = ""; //Log   
+        bool seperation = false; //Seperation
         //Port Okuma Değişkenleri
         SerialPort port;
         string buffer = string.Empty;
         int bufferSize = 175;
         //Port Okuma Değişkenleri 
         int _data = 0, data = 0, resetWait = 5; //İletişim kontrolü için değişkenler
+        //Offline Map
+        internal readonly GMapOverlay objects = new GMapOverlay("objects"); 
+        bool gapi = !true;
+        bool gmap = !false;
+        string mapCacheFolder = @"C:\Users\Administrator\AppData\Local\GMap.NET";
+        //Offline Map
         //My Functions
-        public void InitBrowser()
+        public void InitBrowser()//Google
+        { 
+                var settings = new CefSettings();
+                settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
+                Cef.Initialize(settings);
+                gapiMap.LoadHtml(File.ReadAllText(@"index.html")); 
+                gmapMap.Overlays.Add(objects); 
+        }
+        void InitGmap()//Gmap
         {
-            var settings = new CefSettings();
-            settings.RegisterScheme(new CefCustomScheme { SchemeName = "localfolder", SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: @"", defaultPage: "index.html") });
-            Cef.Initialize(settings);
-            chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
+            GMaps.Instance.Mode = AccessMode.CacheOnly;
+            gmapMap.MapProvider = GoogleSatelliteMapProvider.Instance;
+            gmapMap.CacheLocation = mapCacheFolder;
+            gmapMap.Position = new PointLatLng(38.3965143, 33.7282682);//Aksaray Hisar Atış Alanı Koordinatları
+            gmapMap.MinZoom = 13;
+            gmapMap.MaxZoom = 20;
+            gmapMap.Zoom = 13;
         }
         void ResetData()
         {
@@ -355,7 +352,7 @@ namespace TAISAT_Arayuz
                 if (returnData == "video1")
                 {
                     raspberryIP = RemoteIpEndPoint.Address.ToString();
-                    if(!isStation)  new Thread(new ThreadStart(DownloadVideo)).Start();
+                    if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start();
                     waitVideoTransfer = false;
                 }
                 else if (returnData == "ip")
@@ -421,27 +418,34 @@ namespace TAISAT_Arayuz
             {
                 if (button_recordStartStop.Text == "Stop Record")
                 {
-                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
+                    videoBitmap = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
                     videoWriter.WriteVideoFrame(videoBitmap);
                     pictureBox_camera.Image = videoBitmap;
                 }
                 else
                 {
-                    videoBitmap = (Bitmap)eventArgs.Frame.Clone();
+                    videoBitmap = (System.Drawing.Bitmap)eventArgs.Frame.Clone();
                     pictureBox_camera.Image = videoBitmap;
                 }
             }
             catch (Exception) { MessageBox.Show("Cam_NewFrame"); }
         }
         //My Events
-
         //Form Events
         void Form1_Load(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show("Bu istasyon video alıcı istasyonu mu?", "TAISAT", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+                isStation = false;
+            else
+                isStation = true;
             try
             {
                 if (isStation)
                 {
+                    if (gapi) { gmapMap.Enabled = false; gmapMap.Visible = false; gmapMap.Size = new Size(0, 0); gapiMap.Dock = DockStyle.Fill; }
+                    else if (gmap) { gapiMap.Enabled = false; gapiMap.Visible = false; gapiMap.Size = new Size(0, 0); gmapMap.Dock = DockStyle.Fill; }
+                    InitGmap();
                     groupBox4.Enabled = false;
                     p.StartInfo.UseShellExecute = false;
                     p.StartInfo.RedirectStandardOutput = true;
@@ -491,7 +495,7 @@ namespace TAISAT_Arayuz
                     }
                     ListComPorts();
                     comboBox_baudRateTelemetry.SelectedIndex = (comboBox_baudRateTelemetry.Items.Count - 1);
-                    chromiumWebBrowser1.LoadHtml(File.ReadAllText(@"index.html"));
+                    gapiMap.LoadHtml(File.ReadAllText(@"index.html"));
                 }
                 else
                 {
@@ -875,8 +879,8 @@ namespace TAISAT_Arayuz
                             errorBit5.BackColor = label_errorCode.Text[4] == '0' ? Color.Lime : Color.Red;
                             //Error Code
                             //GPS To Map 
-                            chromiumWebBrowser1.EvaluateScriptAsync("delLastMark();");
-                            chromiumWebBrowser1.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + "," + label_carrierGPSLatitude.Text + "," + label_carrierGPSLongitude.Text + ");");
+                            gapiMap.EvaluateScriptAsync("delLastMark();");
+                            gapiMap.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + "," + label_carrierGPSLatitude.Text + "," + label_carrierGPSLongitude.Text + ");");
                             //GPS To Map
                         }
                         catch (Exception) { MessageBox.Show("Telemetry"); }
@@ -965,13 +969,46 @@ namespace TAISAT_Arayuz
                 {
                     if (file.Contains(".avi"))
                         ftpFile = file;
-                } 
+                }
             }
             catch (Exception ex) { MessageBox.Show("GetVideoFileName" + ex.Message); }
         }
-        private void DownloadVideo_Click(object sender, EventArgs e)
+        private void mapSwitchButton_Click(object sender, EventArgs e)
         {
-             
+            if (mapSwitchButton.Text == "Disconnect")
+            {
+                gapi = false;
+                gmap = true;
+                mapSwitchButton.Text = "Connect";
+                mapSwitchButton.BackColor = Color.BlueViolet;
+            }
+            else if (mapSwitchButton.Text == "Connect")
+            {
+                gapi = true;
+                gmap = false;
+                mapSwitchButton.Text = "Disconnect";
+                mapSwitchButton.BackColor = Color.Lime;
+            }
+            if (gapi)
+            {
+                gmapMap.Enabled = false;
+                gmapMap.Visible = false;
+                gmapMap.Dock = DockStyle.None;
+                gmapMap.Size = new Size(0, 0); 
+                gapiMap.Enabled = true;
+                gapiMap.Visible = true; 
+                gapiMap.Dock = DockStyle.Fill;
+            }
+            else if (gmap)
+            {
+                gapiMap.Enabled = false;
+                gapiMap.Visible = false;
+                gapiMap.Dock = DockStyle.None;
+                gapiMap.Size = new Size(0, 0); 
+                gmapMap.Enabled = true;
+                gmapMap.Visible = true; 
+                gmapMap.Dock = DockStyle.Fill;
+            }
         }
 
         private void DownloadVideo()
@@ -993,9 +1030,9 @@ namespace TAISAT_Arayuz
                         while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
                         {
                             fileStream.Write(buffer, 0, read);
-                            bytes = fileStream.Position.ToString(); 
-                            downloadStatus_label.Text = bytes+" Downloaded";
-                            
+                            bytes = fileStream.Position.ToString();
+                            downloadStatus_label.Text = bytes + " Downloaded";
+
                         }
                     }
                     downloadStatus_label.Text = "Download Completed!";
@@ -1007,7 +1044,6 @@ namespace TAISAT_Arayuz
                 MessageBox.Show("DownloadVideo_Click");
             }
         }
-
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)
         {
             try
