@@ -24,6 +24,9 @@ using System.Net;
 using GMap.NET.MapProviders;
 using GMap.NET;
 using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using System.Runtime.CompilerServices;
+using static System.Collections.Specialized.BitVector32;
 
 namespace TAISAT_Arayuz
 {
@@ -112,8 +115,14 @@ namespace TAISAT_Arayuz
         int _data = 0, data = 0, resetWait = 5; //İletişim kontrolü için değişkenler
         //Offline Map
         internal readonly GMapOverlay objects = new GMapOverlay("objects");
-        bool gapi = !true;
-        bool gmap = !false;
+        GMapOverlay markers = new GMapOverlay("markers");
+        GMapMarker station = new GMarkerGoogle(
+              new PointLatLng(38.398447983639656, 33.71120194610159),//Aksaray Hisar Atış Alanı Koordinatları
+              GMarkerGoogleType.red_dot);
+        GMapMarker sat;
+        GMapOverlay polyOverlay = new GMapOverlay("polygons");
+        bool gapi = true;
+        bool gmap = false;
         string mapCacheFolder = @"C:\Users\Administrator\AppData\Local\GMap.NET";
         //Offline Map
         //My Functions
@@ -127,13 +136,15 @@ namespace TAISAT_Arayuz
         }
         void InitGmap()//Gmap
         {
-            GMaps.Instance.Mode = AccessMode.CacheOnly;
+            GMaps.Instance.Mode = AccessMode.ServerAndCache;
             gmapMap.MapProvider = GoogleSatelliteMapProvider.Instance;
             gmapMap.CacheLocation = mapCacheFolder;
-            gmapMap.Position = new PointLatLng(38.3965143, 33.7282682);//Aksaray Hisar Atış Alanı Koordinatları
+            gmapMap.Position = new PointLatLng(station.Position.Lat, station.Position.Lng);//Aksaray Hisar Atış Alanı Koordinatları
             gmapMap.MinZoom = 13;
             gmapMap.MaxZoom = 20;
-            gmapMap.Zoom = 13;
+            gmapMap.Zoom = 14;
+            markers.Markers.Add(station);
+            gmapMap.Overlays.Add(markers);
         }
         void ResetData()
         {
@@ -279,7 +290,7 @@ namespace TAISAT_Arayuz
         void Upload()
         {
             try
-            { 
+            {
                 string url = "ftp://" + textbox_ftpAddress.Text + "/" + textBox_videoPathToSend.Text.Split('\\').Last();
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
                 request.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
@@ -310,14 +321,14 @@ namespace TAISAT_Arayuz
                 while (progressBar_sendVideo.Value != progressBar_sendVideo.Maximum) { }
                 for (int i = 0; i < 10; i++)
                     if (isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword))
-                    { 
+                    {
                         GetVideoFileName();
-                        if(ftpFile== textBox_videoPathToSend.Text.Split('\\').Last()) 
-                            label_fileSendingStatus.Text = "Doğrulandı!"; 
+                        if (ftpFile == textBox_videoPathToSend.Text.Split('\\').Last())
+                            label_fileSendingStatus.Text = "Doğrulandı!";
                     }
             }
             catch (Exception) { MessageBox.Show("Upload"); }
-        } 
+        }
         bool isValidConnection(string url, string user, string password)
         {
             try
@@ -443,6 +454,66 @@ namespace TAISAT_Arayuz
             }
             catch (Exception) { MessageBox.Show("DownloadVideo_Click"); }
         }
+        void AddSatPointToGMAP(double lat, double lng)
+        {
+            sat = new GMarkerGoogle(
+               new PointLatLng(lat, lng),
+               GMarkerGoogleType.red_dot);
+            sat.ToolTipMode = MarkerTooltipMode.Always;
+            sat.ToolTipText = getDistance(new PointLatLng(sat.Position.Lat, sat.Position.Lng), new PointLatLng(station.Position.Lat, station.Position.Lng)).ToString("N2") + " m";
+            markers.Markers.Add(sat);
+            gmapMap.Overlays.Add(markers);
+        }
+
+        void AddPayloadPointToGMAP(double lat, double lng)
+        {
+            GMapMarker payload = new GMarkerGoogle(
+                new PointLatLng(lat, lng),
+                GMarkerGoogleType.red_dot);
+
+            payload.ToolTipMode = MarkerTooltipMode.Always;
+            payload.ToolTipText = getDistance(new PointLatLng(payload.Position.Lat, payload.Position.Lng), new PointLatLng(sat.Position.Lat, sat.Position.Lng)).ToString("N2") + " m";
+            markers.Markers.Add(payload);
+            gmapMap.Overlays.Add(markers);
+        }
+        double _double(string x)
+        {
+            return Convert.ToDouble(x);
+        }
+        void UpdateGMap(string lat1, string lng1, string lat2, string lng2)
+        {
+            polyOverlay.Polygons.Clear();
+            markers.Markers.Clear();
+            markers.Markers.Add(station);
+            AddSatPointToGMAP(_double(lat1), _double(lng1));
+            AddPayloadPointToGMAP(_double(lat2), _double(lng2));
+            List<PointLatLng> points = new List<PointLatLng>();
+            points.Add(new PointLatLng(_double(lat1), _double(lng1)));
+            points.Add(new PointLatLng(_double(lat2), _double(lng2)));
+            points.Add(new PointLatLng(station.Position.Lat, station.Position.Lng));
+            GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+            polygon.Stroke = new Pen(Color.Red, 3);
+            polygon.Fill = new SolidBrush(Color.Transparent);
+            polyOverlay.Polygons.Add(polygon);
+            gmapMap.Overlays.Add(polyOverlay);
+            gmapMap.Refresh();
+        }
+        double rad(double x)
+        {
+            return x * Math.PI / 180;
+        }
+        double getDistance(PointLatLng p1, PointLatLng p2)
+        {
+            var R = 6378137;
+            var dLat = rad(p2.Lat - p1.Lat);
+            var dLong = rad(p2.Lng - p1.Lng);
+            var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+              Math.Cos(rad(p1.Lat)) * Math.Cos(rad(p2.Lat)) *
+              Math.Sin(dLong / 2) * Math.Sin(dLong / 2);
+            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            var d = R * c;
+            return d;
+        }
         //My Functions
 
         //My Events
@@ -477,7 +548,7 @@ namespace TAISAT_Arayuz
         //Form Events
         void Form1_Load(object sender, EventArgs e)
         {
-            if (textbox_ftpAddress.Text == "") textbox_ftpAddress.Text = "192.168.0.100"; 
+            if (textbox_ftpAddress.Text == "") textbox_ftpAddress.Text = "192.168.0.100";
             if (MessageBox.Show("Bu istasyon video alıcı istasyonu mu?", "TAISAT", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 isStation = false;
             else
@@ -550,7 +621,7 @@ namespace TAISAT_Arayuz
                     new Thread(new ThreadStart(ListenUDP)).Start();
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Form1_Load"+ex.Message); }
+            catch (Exception ex) { MessageBox.Show("Form1_Load" + ex.Message); }
         }
         void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -857,7 +928,7 @@ namespace TAISAT_Arayuz
                                 "Pil Gerilimi Carrier:" + label_carrierVoltage.Text + Environment.NewLine +
                                 "Gps Latitude Carrier:" + label_carrierGPSLatitude.Text + Environment.NewLine +
                                 "Gps Longitude Carrier:" + label_carrierGPSLongitude.Text + Environment.NewLine +
-                                "Raw Data:"+ rawTelemetry+Environment.NewLine+
+                                "Raw Data:" + rawTelemetry + Environment.NewLine +
                                 "---------------------------------------------------" + Environment.NewLine;
                             new Thread(new ThreadStart(SaveFlightTxt)).Start();
                             //Saving Data
@@ -917,6 +988,7 @@ namespace TAISAT_Arayuz
                             errorBit5.BackColor = label_errorCode.Text[4] == '0' ? Color.Lime : Color.Red;
                             //Error Code
                             //GPS To Map 
+                            UpdateGMap(label_carrierGPSLatitude.Text, label_carrierGPSLongitude.Text, label_payloadGPSLatitude.Text, label_payloadGPSLongitude.Text);
                             gapiMap.EvaluateScriptAsync("delLastMark();");
                             gapiMap.EvaluateScriptAsync("setmark(" + label_payloadGPSLatitude.Text + "," + label_payloadGPSLongitude.Text + "," + label_carrierGPSLatitude.Text + "," + label_carrierGPSLongitude.Text + ");");
                             //GPS To Map
