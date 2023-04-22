@@ -221,6 +221,7 @@
             this.gapiMap = new CefSharp.WinForms.ChromiumWebBrowser();
             this.windowFixer = new System.Windows.Forms.Timer(this.components);
             this.dataCheck = new System.Windows.Forms.Timer(this.components);
+            this.gmapRefreshTimer = new System.Windows.Forms.Timer(this.components);
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -2500,6 +2501,11 @@
             this.dataCheck.Interval = 1000;
             this.dataCheck.Tick += new System.EventHandler(this.dataCheck_Tick);
             // 
+            // gmapRefreshTimer
+            // 
+            this.gmapRefreshTimer.Interval = 1000;
+            this.gmapRefreshTimer.Tick += new System.EventHandler(this.gmapRefreshTimer_Tick);
+            // 
             // TAISAT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2754,6 +2760,7 @@
         private CefSharp.WinForms.ChromiumWebBrowser gapiMap;
         private GMap.NET.WindowsForms.GMapControl gmapMap;
         private System.Windows.Forms.Button mapSwitchButton;
+        private System.Windows.Forms.Timer gmapRefreshTimer;
     }
 }
 
