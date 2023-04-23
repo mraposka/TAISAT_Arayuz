@@ -110,7 +110,7 @@ namespace TAISAT_Arayuz
         //Port Okuma Değişkenleri
         SerialPort port;
         string buffer = string.Empty;
-        int bufferSize = 175;
+        int bufferSize = 197;
         //Port Okuma Değişkenleri 
         int _data = 0, data = 0, resetWait = 5; //İletişim kontrolü için değişkenler
         //Offline Map
@@ -126,8 +126,8 @@ namespace TAISAT_Arayuz
              GMarkerGoogleType.red_dot);*/
 
         GMapOverlay polyOverlay = new GMapOverlay("polygons");
-        bool gapi = !true;
-        bool gmap = !false;
+        bool gapi = true;
+        bool gmap = false;
         string mapCacheFolder = @"C:\Users\Administrator\AppData\Local\GMap.NET";
         //Offline Map
         //My Functions
@@ -214,6 +214,19 @@ namespace TAISAT_Arayuz
             }
             catch (Exception) { MessageBox.Show("Deploy"); }
         }
+        void UnDeploy()
+        {
+            try
+            {
+                var data = new byte[] { 0x22, 0x22, 0x1e, (byte)'U' };
+                for (int i = 0; i < 5; i++)
+                {
+                    port.Write(data, 0, data.Length);
+                    Thread.Sleep(50);
+                }
+            }
+            catch (Exception) { MessageBox.Show("Deploy"); }
+        }
         public void SerialPortProgram()
         {
             try
@@ -252,7 +265,7 @@ namespace TAISAT_Arayuz
                                           .Where(c => c.GetType() == type);
             }
             catch (Exception) { MessageBox.Show("GetAll"); return null; }
-        }
+        } 
         void TakeScreenShotOfChart(Chart chart)
         {
             try
@@ -1117,6 +1130,59 @@ namespace TAISAT_Arayuz
                 UpdateGMap(label_carrierGPSLatitude.Text.Replace(".", ","), label_carrierGPSLongitude.Text.Replace(".", ","), label_payloadGPSLatitude.Text.Replace(".", ","), label_payloadGPSLongitude.Text.Replace(".", ","));
             else if (label_payloadGPSLatitude.Text!="0"&& label_payloadGPSLatitude.Text!="" && label_payloadGPSLatitude.Text!=string.Empty && label_payloadGPSLatitude.Text!=null) 
                 UpdateGMap(label_payloadGPSLatitude.Text.Replace(".", ","),label_payloadGPSLongitude.Text.Replace(".", ","));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Sıfırlamak istiyor musunuz?", "TAISAT", MessageBoxButtons.YesNo))
+            {
+                dataGridView_telemetryDataTable.Rows.Clear();
+                foreach (var series in payloadPressure_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in carrierPressure_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in batterVoltage_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in payloadAltitude_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in carrierAltitude_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in velocity_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in payloadGPSAltitude_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in differenceAltitude_Chart.Series)
+                    series.Points.Clear();
+                foreach (var series in temperature_Chart.Series)
+                    series.Points.Clear();
+                ResetData();
+                serialMonitorListBox.Items.Clear();
+                textBox_logs.Text = string.Empty;
+                statusLabels[0].BackColor = SystemColors.Control;
+                statusLabels[1].BackColor = SystemColors.Control; 
+                statusLabels[2].BackColor = SystemColors.Control; 
+                statusLabels[3].BackColor = SystemColors.Control; 
+                statusLabels[4].BackColor = SystemColors.Control;
+                statusLabels[5].BackColor = SystemColors.Control;
+                statusLabels[6].BackColor = SystemColors.Control;
+                statusLabels[7].BackColor = SystemColors.Control; 
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Sıkıştırmak istiyor musunuz?", "TAISAT", MessageBoxButtons.YesNo))
+            {
+                try
+                {
+                    new Thread(new ThreadStart(UnDeploy)).Start();
+                    new Thread(new ThreadStart(UnDeploy)).Start();
+                    new Thread(new ThreadStart(UnDeploy)).Start();
+                    new Thread(new ThreadStart(UnDeploy)).Start();
+                    new Thread(new ThreadStart(UnDeploy)).Start();
+                }
+                catch (Exception) { MessageBox.Show("button_MANUAL_DEPLOY_Click"); }
+            }
         }
 
         void textbox_ftpAddress_KeyDown(object sender, KeyEventArgs e)

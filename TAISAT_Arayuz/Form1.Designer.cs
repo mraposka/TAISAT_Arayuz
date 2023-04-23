@@ -222,6 +222,8 @@
             this.windowFixer = new System.Windows.Forms.Timer(this.components);
             this.dataCheck = new System.Windows.Forms.Timer(this.components);
             this.gmapRefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             tabPage_serialMonitor = new System.Windows.Forms.TabPage();
             tabPage_serialMonitor.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -1654,7 +1656,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label_payloadPressure, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label24, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label10, 0, 5);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 278);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 269);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 12;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -1989,7 +1991,7 @@
             // 
             this.mapSwitchButton.BackColor = System.Drawing.Color.Lime;
             this.mapSwitchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.mapSwitchButton.Location = new System.Drawing.Point(10, 659);
+            this.mapSwitchButton.Location = new System.Drawing.Point(10, 650);
             this.mapSwitchButton.Name = "mapSwitchButton";
             this.mapSwitchButton.Size = new System.Drawing.Size(296, 45);
             this.mapSwitchButton.TabIndex = 4;
@@ -2001,7 +2003,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label8.Location = new System.Drawing.Point(37, 249);
+            this.label8.Location = new System.Drawing.Point(37, 240);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(254, 24);
             this.label8.TabIndex = 2;
@@ -2422,11 +2424,13 @@
             // panel7
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.button2);
+            this.panel7.Controls.Add(this.button1);
             this.panel7.Controls.Add(this.tabControl1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel7.Location = new System.Drawing.Point(0, 828);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1851, 219);
+            this.panel7.Size = new System.Drawing.Size(1920, 219);
             this.panel7.TabIndex = 19;
             // 
             // tableLayoutPanel_views
@@ -2506,12 +2510,40 @@
             this.gmapRefreshTimer.Interval = 1000;
             this.gmapRefreshTimer.Tick += new System.EventHandler(this.gmapRefreshTimer_Tick);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(1844, 28);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(54, 43);
+            this.button1.TabIndex = 26;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(1844, 156);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(54, 43);
+            this.button2.TabIndex = 27;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // TAISAT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1851, 1047);
+            this.ClientSize = new System.Drawing.Size(1920, 1047);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel7);
@@ -2761,6 +2793,8 @@
         private GMap.NET.WindowsForms.GMapControl gmapMap;
         private System.Windows.Forms.Button mapSwitchButton;
         private System.Windows.Forms.Timer gmapRefreshTimer;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
