@@ -116,14 +116,10 @@ namespace TAISAT_Arayuz
         //Offline Map
         internal readonly GMapOverlay objects = new GMapOverlay("objects");
         GMapOverlay markers = new GMapOverlay("markers");
-       
-        GMapMarker deniz = new GMarkerGoogle(
-              new PointLatLng(40.804484, 29.973944),//Aksaray Hisar Atış Alanı Koordinatları
-              GMarkerGoogleType.red_dot);
         GMapMarker sat;
-        /*GMapMarker station = new GMarkerGoogle(
+        GMapMarker station = new GMarkerGoogle(
              new PointLatLng(38.398447983639656, 33.71120194610159),//Aksaray Hisar Atış Alanı Koordinatları
-             GMarkerGoogleType.red_dot);*/
+             GMarkerGoogleType.red_dot);
 
         GMapOverlay polyOverlay = new GMapOverlay("polygons");
         bool gapi = true;
@@ -144,13 +140,13 @@ namespace TAISAT_Arayuz
             GMaps.Instance.Mode = AccessMode.ServerAndCache;
             gmapMap.MapProvider = GoogleSatelliteMapProvider.Instance;
             gmapMap.CacheLocation = mapCacheFolder;
-            gmapMap.Position = new PointLatLng(deniz.Position.Lat, deniz.Position.Lng);//Aksaray Hisar Atış Alanı Koordinatları
+            gmapMap.Position = new PointLatLng(station.Position.Lat, station.Position.Lng);//Aksaray Hisar Atış Alanı Koordinatları
             gmapMap.MinZoom = 3;
             gmapMap.MaxZoom = 20;
             gmapMap.Zoom = 14;
             gmapMap.Manager.CancelTileCaching();
             gmapMap.HoldInvalidation = false;
-            markers.Markers.Add(deniz);
+            markers.Markers.Add(station);
             gmapMap.Overlays.Add(markers);
         }
         void ResetData()
@@ -265,7 +261,7 @@ namespace TAISAT_Arayuz
                                           .Where(c => c.GetType() == type);
             }
             catch (Exception) { MessageBox.Show("GetAll"); return null; }
-        } 
+        }
         void TakeScreenShotOfChart(Chart chart)
         {
             try
@@ -375,6 +371,8 @@ namespace TAISAT_Arayuz
                     if (returnData == "video1")
                     {
                         raspberryIP = RemoteIpEndPoint.Address.ToString();
+                        textbox_ftpAddress.Text = raspberryIP;
+                        label14.BackColor = Color.Lime;
                         if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start();
                         waitVideoTransfer = false;
                     }
@@ -440,7 +438,7 @@ namespace TAISAT_Arayuz
                 response.Close();
                 string[] files = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var file in files)
-                    if (file.Contains(".avi"))
+                    if (file.Contains(".avi")|| file.Contains(".mp4")|| file.Contains(".mkv")|| file.Contains(".ts")|| file.Contains(".wmv")|| file.Contains(".flv")|| file.Contains(".mkv"))
                         ftpFile = file;
             }
             catch (Exception) { MessageBox.Show("GetVideoFileName"); }
@@ -478,9 +476,9 @@ namespace TAISAT_Arayuz
         {
             sat = new GMarkerGoogle(
                new PointLatLng(lat, lng),
-               GMarkerGoogleType.red_dot); 
+               GMarkerGoogleType.red_dot);
             sat.ToolTipMode = MarkerTooltipMode.Always;
-            sat.ToolTipText = getDistance(new PointLatLng(sat.Position.Lat, sat.Position.Lng), new PointLatLng(deniz.Position.Lat, deniz.Position.Lng)).ToString("N2") + " m";
+            sat.ToolTipText = getDistance(new PointLatLng(sat.Position.Lat, sat.Position.Lng), new PointLatLng(station.Position.Lat, station.Position.Lng)).ToString("N2") + " m";
             markers.Markers.Add(sat);
             gmapMap.Overlays.Add(markers);
         }
@@ -504,13 +502,13 @@ namespace TAISAT_Arayuz
         {
             polyOverlay.Polygons.Clear();
             markers.Markers.Clear();
-            markers.Markers.Add(deniz);
+            markers.Markers.Add(station);
             AddSatPointToGMAP(_double(lat1), _double(lng1));
             AddPayloadPointToGMAP(_double(lat2), _double(lng2));
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(new PointLatLng(_double(lat1), _double(lng1)));
             points.Add(new PointLatLng(_double(lat2), _double(lng2)));
-            points.Add(new PointLatLng(deniz.Position.Lat, deniz.Position.Lng));
+            points.Add(new PointLatLng(station.Position.Lat, station.Position.Lng));
             GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
             polygon.Stroke = new Pen(Color.Red, 3);
             polygon.Fill = new SolidBrush(Color.Transparent);
@@ -522,11 +520,11 @@ namespace TAISAT_Arayuz
         {
             polyOverlay.Polygons.Clear();
             markers.Markers.Clear();
-            markers.Markers.Add(deniz);
+            markers.Markers.Add(station);
             AddSatPointToGMAP(_double(lat1), _double(lng1));
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(new PointLatLng(_double(lat1), _double(lng1)));
-            points.Add(new PointLatLng(deniz.Position.Lat, deniz.Position.Lng));
+            points.Add(new PointLatLng(station.Position.Lat, station.Position.Lng));
             GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
             polygon.Stroke = new Pen(Color.Red, 3);
             polygon.Fill = new SolidBrush(Color.Transparent);
@@ -557,7 +555,7 @@ namespace TAISAT_Arayuz
             try
             {
                 if (!backgroundWorker1.IsBusy)
-                    backgroundWorker1.RunWorkerAsync(); 
+                    backgroundWorker1.RunWorkerAsync();
             }
             catch (Exception) { MessageBox.Show("Port_DataReceived"); }
         }
@@ -887,7 +885,7 @@ namespace TAISAT_Arayuz
                     if (telemetryData.Length > 19)//Telemetry To Labels
                     {
                         try
-                        { 
+                        {
                             label_packageNo.Text = telemetryData[0];
                             label_uyduStatus.Text = telemetryData[1];
                             label_errorCode.Text = telemetryData[2];
@@ -1033,13 +1031,13 @@ namespace TAISAT_Arayuz
                 }
                 else
                 {
-                    if (buffer.Contains("\n")) textBox_logs.Text += buffer + Environment.NewLine;
-                    if (buffer.Length > bufferSize) buffer = string.Empty;
+                    if (buffer.Contains("\n")) textBox_logs.Text = buffer;
+                    if (buffer.Length > bufferSize || buffer.Split(',').Length > 24) buffer = string.Empty;
                 }
             }
             catch (Exception)
             { MessageBox.Show("backgroundWorker1_DoWork"); }
-        } 
+        }
         void button_browseVideoFileToSend_Click(object sender, EventArgs e)
         {
             try
@@ -1123,13 +1121,13 @@ namespace TAISAT_Arayuz
                 gmapMap.Visible = true;
                 gmapMap.Dock = DockStyle.Fill;
             }
-        } 
+        }
         private void gmapRefreshTimer_Tick(object sender, EventArgs e)
         {
-            if(label_payloadGPSLongitude.Text != "0" && label_payloadGPSLongitude.Text != "" && label_payloadGPSLongitude.Text != string.Empty && label_payloadGPSLongitude.Text != null && label_payloadGPSLatitude.Text!="0"&& label_payloadGPSLatitude.Text!="" && label_payloadGPSLatitude.Text!=string.Empty && label_payloadGPSLatitude.Text!=null) 
+            if (label_payloadGPSLongitude.Text != "0" && label_payloadGPSLongitude.Text != "" && label_payloadGPSLongitude.Text != string.Empty && label_payloadGPSLongitude.Text != null && label_payloadGPSLatitude.Text != "0" && label_payloadGPSLatitude.Text != "" && label_payloadGPSLatitude.Text != string.Empty && label_payloadGPSLatitude.Text != null)
                 UpdateGMap(label_carrierGPSLatitude.Text.Replace(".", ","), label_carrierGPSLongitude.Text.Replace(".", ","), label_payloadGPSLatitude.Text.Replace(".", ","), label_payloadGPSLongitude.Text.Replace(".", ","));
-            else if (label_payloadGPSLatitude.Text!="0"&& label_payloadGPSLatitude.Text!="" && label_payloadGPSLatitude.Text!=string.Empty && label_payloadGPSLatitude.Text!=null) 
-                UpdateGMap(label_payloadGPSLatitude.Text.Replace(".", ","),label_payloadGPSLongitude.Text.Replace(".", ","));
+            else if (label_payloadGPSLatitude.Text != "0" && label_payloadGPSLatitude.Text != "" && label_payloadGPSLatitude.Text != string.Empty && label_payloadGPSLatitude.Text != null)
+                UpdateGMap(label_payloadGPSLatitude.Text.Replace(".", ","), label_payloadGPSLongitude.Text.Replace(".", ","));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1159,13 +1157,13 @@ namespace TAISAT_Arayuz
                 serialMonitorListBox.Items.Clear();
                 textBox_logs.Text = string.Empty;
                 statusLabels[0].BackColor = SystemColors.Control;
-                statusLabels[1].BackColor = SystemColors.Control; 
-                statusLabels[2].BackColor = SystemColors.Control; 
-                statusLabels[3].BackColor = SystemColors.Control; 
+                statusLabels[1].BackColor = SystemColors.Control;
+                statusLabels[2].BackColor = SystemColors.Control;
+                statusLabels[3].BackColor = SystemColors.Control;
                 statusLabels[4].BackColor = SystemColors.Control;
                 statusLabels[5].BackColor = SystemColors.Control;
                 statusLabels[6].BackColor = SystemColors.Control;
-                statusLabels[7].BackColor = SystemColors.Control; 
+                statusLabels[7].BackColor = SystemColors.Control;
             }
         }
 
@@ -1191,6 +1189,8 @@ namespace TAISAT_Arayuz
             {
                 if (e.KeyCode == Keys.Enter)
                     MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
+                else if(e.KeyCode==Keys.Escape)
+                   { raspberryIP = textbox_ftpAddress.Text; if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start(); }
             }
             catch (Exception) { MessageBox.Show("textbox_ftpAddress_KeyDown"); }
         }
