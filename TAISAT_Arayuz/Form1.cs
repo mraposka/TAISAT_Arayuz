@@ -438,7 +438,7 @@ namespace TAISAT_Arayuz
                 response.Close();
                 string[] files = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var file in files)
-                    if (file.Contains(".avi")|| file.Contains(".mp4")|| file.Contains(".mkv")|| file.Contains(".ts")|| file.Contains(".wmv")|| file.Contains(".flv")|| file.Contains(".mkv"))
+                    if (file.Contains(".avi") || file.Contains(".mp4") || file.Contains(".mkv") || file.Contains(".ts") || file.Contains(".wmv") || file.Contains(".flv") || file.Contains(".mkv"))
                         ftpFile = file;
             }
             catch (Exception) { MessageBox.Show("GetVideoFileName"); }
@@ -991,6 +991,17 @@ namespace TAISAT_Arayuz
                                 case 5: statusLabels[5].BackColor = Color.Lime; break;
                                 case 6: statusLabels[6].BackColor = Color.Lime; break;
                                 case 7: statusLabels[7].BackColor = Color.Lime; break;
+                                case 8:
+                                    try
+                                    {
+                                        if (!seperation)
+                                        {
+                                            seperation = true;
+                                            new UdpClient().Send(Encoding.ASCII.GetBytes("separation"), Encoding.ASCII.GetBytes("separation").Length, "127.0.0.1", 11000);
+                                        }
+                                    }
+                                    catch { }
+                                    break;
                             }
                             //Uydu Status
                             //Charts
@@ -1189,8 +1200,8 @@ namespace TAISAT_Arayuz
             {
                 if (e.KeyCode == Keys.Enter)
                     MessageBox.Show(isValidConnection(textbox_ftpAddress.Text, ftpUserName, ftpPassword) ? "FTP Connection Established" : "FTP Connection Error!");
-                else if(e.KeyCode==Keys.Escape)
-                   { raspberryIP = textbox_ftpAddress.Text; if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start(); }
+                else if (e.KeyCode == Keys.Escape)
+                { raspberryIP = textbox_ftpAddress.Text; if (!isStation) new Thread(new ThreadStart(DownloadVideo)).Start(); }
             }
             catch (Exception) { MessageBox.Show("textbox_ftpAddress_KeyDown"); }
         }
